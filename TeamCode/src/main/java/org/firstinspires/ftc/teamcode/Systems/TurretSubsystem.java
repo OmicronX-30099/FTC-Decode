@@ -16,9 +16,9 @@ public class TurretSubsystem implements Subsystem {
     public static TurretSubsystem INSTANCE = new TurretSubsystem();
     private TurretSubsystem() { }
 
-    private MotorEx turretMotor = new MotorEx("tur");
+    public static MotorEx turretMotor = new MotorEx("tur");
     public static ControlSystem turretControl = ControlSystem.builder()
-            .posPid(p,i,d)
+            .posPid(0.1,0,0)
             .build()
     ;
 
@@ -27,8 +27,8 @@ public class TurretSubsystem implements Subsystem {
     public double calculate(double x, double y, double heading) {
         double dx = 144-x;
         double dy = 48+y;
-        double angle = Math.asin(y/(Math.sqrt(dx*dx+dy*dy)));
-        double ticks = ((angle-heading)/(2*Math.PI)) * 384.5;
+        double angle = Math.atan(dy/dx);
+        double ticks = ((angle+heading)/(2*Math.PI)) * 384.5;
         return ticks;
     }
 
