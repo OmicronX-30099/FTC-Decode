@@ -28,11 +28,15 @@ public class TAim extends NextFTCOpMode {
 
     @Override
     public void onUpdate() {
-        TurretSubsystem.INSTANCE.aimBot(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
-        ActiveOpMode.telemetry().addData("heading",follower().getHeading());
-        ActiveOpMode.telemetry().addData("X",follower().getPose().getX());
-        ActiveOpMode.telemetry().addData("Y",follower().getPose().getY());
-        ActiveOpMode.telemetry().addData("ticks",TurretSubsystem.INSTANCE.calculate(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading()));
+        double heading = Math.round(follower().getHeading() * 100) / 100;
+        double x = Math.round(follower().getPose().getX() * 4) / 4;
+        double y = Math.round(follower().getPose().getY() * 4) / 4;
+
+        TurretSubsystem.INSTANCE.aimBot(x, y, heading);
+        ActiveOpMode.telemetry().addData("heading",heading);
+        ActiveOpMode.telemetry().addData("X",x);
+        ActiveOpMode.telemetry().addData("Y",y);
+        ActiveOpMode.telemetry().addData("ticks",TurretSubsystem.INSTANCE.calculate(x, y, heading));
         ActiveOpMode.telemetry().addData("power",turretControl.calculate(turretMotor.getState()));
         ActiveOpMode.telemetry().update();
     }
