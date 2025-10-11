@@ -38,6 +38,7 @@ public class TAim extends NextFTCOpMode {
         ActiveOpMode.telemetry().addData("Y",y);
         ActiveOpMode.telemetry().addData("ticks",TurretSubsystem.INSTANCE.calculate(x, y, heading));
         ActiveOpMode.telemetry().addData("power",turretControl.calculate(turretMotor.getState()));
+        ActiveOpMode.telemetry().addData("position",turretMotor.getCurrentPosition());
         ActiveOpMode.telemetry().update();
     }
 }
