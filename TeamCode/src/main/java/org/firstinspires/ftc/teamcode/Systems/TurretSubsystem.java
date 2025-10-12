@@ -16,7 +16,7 @@ public class TurretSubsystem implements Subsystem {
     public static TurretSubsystem INSTANCE = new TurretSubsystem();
     private TurretSubsystem() { }
 
-    public static MotorEx turretMotor = new MotorEx("tur");
+    public MotorEx turretMotor = new MotorEx("tur");
     public static ControlSystem turretControl = ControlSystem.builder()
             .posPid(0.1,0,0)
             .build()
