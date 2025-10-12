@@ -10,6 +10,7 @@ import static org.firstinspires.ftc.teamcode.Constants.ConfigConstants.motor_tur
 import dev.nextftc.control.ControlSystem;
 import dev.nextftc.control.KineticState;
 import dev.nextftc.core.subsystems.Subsystem;
+import dev.nextftc.ftc.ActiveOpMode;
 import dev.nextftc.hardware.impl.MotorEx;
 
 public class TurretSubsystem implements Subsystem {
@@ -40,5 +41,8 @@ public class TurretSubsystem implements Subsystem {
     @Override
     public void periodic() {
         turretMotor.setPower(turretControl.calculate(turretMotor.getState()));
+        ActiveOpMode.telemetry().addData("power",turretControl.calculate(turretMotor.getState()));
+        ActiveOpMode.telemetry().addData("position",turretMotor.getCurrentPosition());
+        ActiveOpMode.telemetry().update();
     }
 }
