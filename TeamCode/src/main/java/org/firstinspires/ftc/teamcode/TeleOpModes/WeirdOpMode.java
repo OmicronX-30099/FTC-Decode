@@ -27,10 +27,10 @@ public class    WeirdOpMode extends NextFTCOpMode {
     private final MotorEx frontRightMotor = new MotorEx("fr");
     private final MotorEx backLeftMotor = new MotorEx("bl").reversed();
     private final MotorEx backRightMotor = new MotorEx("br");
-    private final MotorEx fwl = new MotorEx("fwl").reversed();
+    /*private final MotorEx fwl = new MotorEx("fwl").reversed();
     private final MotorEx fwr = new MotorEx("fwr");
     private final MotorGroup fwmotors = new MotorGroup(fwl,fwr);
-    private final MotorEx turret = new MotorEx("tur");
+    private final MotorEx turret = new MotorEx("tur");*/
 
     private MecanumDriverControlled driverControlled;
 
@@ -45,7 +45,7 @@ public class    WeirdOpMode extends NextFTCOpMode {
                 Gamepads.gamepad1().rightStickX()
         );
         driverControlled.named("Drivetrain").schedule();
-        Gamepads.gamepad1().dpadDown()
+        /*Gamepads.gamepad1().dpadDown()
                 .whenBecomesTrue(
                         new IfElseCommand(
                                 () -> driverControlled.getScalar() == 1,
@@ -78,6 +78,6 @@ public class    WeirdOpMode extends NextFTCOpMode {
                                 new InstantCommand(() -> {})
                         )
                 )
-        ;
+        ;*/
     }
 }
