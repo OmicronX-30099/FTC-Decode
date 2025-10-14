@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.Systems;
 
 import com.bylazar.configurables.annotations.Configurable;
-import com.qualcomm.robotcore.hardware.Servo;
+
 import dev.nextftc.control.ControlSystem;
 @Configurable
-public class HoodSubsystem {
-    public static HoodSubsystem INSTANCE = new HoodSubsystem();
+public class RenamedHoodCosItsAnnoying {
+    public static RenamedHoodCosItsAnnoying INSTANCE = new RenamedHoodCosItsAnnoying();
     public ControlSystem HoodControl = ControlSystem.builder()
             .posPid(0, 0, 0)
             .build()

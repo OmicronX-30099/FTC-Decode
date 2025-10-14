@@ -1,15 +1,15 @@
-package org.firstinspires.ftc.teamcode.TeleOpModes;
+/*package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Systems.HoodSubsystem;
+import org.firstinspires.ftc.teamcode.Systems.RenamedHoodCosItsAnnoying;
 
 @TeleOp(name = "Hood TeleOp")
 public class AutoHood {
-    HoodSubsystem subSystem = HoodSubsystem.INSTANCE;
+    RenamedHoodCosItsAnnoying subSystem = RenamedHoodCosItsAnnoying.INSTANCE;
     public AutoHood() {
     }
     public void onUpdate() {
         subSystem.SetServo();
     }
-}
+}*/
