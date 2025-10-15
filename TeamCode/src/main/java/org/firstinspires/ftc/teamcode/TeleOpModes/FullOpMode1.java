@@ -4,7 +4,6 @@ import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
-import org.firstinspires.ftc.teamcode.Subsystems.FlywheelSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.HoodSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ShooterSystem;
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
@@ -19,11 +18,9 @@ import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 
-import static dev.nextftc.extensions.pedro.PedroComponent.follower;
-
-@TeleOp(name = "Turret AutoAim Opmode")
-public class TAim extends NextFTCOpMode {
-    public TAim() {
+@TeleOp(group="FullOpModes", name = "Final OpMode Draft 1")
+public class FullOpMode1 extends NextFTCOpMode {
+    public FullOpMode1() {
         addComponents(
                 new SubsystemComponent(ShooterSystem.INSTANCE),
                 BulkReadComponent.INSTANCE,
@@ -38,6 +35,10 @@ public class TAim extends NextFTCOpMode {
     private final MotorEx backLeftMotor = new MotorEx("bl").reversed();
     private final MotorEx backRightMotor = new MotorEx("br");
     private MecanumDriverControlled driverControlled;
+
+    public MotorEx fwl = new MotorEx("fwl").reversed();
+    public MotorEx fwr = new MotorEx("fwr");
+    public MotorGroup fwmotor = new MotorGroup(fwl,fwr);
 
     @Override
     public void onInit() {
@@ -55,6 +56,23 @@ public class TAim extends NextFTCOpMode {
                 Gamepads.gamepad1().rightStickX()
         );
         driverControlled.named("Drivetrain").schedule();
+
+        // Commented out with intention to test/tune/calculate auto flywheel
+
+        Gamepads.gamepad1().rightTrigger().greaterThan(0)
+                .whenTrue(() -> fwmotor.setPower(Gamepads.gamepad1().rightTrigger().get()))
+                .whenBecomesFalse(() -> fwmotor.setPower(0)
+        );
+
+        Gamepads.gamepad1().circle()
+                .whenBecomesTrue(HoodSubsystem.INSTANCE.highAngle)
+        ;
+        Gamepads.gamepad1().square()
+                .whenBecomesTrue(HoodSubsystem.INSTANCE.lowAngle)
+        ;
+        Gamepads.gamepad1().triangle()
+                .whenBecomesTrue(HoodSubsystem.INSTANCE.midAngle)
+        ;
     }
 
     @Override
@@ -63,5 +81,8 @@ public class TAim extends NextFTCOpMode {
         double y = follower.getPose().getY();
         double heading = follower.getHeading();
         TurretSubsystem.INSTANCE.calibrateTurretAngle(x, y, heading);
+        /*
+        FlywheelSubsystem.INSTANCE.calibrateFlywheelVelocity();
+        */
     }
 }

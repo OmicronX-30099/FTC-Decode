@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Systems.LimelightSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.LimelightSubsystem;
 
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
