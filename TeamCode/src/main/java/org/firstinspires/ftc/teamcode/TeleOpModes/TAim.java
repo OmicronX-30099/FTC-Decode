@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
 
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
+import dev.nextftc.extensions.pedro.PedroComponent;
 import dev.nextftc.ftc.ActiveOpMode;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
@@ -27,22 +28,17 @@ public class TAim extends NextFTCOpMode {
         addComponents(
                 new SubsystemComponent(ShooterSystem.INSTANCE),
                 BulkReadComponent.INSTANCE,
-                BindingsComponent.INSTANCE
+                BindingsComponent.INSTANCE,
+                new PedroComponent(Constants::createFollower)
         );
     }
 
-    private Follower follower;
 
-    private final MotorEx frontLeftMotor = new MotorEx("fl").reversed();
+    private final MotorEx frontLeftMotor = new MotorEx("fl");
     private final MotorEx frontRightMotor = new MotorEx("fr");
-    private final MotorEx backLeftMotor = new MotorEx("bl").reversed();
+    private final MotorEx backLeftMotor = new MotorEx("bl");
     private final MotorEx backRightMotor = new MotorEx("br");
     private MecanumDriverControlled driverControlled;
-
-    @Override
-    public void onInit() {
-        follower = Constants.createFollower(ActiveOpMode.hardwareMap());
-    }
 
     @Override
     public void onStartButtonPressed() {
@@ -59,10 +55,9 @@ public class TAim extends NextFTCOpMode {
 
     @Override
     public void onUpdate() {;
-        follower.update();
-        double x = follower.getPose().getX();
-        double y = follower.getPose().getY();
-        double heading = follower.getHeading();
+        double x = follower().getPose().getX();
+        double y = follower().getPose().getY();
+        double heading = follower().getHeading();
         TurretSubsystem.INSTANCE.calibrateTurretAngle(x, y, heading);
         ActiveOpMode.telemetry().addData("stuff", x);
         ActiveOpMode.telemetry().addData("stuff", y);
