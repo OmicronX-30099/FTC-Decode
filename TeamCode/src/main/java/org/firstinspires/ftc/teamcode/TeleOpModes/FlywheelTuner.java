@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.teamcode.Subsystems.FlywheelSystem;
 
 import dev.nextftc.core.components.BindingsComponent;
@@ -9,6 +11,7 @@ import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 
+@TeleOp(name="Flywheel Tuner")
 public class FlywheelTuner extends NextFTCOpMode {
     public FlywheelTuner() {
         addComponents(
