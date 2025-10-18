@@ -30,9 +30,9 @@ public class FullOpMode1 extends NextFTCOpMode {
 
     private Follower follower;
 
-    private final MotorEx frontLeftMotor = new MotorEx("fl").reversed();
+    private final MotorEx frontLeftMotor = new MotorEx("fl");
     private final MotorEx frontRightMotor = new MotorEx("fr");
-    private final MotorEx backLeftMotor = new MotorEx("bl").reversed();
+    private final MotorEx backLeftMotor = new MotorEx("bl");
     private final MotorEx backRightMotor = new MotorEx("br");
     private MecanumDriverControlled driverControlled;
 
