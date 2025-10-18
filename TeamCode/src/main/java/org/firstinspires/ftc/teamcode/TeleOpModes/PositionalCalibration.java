@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
+import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
@@ -11,6 +13,12 @@ import dev.nextftc.hardware.positionable.SetPosition;
 
 @TeleOp(name="Angle and Velocity Calibrator")
 public class PositionalCalibration extends NextFTCOpMode {
+    public PositionalCalibration() {
+        addComponents(
+                BulkReadComponent.INSTANCE,
+                BindingsComponent.INSTANCE
+        );
+    }
     public ServoEx hood = new ServoEx("hood");
     /*
     public MotorEx fwl = new MotorEx("fwl").reversed();
