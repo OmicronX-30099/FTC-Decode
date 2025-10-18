@@ -9,11 +9,9 @@ import dev.nextftc.hardware.powerable.SetPower;
 public class IntakeSystem implements Subsystem {
     public static IntakeSystem INSTANCE = new IntakeSystem();
     private IntakeSystem() {}
-    public MotorEx IntakeMotor = new MotorEx("intake");
+    public MotorEx IntakeMotor = new MotorEx("Intake");
 
     public Command activateIntake = new SetPower(IntakeMotor, 0.5);
     public Command deactivateIntake = new SetPower(IntakeMotor, 0);
-    @Override
-    public void initialize() {IntakeMotor.SetPower();}
 
 }
