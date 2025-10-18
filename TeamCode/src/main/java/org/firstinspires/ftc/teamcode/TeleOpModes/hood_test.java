@@ -24,11 +24,11 @@ public class hood_test extends LinearOpMode {
 
         while (opModeIsActive()) {
             if(gamepad1.squareWasPressed()){
-                hood_angle = hood_angle + 0.1;
+                hood_angle += 0.1;
                 hood.setPosition(hood_angle);
             }
             if (gamepad1.triangleWasPressed()){
-                hood_angle = hood_angle - 0.1;
+                hood_angle -= 0.1;
                 hood.setPosition(hood_angle);
             }
         }

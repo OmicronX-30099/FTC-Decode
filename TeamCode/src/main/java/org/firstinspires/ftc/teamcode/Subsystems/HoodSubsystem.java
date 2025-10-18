@@ -9,9 +9,9 @@ public class HoodSubsystem implements Subsystem {
     public static HoodSubsystem INSTANCE = new HoodSubsystem();
     private HoodSubsystem() { }
 
-    public static double LOW_ANGLE = 0;
-    public static double MID_ANGLE = 0;
-    public static double HIGH_ANGLE = 0;
+    public static double LOW_ANGLE = 0.1;
+    public static double MID_ANGLE = 0.2;
+    public static double HIGH_ANGLE = 0.3;
 
     public ServoEx hoodServo = new ServoEx("hood");
 
