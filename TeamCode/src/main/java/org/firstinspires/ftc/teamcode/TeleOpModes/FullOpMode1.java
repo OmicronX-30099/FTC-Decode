@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.HoodSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.IntakeSystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ShooterSystem;
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
 
@@ -72,6 +73,10 @@ public class FullOpMode1 extends NextFTCOpMode {
         ;
         Gamepads.gamepad1().triangle()
                 .whenBecomesTrue(HoodSubsystem.INSTANCE.midAngle)
+        ;
+        Gamepads.gamepad1().cross()
+                .whenBecomesTrue(IntakeSystem.INSTANCE.activateIntake)
+                .whenBecomesFalse(IntakeSystem.INSTANCE.deactivateIntake)
         ;
     }
 

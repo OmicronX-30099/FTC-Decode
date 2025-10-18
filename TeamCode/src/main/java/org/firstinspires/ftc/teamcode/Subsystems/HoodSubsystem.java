@@ -14,7 +14,6 @@ public class HoodSubsystem implements Subsystem {
     public static double HIGH_ANGLE = 0.3;
 
     public ServoEx hoodServo = new ServoEx("hood");
-
     public Command lowAngle = new SetPosition(hoodServo, LOW_ANGLE);
     public Command midAngle = new SetPosition(hoodServo, MID_ANGLE);
     public Command highAngle = new SetPosition(hoodServo, HIGH_ANGLE);
