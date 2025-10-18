@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.IntakeSystem;
 import org.firstinspires.ftc.teamcode.Subsystems.ShooterSystem;
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem;
 
+import dev.nextftc.core.commands.conditionals.IfElseCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
 import dev.nextftc.ftc.ActiveOpMode;
@@ -75,13 +76,17 @@ public class FullOpMode1 extends NextFTCOpMode {
                 .whenBecomesTrue(HoodSubsystem.INSTANCE.midAngle)
         ;
         Gamepads.gamepad1().cross()
-                .whenBecomesTrue(IntakeSystem.INSTANCE.activateIntake)
+                .whenTrue(new IfElseCommand(
+                        () -> IntakeSystem.INSTANCE.getPower()==0,
+                        IntakeSystem.INSTANCE.activateIntake,
+                        IntakeSystem.INSTANCE.deactivateIntake
+                ))
                 .whenBecomesFalse(IntakeSystem.INSTANCE.deactivateIntake)
         ;
     }
 
     @Override
-    public void onUpdate() {;
+    public void onUpdate() {
         double x = follower.getPose().getX();
         double y = follower.getPose().getY();
         double heading = follower.getHeading();

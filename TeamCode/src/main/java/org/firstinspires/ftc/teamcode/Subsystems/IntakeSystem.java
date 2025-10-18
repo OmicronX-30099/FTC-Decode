@@ -14,4 +14,8 @@ public class IntakeSystem implements Subsystem {
     public Command activateIntake = new SetPower(IntakeMotor, 0.5);
     public Command deactivateIntake = new SetPower(IntakeMotor, 0);
 
+    public double getPower() {
+        return IntakeMotor.getPower();
+    }
+
 }
