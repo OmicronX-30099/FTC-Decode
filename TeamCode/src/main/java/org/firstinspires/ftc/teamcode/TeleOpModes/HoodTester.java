@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.teamcode.Subsystems.HoodSubsystem;
 
 import dev.nextftc.core.components.BindingsComponent;
@@ -8,6 +10,7 @@ import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 
+@TeleOp(name="Hood Test")
 public class HoodTester extends NextFTCOpMode {
     public HoodTester() {
         addComponents(
