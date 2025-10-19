@@ -28,10 +28,13 @@ public class FlywheelSubsystem implements Subsystem {
             .build()
     ;
 
-    public void calibrateFlywheelVelocity() {
+    public void calibrateFlywheelVelocity(double vel) {
         // math here
-        double vel = 0;
         flywheelControl.setGoal(new KineticState(0, vel));
+    }
+
+    public double getvel() {
+        return flywheelMotors.getVelocity();
     }
 
     @Override
