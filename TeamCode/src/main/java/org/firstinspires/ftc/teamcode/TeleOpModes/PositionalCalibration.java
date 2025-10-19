@@ -20,11 +20,9 @@ public class PositionalCalibration extends NextFTCOpMode {
         );
     }
     public ServoEx hood = new ServoEx("hood");
-    /*
     public MotorEx fwl = new MotorEx("fwl").reversed();
     public MotorEx fwr = new MotorEx("fwr");
     public MotorGroup fwm = new MotorGroup(fwl, fwr);
-    */
 
     public double low = 0;
     public double mid = 0.3;
@@ -41,16 +39,15 @@ public class PositionalCalibration extends NextFTCOpMode {
         Gamepads.gamepad1().a().whenTrue(
                 () -> hood.setPosition(high)
         );
-        /*
         Gamepads.gamepad1().rightTrigger().greaterThan(0)
                 .whenTrue(() -> fwm.setPower(Gamepads.gamepad1().rightTrigger().get()))
                 .whenBecomesFalse(() -> fwm.setPower(0));
 
-         */
     }
 
     @Override
     public void onUpdate() {
-        //telemetry.addData("Velocity", fwm.getVelocity());
+        telemetry.addData("Velocity", fwl.getVelocity());
+        telemetry.update();
     }
 }
