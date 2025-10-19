@@ -58,7 +58,7 @@ public class TAim extends NextFTCOpMode {
         double x = follower().getPose().getX();
         double y = follower().getPose().getY();
         double heading = follower().getHeading();
-        TurretSubsystem.INSTANCE.calibrateTurretAngle(x, y, heading);
+        TurretSubsystem.INSTANCE.setTurretHeading(x, y, heading);
         ActiveOpMode.telemetry().addData("x", x);
         ActiveOpMode.telemetry().addData("y", y);
         ActiveOpMode.telemetry().addData("headings", heading);

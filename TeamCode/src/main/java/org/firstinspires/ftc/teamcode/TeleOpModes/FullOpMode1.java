@@ -90,7 +90,7 @@ public class FullOpMode1 extends NextFTCOpMode {
         double x = follower.getPose().getX();
         double y = follower.getPose().getY();
         double heading = follower.getHeading();
-        TurretSubsystem.INSTANCE.calibrateTurretAngle(x, y, heading);
+        TurretSubsystem.INSTANCE.setTurretHeading(x, y, heading);
 
         /*
         FlywheelSubsystem.INSTANCE.calibrateFlywheelVelocity();
