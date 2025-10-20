@@ -4,6 +4,9 @@ import android.renderscript.ScriptGroup;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import dev.nextftc.core.commands.delays.Delay;
+import dev.nextftc.core.commands.groups.SequentialGroup;
+import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
@@ -39,7 +42,12 @@ public class stuff extends NextFTCOpMode {
                 .whenTrue(() -> intake.setPower(Gamepads.gamepad1().leftTrigger().get()))
                 .whenBecomesFalse(() -> intake.setPower(0))
         ;
-        Gamepads.gamepad1().circle().whenBecomesTrue(() -> pusher.setPosition(0));
-        Gamepads.gamepad1().triangle().whenBecomesTrue(() -> pusher.setPosition(0.25));
+        Gamepads.gamepad1().circle().whenBecomesTrue(
+                new SequentialGroup(
+                        new InstantCommand(() -> pusher.setPosition(0.25)),
+                        new Delay(0.1),
+                        new InstantCommand(() -> pusher.setPosition(0))
+                )
+        );
     }
 }
