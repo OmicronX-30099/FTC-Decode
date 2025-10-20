@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Robot.Subsystems;
+package org.firstinspires.ftc.teamcode.Robot.ShooterSubsystems;
 
 import dev.nextftc.control.ControlSystem;
 import dev.nextftc.control.KineticState;
