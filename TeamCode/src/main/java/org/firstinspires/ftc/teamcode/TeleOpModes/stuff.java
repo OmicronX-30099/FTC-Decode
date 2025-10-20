@@ -44,8 +44,8 @@ public class stuff extends NextFTCOpMode {
         ;
         Gamepads.gamepad1().circle().whenBecomesTrue(
                 new SequentialGroup(
-                        new InstantCommand(() -> pusher.setPosition(0.25)),
-                        new Delay(0.1),
+                        new InstantCommand(() -> pusher.setPosition(0.3)),
+                        new Delay(0.15),
                         new InstantCommand(() -> pusher.setPosition(0))
                 )
         );
