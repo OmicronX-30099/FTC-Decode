@@ -26,7 +26,7 @@ public class PositionalCalibration extends NextFTCOpMode {
 
     public double low = 0;
     public double mid = 0.3;
-    public double high = 0.7;
+    public double high = 1;
 
     @Override
     public void onStartButtonPressed() {
@@ -47,7 +47,7 @@ public class PositionalCalibration extends NextFTCOpMode {
 
     @Override
     public void onUpdate() {
-        telemetry.addData("Velocity", fwl.getVelocity());
+        telemetry.addData("Velocity", fwr.getVelocity());
         telemetry.update();
     }
 }
