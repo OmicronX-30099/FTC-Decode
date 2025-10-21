@@ -19,6 +19,10 @@ public class HoodSubsystem implements Subsystem {
     public Command midPosition = new SetPosition(hoodServo, midAngle);
     public Command highPosition = new SetPosition(hoodServo, highAngle);
 
+    public void setPosition(double position) {
+        hoodServo.setPosition(position);
+    }
+
     @Override
     public void initialize() {
         hoodServo.setPosition(highAngle);

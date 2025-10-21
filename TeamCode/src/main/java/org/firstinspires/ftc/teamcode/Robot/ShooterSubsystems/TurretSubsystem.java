@@ -17,8 +17,8 @@ public class TurretSubsystem implements Subsystem {
             .build()
     ;
 
-    public void setTurretHeading(double distance, double heading) {
-        double angle = Math.atan(distance);
+    public void setTurretHeading(double dx, double dy, double heading) {
+        double angle = Math.atan(dy/dx);
         double ticks = Math.round(((-heading-angle)/(2*Math.PI)) * 384.5 * (100/24) + INITIAL_TICKS);
         turretControl.setGoal(new KineticState(ticks));
     }

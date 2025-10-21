@@ -43,9 +43,12 @@ public class ShooterSystem extends SubsystemGroup {
     }
 
     public void autoAim(double x, double y, double heading) {
-        double dx = 48
-        double distance = Math.sqrt(x*x + y*y)
-        TurretSubsystem.INSTANCE.setTurretHeading();
+        double dx = 48-x;
+        double dy = 48+y;
+        double distance = Math.sqrt(x*x + y*y);
+        double[] angleVel = getAngleVelocity(distance);
+        TurretSubsystem.INSTANCE.setTurretHeading(dx, dy, heading);
+        FlywheelSubsystem.INSTANCE.autoFlywheel(angleVel[1]);
+        HoodSubsystem.INSTANCE.setPosition(angleVel[0]);
     }
-
 }
