@@ -5,6 +5,7 @@ import org.firstinspires.ftc.teamcode.Robot.ShooterSubsystems.HoodSubsystem;
 import org.firstinspires.ftc.teamcode.Robot.ShooterSubsystems.TurretSubsystem;
 
 import dev.nextftc.core.subsystems.SubsystemGroup;
+import dev.nextftc.ftc.ActiveOpMode;
 
 public class ShooterSystem extends SubsystemGroup {
     public static ShooterSystem INSTANCE = new ShooterSystem();
@@ -14,29 +15,29 @@ public class ShooterSystem extends SubsystemGroup {
 
     public double[] getAngleVelocity(double distance) {
         if (distance < 2) {
-            return new double[] {0,800};
+            return new double[] {0,0.3};
         } else if (distance >= 2 && distance <3) {
-            return new double[] {0,1000};
+            return new double[] {0,0.4};
         } else if (distance >= 3 && distance <4) {
-            return new double[] {0,1140};
+            return new double[] {0,0.45};
         } else if (distance >= 4 && distance <5) {
-            return new double[] {0.3,1100};
+            return new double[] {0.3,0.429};
         } else if (distance >= 5 && distance <6) {
-            return new double[] {0.3,1130};
+            return new double[] {0.3,0.44};
         } else if (distance >= 6 && distance <7.5) {
-            return new double[] {0.3,1220};
+            return new double[] {0.3,0.49};
         } else if (distance >= 7.5 && distance <8.5) {
-            return new double[] {0.3,1280};
+            return new double[] {0.3,0.51};
         } else if (distance >= 8.5 && distance <9.5) {
-            return new double[] {0.3,1350};
+            return new double[] {0.3,0.52};
         } else if (distance >= 9.5 && distance <10.5) {
-            return new double[] {1,1400};
+            return new double[] {1,0.54};
         } else if (distance >= 10.5 && distance <11.5) {
-            return new double[] {1,1460};
+            return new double[] {1,0.565};
         } else if (distance >= 11.5 && distance <12.5) {
-            return new double[] {1,1500};
+            return new double[] {1,0.58};
         } else if (distance >= 12.5 && distance <13.5D) {
-            return new double[] {1,1550};
+            return new double[] {1,0.614};
         } else {
             return new double[] {1,1650};
         }
@@ -45,10 +46,11 @@ public class ShooterSystem extends SubsystemGroup {
     public void autoAim(double x, double y, double heading) {
         double dx = 72-x;
         double dy = -72-y;
-        double distance = Math.sqrt(x*x + y*y);
+        double distance = Math.sqrt(x*x + y*y) / 12;
         double[] angleVel = getAngleVelocity(distance);
         TurretSubsystem.INSTANCE.setTurretHeading(dx, dy, heading);
         FlywheelSubsystem.INSTANCE.autoFlywheel(angleVel[1]);
+        ActiveOpMode.telemetry().addData("Power", angleVel[1]);
         HoodSubsystem.INSTANCE.setPosition(angleVel[0]);
     }
 }

@@ -15,6 +15,7 @@ import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
+import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "Master TeleOp")
@@ -28,6 +29,10 @@ public class MasterTeleOp extends NextFTCOpMode {
         );
     }
 
+    @Override
+    public void onInit() {
+        follower().setStartingPose(new Pose(24,24));
+    }
     @Override
     public void onStartButtonPressed() {
         Gamepads.gamepad1().rightBumper()
@@ -45,5 +50,7 @@ public class MasterTeleOp extends NextFTCOpMode {
     @Override
     public void onUpdate() {
         ShooterSystem.INSTANCE.autoAim(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
+        telemetry.update();
+        IntakeSubsystem.INSTANCE.intakeMotor.setPower(Gamepads.gamepad1().rightTrigger().get()-Gamepads.gamepad1().leftTrigger().get());
     }
 }
