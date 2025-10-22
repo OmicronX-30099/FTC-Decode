@@ -12,6 +12,8 @@ import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.driving.DriverControlledCommand;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
+import dev.nextftc.hardware.impl.ServoEx;
+
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -33,6 +35,8 @@ public class Tele extends NextFTCOpMode {
     public MotorEx fwl = new MotorEx("fwl").reversed();
     public MotorEx fwr = new MotorEx("fwr");
     public MotorEx intake = new MotorEx("intake");
+    public ServoEx hoodServo = new ServoEx("hood");
+    public ServoEx k = new ServoEx("k");
 
     public DriverControlledCommand drive;
 
@@ -48,6 +52,12 @@ public class Tele extends NextFTCOpMode {
         ;
         drive = new MecanumDriverControlled(fl, fr, bl,br, Gamepads.gamepad1().leftStickY().negate(), Gamepads.gamepad1().leftStickX(), Gamepads.gamepad1().rightStickX());
         drive.schedule();
+        Gamepads.gamepad1().rightBumper().whenTrue(() -> k.setPosition(0.25))
+                .whenBecomesFalse(() -> k.setPosition(0));
+        Gamepads.gamepad1().triangle().whenBecomesTrue(() -> hoodServo.setPosition(0));
+        Gamepads.gamepad1().circle().whenBecomesTrue(() -> hoodServo.setPosition(0.5));
+        Gamepads.gamepad1().square().whenBecomesTrue(() -> hoodServo.setPosition(1));
+
     }
 
     @Override
