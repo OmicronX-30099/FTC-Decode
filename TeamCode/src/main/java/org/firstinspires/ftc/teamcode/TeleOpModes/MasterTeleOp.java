@@ -15,6 +15,9 @@ import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+@TeleOp(name = "Master TeleOp")
 public class MasterTeleOp extends NextFTCOpMode {
     public MasterTeleOp() {
         addComponents(
@@ -32,13 +35,7 @@ public class MasterTeleOp extends NextFTCOpMode {
         ;
         Gamepads.gamepad1().rightTrigger().greaterThan(0)
                 .whenTrue(IntakeSubsystem.INSTANCE.activateIntake)
-                .whenFalse(new IfElseCommand(
-                                () -> Gamepads.gamepad1().leftTrigger().get() == 0,
-                                IntakeSubsystem.INSTANCE.stopIntake,
-                                new InstantCommand(() -> {
-                                })
-                        )
-                )
+        ;
         ;
         Gamepads.gamepad1().leftTrigger().greaterThan(0)
                 .whenTrue(IntakeSubsystem.INSTANCE.outtake)

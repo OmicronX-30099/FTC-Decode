@@ -8,7 +8,6 @@ import dev.nextftc.core.subsystems.Subsystem;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.impl.MotorEx;
 
-@Config
 public class FlywheelSubsystem implements Subsystem {
     public static FlywheelSubsystem INSTANCE = new FlywheelSubsystem();
     public FlywheelSubsystem() { }
@@ -20,7 +19,7 @@ public class FlywheelSubsystem implements Subsystem {
     public double p, i, d, v, a, s = 0.0;
 
     public ControlSystem flywheelControl = ControlSystem.builder()
-            .velPid(p, i, d)
+            .velPid(1, i, d)
             .basicFF(v, a, s)
             .build()
     ;
