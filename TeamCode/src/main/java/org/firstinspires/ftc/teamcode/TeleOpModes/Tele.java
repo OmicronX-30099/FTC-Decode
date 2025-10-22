@@ -14,6 +14,9 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+@TeleOp(name="simple")
 public class Tele extends NextFTCOpMode {
     public Tele() {
         addComponents(
