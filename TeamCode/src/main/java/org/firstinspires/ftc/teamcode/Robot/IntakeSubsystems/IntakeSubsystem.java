@@ -11,8 +11,6 @@ public class IntakeSubsystem implements Subsystem {
 
     public MotorEx intakeMotor = new MotorEx("intake");
 
-    public static Boolean IS_LOCKED = Boolean.FALSE;
-
     public Command activateIntake = new SetPower(intakeMotor, 1);
     public Command stopIntake = new SetPower(intakeMotor, 0);
     public Command outtake = new SetPower(intakeMotor, -1);

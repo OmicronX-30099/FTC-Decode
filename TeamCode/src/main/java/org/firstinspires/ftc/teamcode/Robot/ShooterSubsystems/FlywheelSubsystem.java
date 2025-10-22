@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.Robot.ShooterSubsystems;
 
+import com.acmerobotics.dashboard.config.Config;
+
 import dev.nextftc.control.ControlSystem;
 import dev.nextftc.control.KineticState;
 import dev.nextftc.core.subsystems.Subsystem;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.impl.MotorEx;
 
+@Config
 public class FlywheelSubsystem implements Subsystem {
     public static FlywheelSubsystem INSTANCE = new FlywheelSubsystem();
     public FlywheelSubsystem() { }

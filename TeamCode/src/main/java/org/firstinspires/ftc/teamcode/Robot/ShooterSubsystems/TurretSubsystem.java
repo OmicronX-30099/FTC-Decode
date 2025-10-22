@@ -9,7 +9,7 @@ public class TurretSubsystem implements Subsystem {
     public static TurretSubsystem INSTANCE = new TurretSubsystem();
     private TurretSubsystem() { }
 
-    public static double INITIAL_TICKS = 0;
+    public static double INITIAL_TICKS = -30;
 
     public MotorEx turretMotor = new MotorEx("tur");
     public ControlSystem turretControl = ControlSystem.builder()
