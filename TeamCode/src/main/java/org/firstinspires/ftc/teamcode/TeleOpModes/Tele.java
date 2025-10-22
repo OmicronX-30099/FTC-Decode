@@ -3,6 +3,10 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 import org.firstinspires.ftc.teamcode.Robot.Constants;
 import org.firstinspires.ftc.teamcode.Robot.ShooterSubsystems.TurretSubsystem;
 
+import dev.nextftc.core.commands.conditionals.IfElseCommand;
+import dev.nextftc.core.commands.delays.Delay;
+import dev.nextftc.core.commands.groups.SequentialGroup;
+import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
 import dev.nextftc.extensions.pedro.PedroComponent;
@@ -12,9 +16,12 @@ import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.driving.DriverControlledCommand;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
+import dev.nextftc.hardware.impl.ServoEx;
+
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="simple")
 public class Tele extends NextFTCOpMode {
@@ -30,29 +37,48 @@ public class Tele extends NextFTCOpMode {
     public MotorEx fr = new MotorEx("fr");
     public MotorEx bl = new MotorEx("bl");
     public MotorEx br = new MotorEx("br");
-    public MotorEx fwl = new MotorEx("fwl").reversed();
+    public MotorEx fwl = new MotorEx("fwl");
     public MotorEx fwr = new MotorEx("fwr");
     public MotorEx intake = new MotorEx("intake");
+    public ServoEx kicker = new ServoEx("k");
 
     public DriverControlledCommand drive;
+
+    public Boolean isRunning = false;
 
     @Override
     public void onStartButtonPressed() {
         Gamepads.gamepad1().rightTrigger().greaterThan(0)
-                .whenTrue(() -> {fwl.setPower(Gamepads.gamepad1().rightTrigger().get()); fwr.setPower(Gamepads.gamepad1().rightTrigger().get()); })
+                .whenTrue(() -> {fwl.setPower(0.5); fwr.setPower(0.5); })
                 .whenBecomesFalse(() -> {fwl.setPower(0); fwr.setPower(0);})
         ;
         Gamepads.gamepad1().leftTrigger().greaterThan(0)
-                .whenTrue(() -> intake.setPower(Gamepads.gamepad1().leftTrigger().get()))
-                .whenBecomesFalse(() -> intake.setPower(0))
+                .whenTrue(() -> {fwl.setPower(-0.3); fwr.setPower(-0.3); intake.setPower(-0.2);})
+                .whenBecomesFalse(() -> {fwl.setPower(0); fwr.setPower(0); intake.setPower(0);})
         ;
+        Gamepads.gamepad1().rightBumper()
+                .whenTrue(() -> {intake.setPower(1); })
+                .whenBecomesFalse(() -> {intake.setPower(0);})
+        ;
+        Gamepads.gamepad1().leftBumper()
+                .whenTrue(() -> {intake.setPower(-1);})
+                .whenBecomesFalse(() -> {intake.setPower(0);})
+        ;
+        Gamepads.gamepad1().circle().whenBecomesTrue(
+                new SequentialGroup(
+                        new InstantCommand(() -> kicker.setPosition(0.25)),
+                        new Delay(0.15),
+                        new InstantCommand(() -> kicker.setPosition(0))
+                )
+        );
+
         drive = new MecanumDriverControlled(fl, fr, bl,br, Gamepads.gamepad1().leftStickY().negate(), Gamepads.gamepad1().leftStickX(), Gamepads.gamepad1().rightStickX());
         drive.schedule();
     }
 
     @Override
     public void onUpdate() {
-        TurretSubsystem.INSTANCE.setTurretHeading(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
+        //TurretSubsystem.INSTANCE.setTurretHeading(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
         telemetry.addData("vel", fwr.getVelocity());
         telemetry.update();
     }
