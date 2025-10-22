@@ -12,7 +12,6 @@ import dev.nextftc.ftc.ActiveOpMode;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.impl.MotorEx;
 
-@Config
 public class FlywheelSubsystem implements Subsystem {
     public static FlywheelSubsystem INSTANCE = new FlywheelSubsystem();
     private FlywheelSubsystem() { }
