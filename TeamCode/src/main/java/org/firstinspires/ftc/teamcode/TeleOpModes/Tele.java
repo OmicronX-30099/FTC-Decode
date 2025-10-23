@@ -71,6 +71,16 @@ public class Tele extends NextFTCOpMode {
                         new InstantCommand(() -> kicker.setPosition(0))
                 )
         );
+        Gamepads.gamepad1().square().whenBecomesTrue(
+                new SequentialGroup(
+                        new InstantCommand(() -> {fwl.setPower(1); fwr.setPower(1);}),
+                        new Delay(0.15),
+                        new InstantCommand(() -> {fwl.setPower(0.55); fwr.setPower(0.55);})
+                )
+        );
+        Gamepads.gamepad1().cross().whenBecomesTrue(
+                new InstantCommand(() -> {fwl.setPower(0); fwr.setPower(0);})
+        );
 
         drive = new MecanumDriverControlled(fl, fr, bl,br, Gamepads.gamepad1().leftStickY().negate(), Gamepads.gamepad1().leftStickX(), Gamepads.gamepad1().rightStickX());
         drive.schedule();
