@@ -77,23 +77,55 @@ public class Pathing extends NextFTCOpMode {
             new InstantCommand(() -> fwm.setPower(0.52))
     );
     public Command shootSequenceShort = new SequentialGroup(
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             flywheelAccelShort,
             new InstantCommand(() -> intake.setPower(1)),
-            push,
+
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             new Delay(1),
-            push,
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             new Delay(1),
-            push,
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
     public Command shootSequenceFar = new SequentialGroup(
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             flywheelAccelFar,
             new InstantCommand(() -> intake.setPower(1)),
-            push,
+
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             new Delay(1),
-            push,
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             new Delay(1),
-            push,
+            //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0)),
+
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
 
