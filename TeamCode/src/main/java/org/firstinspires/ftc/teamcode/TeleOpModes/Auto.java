@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -58,6 +59,10 @@ public class Auto extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
+        new SequentialGroup(push,
+                new Delay(1),
+                realignBalls
+                ).schedule();
 
 
     }
