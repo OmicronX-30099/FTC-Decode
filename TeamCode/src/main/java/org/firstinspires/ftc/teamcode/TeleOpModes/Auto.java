@@ -52,7 +52,7 @@ public class Auto extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
-        kicker.setPosition(0);
+            kicker.setPosition(0);
         new SequentialGroup(
             //new InstantCommand(() -> fwm.setPower(1)),
             //new FollowPath(score_preloaded, true, 0.5),
