@@ -41,6 +41,7 @@ public class Tele extends NextFTCOpMode {
     public MotorEx fwr = new MotorEx("fwr");
     public MotorEx intake = new MotorEx("intake");
     public ServoEx kicker = new ServoEx("k");
+    public ServoEx hood = new ServoEx("hood");
 
     public DriverControlledCommand drive;
 
@@ -48,8 +49,9 @@ public class Tele extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
+        hood.setPosition(0);
         Gamepads.gamepad1().rightTrigger().greaterThan(0)
-                .whenTrue(() -> {fwl.setPower(0.5); fwr.setPower(0.5); })
+                .whenTrue(() -> {fwl.setPower(0.4); fwr.setPower(0.4); })
                 .whenBecomesFalse(() -> {fwl.setPower(0); fwr.setPower(0);})
         ;
         Gamepads.gamepad1().leftTrigger().greaterThan(0)
@@ -74,12 +76,16 @@ public class Tele extends NextFTCOpMode {
         Gamepads.gamepad1().square().whenBecomesTrue(
                 new SequentialGroup(
                         new InstantCommand(() -> {fwl.setPower(1); fwr.setPower(1);}),
-                        new Delay(0.15),
-                        new InstantCommand(() -> {fwl.setPower(0.55); fwr.setPower(0.55);})
+                        new Delay(0.5),
+                        new InstantCommand(() -> {fwl.setPower(0.4); fwr.setPower(0.4);})
                 )
         );
         Gamepads.gamepad1().cross().whenBecomesTrue(
-                new InstantCommand(() -> {fwl.setPower(0); fwr.setPower(0);})
+                new SequentialGroup(
+                        new InstantCommand(() -> {fwl.setPower(-0.5); fwr.setPower(-0.5);}),
+                        new Delay (1),
+                        new InstantCommand(() -> {fwl.setPower(0); fwr.setPower(0);})
+                )
         );
 
         drive = new MecanumDriverControlled(fl, fr, bl,br, Gamepads.gamepad1().leftStickY().negate(), Gamepads.gamepad1().leftStickX(), Gamepads.gamepad1().rightStickX());

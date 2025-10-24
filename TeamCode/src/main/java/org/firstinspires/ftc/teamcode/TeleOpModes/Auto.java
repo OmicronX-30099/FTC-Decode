@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Robot.Constants;
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.commands.delays.Delay;
 import dev.nextftc.core.commands.groups.SequentialGroup;
+import dev.nextftc.core.commands.groups.ParallelGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.extensions.pedro.FollowPath;
@@ -33,6 +35,13 @@ public class Auto extends NextFTCOpMode {
         );
     }
 
+    // Shooter Commands
+    public Command push;
+    public Command realignBalls;
+    public Command accelerateFlywheel;
+    public Command quickAcceleration;
+    public Command tripleBallSequence;
+
     public PathChain score_preloaded;
 
     public Pose pre_load = new Pose(-2,1);
@@ -42,8 +51,6 @@ public class Auto extends NextFTCOpMode {
     public MotorGroup fwm = new MotorGroup(fwr,fwl);
     public MotorEx intake = new MotorEx("intake");
     public ServoEx kicker = new ServoEx("k");
-    public Command kick;
-
     @Override
     public void onInit() {
         buildPaths();
@@ -52,31 +59,49 @@ public class Auto extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
-            kicker.setPosition(0);
-        new SequentialGroup(
-            //new InstantCommand(() -> fwm.setPower(1)),
-            //new FollowPath(score_preloaded, true, 0.5),
-            //new Delay(0.075),
-            //new InstantCommand(() -> fwm.setPower(0.8)),
-            //new InstantCommand(() -> intake.setPower(1)),
-            //new Delay(2),
-            new InstantCommand(() -> kicker.setPosition(0.25)),
-            new Delay(0.15)//,
+        new SequentialGroup(push,
+                new Delay(1),
+                realignBalls
+                ).schedule();
 
-        ).schedule();
 
     }
     public void buildPaths() {
-        score_preloaded = follower().pathBuilder()
-                .addPath(new BezierLine(start, pre_load))
-                .setLinearHeadingInterpolation(0,Math.toRadians(-10))
-                .build();
+
     }
     public void buildCommands() {
-        kick = new SequentialGroup(
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0))
+        push = new SequentialGroup(
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.15),
+            new InstantCommand(() -> kicker.setPosition(0))
+        );
+
+        realignBalls = new ParallelGroup(
+            new InstantCommand(() -> {fwm.setPower(-0.3); intake.setPower(-0.2);}),
+            new Delay(0.3)
+        );
+
+        accelerateFlywheel = new SequentialGroup(
+            new InstantCommand(() -> fwm.setPower(1)),
+            new Delay(0.2),
+            new InstantCommand(() -> fwm.setPower(0.75))
+        );
+
+        quickAcceleration = new SequentialGroup(
+            new InstantCommand(() -> fwm.setPower(0.85)),
+            new Delay(0.05),
+            new InstantCommand(() -> fwm.setPower(0.75))
+        );
+
+        tripleBallSequence = new SequentialGroup(
+            new InstantCommand(() -> intake.setPower(1)),
+            new Delay(0.3),
+            realignBalls,
+            new InstantCommand(() -> intake.setPower(0)),
+            accelerateFlywheel,
+            new InstantCommand(() -> intake.setPower(1)),
+            quickAcceleration,
+            push
         );
     }
 }
