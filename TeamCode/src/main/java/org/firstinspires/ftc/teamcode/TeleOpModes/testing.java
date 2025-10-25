@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
+@Disabled
+@TeleOp(name="testing")
 public class testing extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,7 +29,7 @@ public class testing extends LinearOpMode {
             telemetry.addData("Flywheel V:", flyWheelR.getVelocity());
             telemetry.addData("Flywheel Power:", flyWheelR.getPower());
             telemetry.update();
-
+            hood_servo.setPosition(0);
         }
     }
 }

@@ -141,7 +141,7 @@ public class RightPathing extends NextFTCOpMode {
 
     @Override
     public void onInit() {
-        follower().setStartingPose(new Pose(105, 135, Math.toRadians(270)));
+        follower().setStartingPose(new Pose(109.6, 134.37, Math.toRadians(270)));
         buildPaths();
     }
     @Override
@@ -186,7 +186,7 @@ public class RightPathing extends NextFTCOpMode {
         Path1 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000, 135.000), new Pose(105.000, 105.000))
+                        new BezierLine(new Pose(109.600, 134.370), new Pose(105.000, 105.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(-90), Math.toRadians(-130))
                 .build();
