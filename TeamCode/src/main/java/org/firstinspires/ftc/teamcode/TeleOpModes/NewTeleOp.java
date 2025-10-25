@@ -52,7 +52,7 @@ public class NewTeleOp extends NextFTCOpMode {
     public PathChain toShort;
     public PathChain toFar;
 
-    public DriverControlledCommand driverControlled;
+    public DriverControlledCommand drive;
 
     @Override
     public void onInit() {
@@ -87,8 +87,8 @@ public class NewTeleOp extends NextFTCOpMode {
         flywheelAccelShort = new SequentialGroup(
                 new InstantCommand(() -> fwm.setPower(1)),
                 new InstantCommand(() -> hood.setPosition(0)),
-                new WaitUntil(() -> fwm.getVelocity() >= 1020),
-                new InstantCommand(() -> fwm.setPower(0.4))
+                new WaitUntil(() -> fwm.getVelocity() >= 1030),
+                new InstantCommand(() -> fwm.setPower(0.42))
         );
         flywheelAccelFar = new SequentialGroup(
                 new InstantCommand(() -> fwm.setPower(1)),
@@ -103,26 +103,29 @@ public class NewTeleOp extends NextFTCOpMode {
                 new InstantCommand(() -> kicker.setPosition(0)),
 
                 flywheelAccelShort,
+                new Delay(0.25),
+
+                //push fix
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
                 new InstantCommand(() -> intake.setPower(1)),
 
+                flywheelAccelShort,
+                new Delay(0.2),
                 //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0)),
 
                 flywheelAccelShort,
+                new Delay(0.2),
                 //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0)),
 
-                flywheelAccelShort,
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                new Delay(0.75),
+                new Delay(0.5),
                 new InstantCommand(() -> fwm.setPower(-0.3))
         );
         shootSequenceFar = new SequentialGroup(
@@ -151,33 +154,31 @@ public class NewTeleOp extends NextFTCOpMode {
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0)),
 
-                new Delay(0.72),
+                new Delay(0.5),
                 new InstantCommand(() -> fwm.setPower(-0.3))
         );
     }
     @Override
     public void onStartButtonPressed() {
         Gamepads.gamepad1().rightBumper().whenBecomesTrue(
-                shootSequenceShort
+                new SequentialGroup(
+                    shootSequenceShort,
+                    new InstantCommand(() ->fwm.setPower(0) )
+                )
         );
         Gamepads.gamepad1().leftBumper().whenBecomesTrue(
                 shootSequenceFar
         );
-        driverControlled = new MecanumDriverControlled(
-                fl,
-                fr,
-                bl,
-                br,
-                Gamepads.gamepad1().leftStickY().negate(),
-                Gamepads.gamepad1().leftStickX(),
-                Gamepads.gamepad2().rightStickX()
-        );
-        driverControlled.setScalar(0.7);
-        driverControlled.schedule();
+        drive = new MecanumDriverControlled(fl, fr, bl,br, Gamepads.gamepad1().leftStickY().negate(), Gamepads.gamepad1().leftStickX(), Gamepads.gamepad1().rightStickX());
+        drive.schedule();
+        Gamepads.gamepad1().leftTrigger().greaterThan(0)
+                .whenTrue(() -> intake.setPower(-1*Gamepads.gamepad1().leftTrigger().get()))
+                .whenBecomesFalse(() -> intake.setPower(0))
+        ;
     }
 
     @Override
     public void onUpdate() {
-        intake.setPower(Gamepads.gamepad1().rightTrigger().get()-Gamepads.gamepad1().leftTrigger().get());
+
     }
 }

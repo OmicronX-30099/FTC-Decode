@@ -141,7 +141,7 @@ public class LeftPathing extends NextFTCOpMode {
 
     @Override
     public void onInit() {
-        follower().setStartingPose(new Pose(105, 135, Math.toRadians(270)));
+        follower().setStartingPose(new Pose(34.4, 134.370, Math.toRadians(270)));
         buildPaths();
     }
     @Override
