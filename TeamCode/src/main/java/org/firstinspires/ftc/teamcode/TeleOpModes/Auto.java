@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Robot.Constants;
 
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.commands.delays.Delay;
+import dev.nextftc.core.commands.delays.WaitUntil;
 import dev.nextftc.core.commands.groups.SequentialGroup;
 import dev.nextftc.core.commands.groups.ParallelGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
@@ -51,6 +52,14 @@ public class Auto extends NextFTCOpMode {
     public MotorGroup fwm = new MotorGroup(fwr,fwl);
     public MotorEx intake = new MotorEx("intake");
     public ServoEx kicker = new ServoEx("k");
+    public ServoEx hood = new ServoEx("hood");
+
+    public Command flywheelAccelShort = new SequentialGroup(
+            new InstantCommand(() -> fwm.setPower(1)),
+            new InstantCommand(() -> hood.setPosition(0)),
+            new WaitUntil(() -> fwm.getVelocity() >= 1005),
+            new InstantCommand(() -> fwm.setPower(0.4))
+    );
     @Override
     public void onInit() {
         buildPaths();
@@ -59,10 +68,34 @@ public class Auto extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
-        new SequentialGroup(push,
+        new SequentialGroup(
+                //push fix
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.005),
+                new InstantCommand(() -> kicker.setPosition(0)),
+
+                flywheelAccelShort,
+                new InstantCommand(() -> intake.setPower(1)),
+
+                //push fix
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+
                 new Delay(1),
-                realignBalls
-                ).schedule();
+                //push fix
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+
+                new Delay(1.15),
+                //push fix
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+                new Delay(0.25),
+                new InstantCommand(() -> fwm.setPower(-0.3))
+        ).schedule();
 
 
     }

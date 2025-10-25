@@ -67,17 +67,19 @@ public class Pathing extends NextFTCOpMode {
     public Command flywheelAccelShort = new SequentialGroup(
             new InstantCommand(() -> fwm.setPower(1)),
             new InstantCommand(() -> hood.setPosition(0)),
-            new WaitUntil(() -> fwm.getVelocity() >= 1005),
+            new WaitUntil(() -> fwm.getVelocity() >= 1020),
             new InstantCommand(() -> fwm.setPower(0.4))
     );
     public Command flywheelAccelFar = new SequentialGroup(
             new InstantCommand(() -> fwm.setPower(1)),
             new InstantCommand(() -> hood.setPosition(0.3)),
-            new WaitUntil(() -> fwm.getVelocity() >= 1205),
+            new WaitUntil(() -> fwm.getVelocity() >= 1260),
             new InstantCommand(() -> fwm.setPower(0.52))
     );
     public Command shootSequenceShort = new SequentialGroup(
             //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
 
             flywheelAccelShort,
@@ -88,22 +90,25 @@ public class Pathing extends NextFTCOpMode {
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
 
-            new Delay(1),
+            flywheelAccelShort,
             //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
 
-            new Delay(1),
+            flywheelAccelShort,
             //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
 
+            new Delay(0.75),
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
     public Command shootSequenceFar = new SequentialGroup(
             //push fix
+            new InstantCommand(() -> kicker.setPosition(0.25)),
+            new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
 
             flywheelAccelFar,
@@ -114,18 +119,19 @@ public class Pathing extends NextFTCOpMode {
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
 
-            new Delay(1),
+            flywheelAccelFar,
             //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
 
-            new Delay(1),
+            flywheelAccelFar,
             //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
 
+            new Delay(0.72),
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
 
@@ -195,19 +201,19 @@ public class Pathing extends NextFTCOpMode {
                 new FollowPath(Path2, true),
                 new InstantCommand(() -> intake.setPower(1)),
                 new FollowPath(Path3, true),
-                new InstantCommand(() -> intake.setPower(0)),
+                new InstantCommand(() -> intake.setPower(0.1)),
                 new FollowPath(Path4, true),
                 shootSequenceShort,
                 new FollowPath(Path5, true),
                 new InstantCommand(() -> intake.setPower(1)),
                 new FollowPath(Path6, true),
-                new InstantCommand(() -> intake.setPower(0)),
+                new InstantCommand(() -> intake.setPower(0.1)),
                 new FollowPath(Path7, true),
                 shootSequenceFar,
                 new FollowPath(Path8, true),
                 new InstantCommand(() -> intake.setPower(1)),
                 new FollowPath(Path9, true),
-                new InstantCommand(() -> intake.setPower(0)),
+                new InstantCommand(() -> intake.setPower(0.1)),
                 new FollowPath(Path10, true),
                 shootSequenceFar
         ).schedule();
@@ -224,7 +230,7 @@ public class Pathing extends NextFTCOpMode {
         Path2 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000,105.000), new Pose(100.000,84.000))
+                        new BezierLine(new Pose(105.000,105.000), new Pose(100.000,85.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
                 .build();
@@ -232,7 +238,7 @@ public class Pathing extends NextFTCOpMode {
         Path3 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(100.000, 84.000), new Pose(128.000, 84.000))
+                        new BezierLine(new Pose(100.000, 85.000), new Pose(128.000, 85.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
@@ -240,7 +246,7 @@ public class Pathing extends NextFTCOpMode {
         Path4 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(128.000, 84.000), new Pose(105.000, 105.000))
+                        new BezierLine(new Pose(128.000, 85.000), new Pose(105.000, 105.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-135))
                 .build();
@@ -248,7 +254,7 @@ public class Pathing extends NextFTCOpMode {
         Path5 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000,105.000), new Pose(102.500,59.500))
+                        new BezierLine(new Pose(105.000,105.000), new Pose(102.500,60.00))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
                 .build();
@@ -256,7 +262,7 @@ public class Pathing extends NextFTCOpMode {
         Path6 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(102.500, 59.500), new Pose(134.000, 59.500))
+                        new BezierLine(new Pose(102.500, 60.000), new Pose(134.000, 60.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
@@ -264,9 +270,9 @@ public class Pathing extends NextFTCOpMode {
         Path7 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(134.000, 59.500), new Pose(85.000, 85.000))
+                        new BezierLine(new Pose(134.000, 60.000), new Pose(85.000, 85.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-132))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
 
         Path8 = follower()
@@ -274,7 +280,7 @@ public class Pathing extends NextFTCOpMode {
                 .addPath(
                         new BezierLine(new Pose(85.000, 85.000), new Pose(100.000, 35.500))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-130), Math.toRadians(0))
                 .build();
 
         Path9 = follower()
@@ -290,7 +296,7 @@ public class Pathing extends NextFTCOpMode {
                 .addPath(
                         new BezierLine(new Pose(132.500, 35.500), new Pose(85.000,85.000 ))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-132))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
     }
 }
