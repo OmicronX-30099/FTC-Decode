@@ -230,7 +230,11 @@ public class Pathing extends NextFTCOpMode {
         Path2 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000,105.000), new Pose(100.000,85.000))
+                        new BezierCurve(
+                                new Pose(105.000, 105.000),
+                                new Pose(93.083, 93.878),
+                                new Pose(100.000, 84.000)
+                        )
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
                 .build();
@@ -238,7 +242,7 @@ public class Pathing extends NextFTCOpMode {
         Path3 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(100.000, 85.000), new Pose(128.000, 85.000))
+                        new BezierLine(new Pose(100.000, 84.000), new Pose(127.000, 84.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
@@ -246,7 +250,7 @@ public class Pathing extends NextFTCOpMode {
         Path4 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(128.000, 85.000), new Pose(105.000, 105.000))
+                        new BezierLine(new Pose(127.000, 84.000), new Pose(105.000, 105.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-135))
                 .build();
@@ -254,7 +258,7 @@ public class Pathing extends NextFTCOpMode {
         Path5 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000,105.000), new Pose(102.500,60.00))
+                        new BezierLine(new Pose(105.000,105.000), new Pose(102.500,59.500))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
                 .build();
@@ -262,7 +266,7 @@ public class Pathing extends NextFTCOpMode {
         Path6 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(102.500, 60.000), new Pose(134.000, 60.000))
+                        new BezierLine(new Pose(102.500, 59.500), new Pose(132.000, 59.500))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
@@ -270,7 +274,7 @@ public class Pathing extends NextFTCOpMode {
         Path7 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(134.000, 60.000), new Pose(85.000, 85.000))
+                        new BezierLine(new Pose(132.000, 59.500), new Pose(85.000, 85.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
@@ -286,7 +290,7 @@ public class Pathing extends NextFTCOpMode {
         Path9 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(100.000, 35.500), new Pose(132.500, 35.500))
+                        new BezierLine(new Pose(100.000, 35.500), new Pose(132.000, 35.500))
                 )
                 .setTangentHeadingInterpolation()
                 .build();
@@ -294,7 +298,7 @@ public class Pathing extends NextFTCOpMode {
         Path10 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(132.500, 35.500), new Pose(85.000,85.000 ))
+                        new BezierLine(new Pose(132.000, 35.500), new Pose(85.000,85.000 ))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
