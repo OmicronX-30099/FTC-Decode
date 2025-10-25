@@ -52,11 +52,12 @@ public class NewTeleOp extends NextFTCOpMode {
 
     public DriverControlledCommand driverControlled;
 
-    /*@Override
+    @Override
     public void onInit() {
-        follower().setStartingPose(current_pose);
+        //follower().setStartingPose(current_pose);
+        buildCommands();
     }
-
+    /*
     public void buildPaths() {
         toShort = follower()
                 .pathBuilder()
@@ -155,7 +156,7 @@ public class NewTeleOp extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
         Gamepads.gamepad1().rightBumper().whenBecomesTrue(
-                new InstantCommand(() -> shootSequenceShort.schedule())
+                shootSequenceShort
         );
         Gamepads.gamepad1().leftBumper().whenBecomesTrue(
                 shootSequenceFar
