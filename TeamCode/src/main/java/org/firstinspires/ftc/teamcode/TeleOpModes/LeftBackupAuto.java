@@ -23,7 +23,7 @@ import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 import org.firstinspires.ftc.teamcode.Robot.Constants;
 
-@Autonomous(name="Right Side Backup Auto")
+@Autonomous(name="Left Side Backup Auto")
 public class LeftBackupAuto extends NextFTCOpMode {
 
     public LeftBackupAuto() {
