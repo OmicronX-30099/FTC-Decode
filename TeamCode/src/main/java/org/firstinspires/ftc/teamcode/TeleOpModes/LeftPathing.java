@@ -186,7 +186,7 @@ public class LeftPathing extends NextFTCOpMode {
         Path1 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(39.000, 135.000), new Pose(39.000, 105.000))
+                        new BezierLine(new Pose(34.400, 134.370), new Pose(39.000, 105.000))
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(-90), Math.toRadians(-50))
                 .build();
