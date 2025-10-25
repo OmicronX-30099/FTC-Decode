@@ -155,7 +155,7 @@ public class NewTeleOp extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
         Gamepads.gamepad1().rightBumper().whenBecomesTrue(
-                shootSequenceShort
+                new InstantCommand(() -> shootSequenceShort.schedule())
         );
         Gamepads.gamepad1().leftBumper().whenBecomesTrue(
                 shootSequenceFar
