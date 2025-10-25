@@ -54,10 +54,8 @@ public class Pathing extends NextFTCOpMode {
     public PathChain Path9;
     public PathChain Path10;
 
-    public Command realignBalls = new SequentialGroup(
-            new InstantCommand(() -> {fwm.setPower(-0.3); }),
-            new Delay(1)
-        );
+    public static Pose current_pose;
+
     public Command push = new SequentialGroup(
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
@@ -147,54 +145,6 @@ public class Pathing extends NextFTCOpMode {
     public void onStartButtonPressed() {
         kicker.setPosition(0);
         push.schedule();
-        /*new SequentialGroup(
-                push,
-                new FollowPath(Path1, true),
-                new Delay(2),
-                new FollowPath(Path2, true),
-                new InstantCommand(() -> intake.setPower(1)),
-                new FollowPath(Path3, true),
-                new InstantCommand(() -> intake.setPower(0.3)),
-                new FollowPath(Path4, true),
-                //realignBalls,
-                flywheelAccelShort,
-                new InstantCommand(() -> intake.setPower(1)),
-                push,
-                new Delay(1),
-                push,
-                new Delay(1),
-                push,
-                new InstantCommand(() -> intake.setPower(0)),
-                new InstantCommand(() -> fwm.setPower(-0.3)),
-                new FollowPath(Path5, true),
-                new InstantCommand(() -> intake.setPower(1)),
-                new FollowPath(Path6, true),
-                new InstantCommand(() -> intake.setPower(0.3)),
-                new FollowPath(Path7, true),
-                //realignBalls,
-                flywheelAccel,
-                push,
-                new Delay(1),
-                push,
-                new Delay(1),
-                push,
-                new InstantCommand(() -> intake.setPower(0)),
-                new InstantCommand(() -> fwm.setPower(-0.3)),
-                new FollowPath(Path8, true),
-                new InstantCommand(() -> intake.setPower(1)),
-                new FollowPath(Path9, true),
-                new InstantCommand(() -> intake.setPower(0.3)),
-                new FollowPath(Path10, true),
-                //realignBalls,
-                flywheelAccel,
-                push,
-                new Delay(1),
-                push,
-                new Delay(1),
-                push,
-                new InstantCommand(() -> intake.setPower(0)),
-                new InstantCommand(() -> fwm.setPower(-0.3))
-        ).schedule();*/
         new SequentialGroup(
                 new FollowPath(Path1, true),
                 shootSequenceShort,
@@ -217,6 +167,10 @@ public class Pathing extends NextFTCOpMode {
                 new FollowPath(Path10, true),
                 shootSequenceFar
         ).schedule();
+    }
+    @Override
+    public void onUpdate() {
+        current_pose = follower().getPose();
     }
     public void buildPaths() {
         Path1 = follower()
