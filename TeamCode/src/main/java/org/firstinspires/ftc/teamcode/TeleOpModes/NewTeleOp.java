@@ -171,7 +171,7 @@ public class NewTeleOp extends NextFTCOpMode {
                 fl,
                 fr,
                 bl,
-                br
+                br,
                 Gamepads.gamepad1().leftStickY().negate(),
                 Gamepads.gamepad1().leftStickX(),
                 Gamepads.gamepad2().rightStickX()
