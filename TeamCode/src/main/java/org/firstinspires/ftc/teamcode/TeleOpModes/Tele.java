@@ -70,7 +70,7 @@ public class Tele extends NextFTCOpMode {
                 new SequentialGroup(
                         new InstantCommand(() -> {fwl.setPower(1); fwr.setPower(1);}),
                         new Delay(0.5),
-                        new InstantCommand(() -> {fwl.setPower(0.4); fwr.setPower(0.4);})
+                        new InstantCommand(() -> {fwl.setPower(0.45); fwr.setPower(0.45);})
                 )
         );
         Gamepads.gamepad1().cross().whenBecomesTrue(
