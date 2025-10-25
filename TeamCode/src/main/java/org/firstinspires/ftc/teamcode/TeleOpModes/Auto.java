@@ -20,7 +20,6 @@ import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
 
-@Autonomous(name="InitialAuto")
 public class Auto extends NextFTCOpMode {
     public Auto() {
         addComponents(
