@@ -18,11 +18,7 @@ import dev.nextftc.hardware.driving.DriverControlledCommand;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
-import static dev.nextftc.extensions.pedro.PedroComponent.follower;
-import static org.firstinspires.ftc.teamcode.TeleOpModes.Pathing.current_pose;
 
-import com.pedropathing.geometry.BezierLine;
-import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 

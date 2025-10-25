@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
-import com.google.gson.InstanceCreator;
 import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
@@ -26,9 +25,9 @@ import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 import org.firstinspires.ftc.teamcode.Robot.Constants;
 
 @Autonomous(name="Full pathing")
-public class Pathing extends NextFTCOpMode {
+public class RightPathing extends NextFTCOpMode {
 
-    public Pathing() {
+    public RightPathing() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 new PedroComponent(Constants::createFollower),
