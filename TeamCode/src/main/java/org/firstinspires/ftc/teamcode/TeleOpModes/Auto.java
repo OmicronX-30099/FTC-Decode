@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
-import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
-import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -15,16 +13,12 @@ import dev.nextftc.core.commands.groups.SequentialGroup;
 import dev.nextftc.core.commands.groups.ParallelGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
-import dev.nextftc.extensions.pedro.FollowPath;
 import dev.nextftc.extensions.pedro.PedroComponent;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
-import dev.nextftc.hardware.positionable.SetPosition;
-
-import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 @Autonomous(name="InitialAuto")
 public class Auto extends NextFTCOpMode {
@@ -43,10 +37,6 @@ public class Auto extends NextFTCOpMode {
     public Command quickAcceleration;
     public Command tripleBallSequence;
 
-    public PathChain score_preloaded;
-
-    public Pose pre_load = new Pose(-2,1);
-    public Pose start = new Pose(0,0);
     public MotorEx fwl = new MotorEx("fwl");
     public MotorEx fwr = new MotorEx("fwr");
     public MotorGroup fwm = new MotorGroup(fwr,fwl);

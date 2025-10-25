@@ -3,12 +3,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
-import dev.nextftc.hardware.impl.MotorEx;
 
 @TeleOp
 public class testing extends LinearOpMode {
@@ -24,7 +19,6 @@ public class testing extends LinearOpMode {
         if(isStopRequested()) return;
 
         while (opModeIsActive()){
-            //hood_servo.setPosition(0);
             flyWheelR.setPower(gamepad1.right_trigger);
             flyWheelL.setPower(gamepad1.right_trigger);
             flyWheelR.setPower(-gamepad1.left_trigger);

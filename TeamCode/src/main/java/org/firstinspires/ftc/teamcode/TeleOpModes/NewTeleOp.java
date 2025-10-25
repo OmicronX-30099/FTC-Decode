@@ -52,7 +52,7 @@ public class NewTeleOp extends NextFTCOpMode {
 
     public DriverControlledCommand driverControlled;
 
-    @Override
+    /*@Override
     public void onInit() {
         follower().setStartingPose(current_pose);
     }
@@ -72,7 +72,7 @@ public class NewTeleOp extends NextFTCOpMode {
                 )
                 .setLinearHeadingInterpolation(follower().getHeading(), Math.toRadians(-130))
                 .build();
-    }
+    }*/
 
     public void buildCommands() {
         push = new SequentialGroup(

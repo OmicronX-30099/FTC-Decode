@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import org.firstinspires.ftc.teamcode.Robot.Constants;
-import org.firstinspires.ftc.teamcode.Robot.ShooterSubsystems.TurretSubsystem;
 
-import dev.nextftc.core.commands.conditionals.IfElseCommand;
 import dev.nextftc.core.commands.delays.Delay;
 import dev.nextftc.core.commands.groups.SequentialGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
-import dev.nextftc.core.components.SubsystemComponent;
+
 import dev.nextftc.extensions.pedro.PedroComponent;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
@@ -17,11 +15,7 @@ import dev.nextftc.hardware.driving.DriverControlledCommand;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
-
-import static dev.nextftc.extensions.pedro.PedroComponent.follower;
-
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="simple")
 public class Tele extends NextFTCOpMode {
@@ -29,7 +23,6 @@ public class Tele extends NextFTCOpMode {
         addComponents(
                 BindingsComponent.INSTANCE,
                 BulkReadComponent.INSTANCE,
-                new SubsystemComponent(TurretSubsystem.INSTANCE),
                 new PedroComponent(Constants::createFollower)
         );
     }
@@ -94,7 +87,6 @@ public class Tele extends NextFTCOpMode {
 
     @Override
     public void onUpdate() {
-        //TurretSubsystem.INSTANCE.setTurretHeading(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
         telemetry.addData("vel", fwr.getVelocity());
         telemetry.update();
     }
