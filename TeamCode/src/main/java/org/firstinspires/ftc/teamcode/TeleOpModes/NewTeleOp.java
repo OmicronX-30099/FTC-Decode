@@ -15,6 +15,7 @@ import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.driving.DriverControlledCommand;
+import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
@@ -34,6 +35,11 @@ public class NewTeleOp extends NextFTCOpMode {
                 new PedroComponent(Constants::createFollower)
         );
     }
+
+    public MotorEx fl = new MotorEx("fl");
+    public MotorEx fr = new MotorEx("fr");
+    public MotorEx bl = new MotorEx("bl");
+    public MotorEx br = new MotorEx("br");
     public MotorEx fwl = new MotorEx("fwl");
     public MotorEx fwr = new MotorEx("fwr");
     public MotorGroup fwm = new MotorGroup(fwr,fwl);
@@ -161,7 +167,11 @@ public class NewTeleOp extends NextFTCOpMode {
         Gamepads.gamepad1().leftBumper().whenBecomesTrue(
                 shootSequenceFar
         );
-        driverControlled = new PedroDriverControlled(
+        driverControlled = new MecanumDriverControlled(
+                fl,
+                fr,
+                bl,
+                br
                 Gamepads.gamepad1().leftStickY().negate(),
                 Gamepads.gamepad1().leftStickX(),
                 Gamepads.gamepad2().rightStickX()
