@@ -24,7 +24,7 @@ import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 import org.firstinspires.ftc.teamcode.Robot.Constants;
 
-@Autonomous(name="Full pathing")
+@Autonomous(name="Left Side Auto - 12ball")
 public class LeftPathing extends NextFTCOpMode {
 
     public LeftPathing() {

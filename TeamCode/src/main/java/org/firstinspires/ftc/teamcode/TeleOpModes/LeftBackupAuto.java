@@ -23,10 +23,10 @@ import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 import org.firstinspires.ftc.teamcode.Robot.Constants;
 
-@Autonomous(name="Backup Auto")
-public class BackupAuto extends NextFTCOpMode {
+@Autonomous(name="Right Side Backup Auto")
+public class LeftBackupAuto extends NextFTCOpMode {
 
-    public BackupAuto() {
+    public LeftBackupAuto() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 new PedroComponent(Constants::createFollower),
@@ -174,71 +174,71 @@ public class BackupAuto extends NextFTCOpMode {
         Path1 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000, 135.000), new Pose(105.000, 105.000))
+                        new BezierLine(new Pose(39.000, 135.000), new Pose(39.000, 105.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-90), Math.toRadians(-135))
+                .setLinearHeadingInterpolation(Math.toRadians(-90), Math.toRadians(-45))
                 .build();
 
         Path2 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000,105.000), new Pose(100.000,85.000))
+                        new BezierLine(new Pose(39.000,105.000), new Pose(44.000,85.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-45), Math.toRadians(-180))
                 .build();
 
         Path3 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(100.000, 85.000), new Pose(127.000, 85.000))
+                        new BezierLine(new Pose(44.000, 85.000), new Pose(17.000, 85.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-180))
                 .build();
 
         Path4 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(127.000, 85.000), new Pose(105.000, 105.000))
+                        new BezierLine(new Pose(17.000, 85.000), new Pose(39.000, 105.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-135))
+                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-45))
                 .build();
 
         Path5 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(105.000,105.000), new Pose(102.500,60.00))
+                        new BezierLine(new Pose(39.000,105.000), new Pose(41.500,60.00))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-135), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-45), Math.toRadians(-180))
                 .build();
 
         Path6 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(102.500, 60.000), new Pose(132.000, 60.000))
+                        new BezierLine(new Pose(41.500, 60.000), new Pose(12.000, 60.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-180))
                 .build();
 
         Path7 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(132.000, 60.000), new Pose(85.000, 85.000))
+                        new BezierLine(new Pose(132.000, 60.000), new Pose(59.000, 85.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
+                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-50))
                 .build();
 
         Path8 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(85.000, 85.000), new Pose(100.000, 35.500))
+                        new BezierLine(new Pose(59.000, 85.000), new Pose(44.000, 35.500))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-130), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-50), Math.toRadians(-180))
                 .build();
 
         Path9 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(100.000, 35.500), new Pose(132.000, 35.500))
+                        new BezierLine(new Pose(44.000, 35.500), new Pose(12.000, 35.500))
                 )
                 .setTangentHeadingInterpolation()
                 .build();
@@ -246,9 +246,9 @@ public class BackupAuto extends NextFTCOpMode {
         Path10 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(132.000, 35.500), new Pose(85.000,85.000 ))
+                        new BezierLine(new Pose(12.000, 35.500), new Pose(59.000,85.000 ))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
+                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-50))
                 .build();
     }
 }
