@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
+import com.pedropathing.paths.PathChain;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.teamcode.Robot.Constants;
 
 import dev.nextftc.core.commands.Command;
@@ -9,7 +12,6 @@ import dev.nextftc.core.commands.groups.SequentialGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.extensions.pedro.PedroComponent;
-import dev.nextftc.extensions.pedro.PedroDriverControlled;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
@@ -19,12 +21,9 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
 
-import com.pedropathing.paths.PathChain;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-@TeleOp(name="Test This Maximus For Teleop")
-public class NewTeleOp extends NextFTCOpMode {
-    public NewTeleOp() {
+@TeleOp(name="teleop2 i guess")
+public class Try2Teleop extends NextFTCOpMode {
+    public Try2Teleop() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 BindingsComponent.INSTANCE,
@@ -109,24 +108,8 @@ public class NewTeleOp extends NextFTCOpMode {
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0)),
-                new InstantCommand(() -> intake.setPower(1)),
+                new InstantCommand(() -> intake.setPower(1))
 
-                flywheelAccelShort,
-                new Delay(0.2),
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                flywheelAccelShort,
-                new Delay(0.2),
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                new Delay(0.5),
-                new InstantCommand(() -> fwm.setPower(-0.3))
         );
         shootSequenceFar = new SequentialGroup(
                 //push fix
@@ -140,22 +123,9 @@ public class NewTeleOp extends NextFTCOpMode {
                 //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
+                new InstantCommand(() -> kicker.setPosition(0))
 
-                flywheelAccelFar,
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
 
-                flywheelAccelFar,
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                new Delay(0.5),
-                new InstantCommand(() -> fwm.setPower(-0.3))
         );
     }
     @Override
@@ -182,6 +152,9 @@ public class NewTeleOp extends NextFTCOpMode {
                 .whenTrue(() -> intake.setPower(1*Gamepads.gamepad1().rightTrigger().get()))
                 .whenBecomesFalse(() -> intake.setPower(0))
         ;
+        Gamepads.gamepad1().triangle().whenBecomesTrue(
+                () -> drive.setScalar(0.5)
+        );
     }
 
     @Override
