@@ -1,4 +1,15 @@
-package org.firstinspires.ftc.teamcode.TeleOpModes;
+package org.firstinspires.ftc.teamcode.AutoOpModes;
+
+/**
+ * This is Team 30099 OmicronX's Code
+ * Authors: Achintya Akula, Maximus Xiao, Alex Zhang
+ * Season: FTC Decode (2025-2026)
+ * Event: SoCal Group H League Meet 0
+ * Type: AutoOpMode
+ * Alliance: Red
+ * Backup Autonomous OpMode to score an ideal 12 balls
+ * Had an average of 8 balls during testing, but made one max run of 11 balls
+ */
 
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
@@ -21,12 +32,12 @@ import dev.nextftc.core.commands.delays.WaitUntil;
 
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
-import org.firstinspires.ftc.teamcode.Robot.Constants;
+import org.firstinspires.ftc.teamcode.Constants;
 
 @Autonomous(name="Right Side Backup Auto")
-public class RightBackupAuto extends NextFTCOpMode {
+public class BackupRedAuto extends NextFTCOpMode {
 
-    public RightBackupAuto() {
+    public BackupRedAuto() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 new PedroComponent(Constants::createFollower),
@@ -73,67 +84,45 @@ public class RightBackupAuto extends NextFTCOpMode {
             new InstantCommand(() -> fwm.setPower(0.52))
     );
     public Command shootSequenceShort = new SequentialGroup(
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelShort,
             new InstantCommand(() -> intake.setPower(1)),
-
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelShort,
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelShort,
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             new Delay(0.75),
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
     public Command shootSequenceFar = new SequentialGroup(
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelFar,
             new InstantCommand(() -> intake.setPower(1)),
-
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelFar,
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelFar,
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             new Delay(0.72),
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
-
-
-
-
     @Override
     public void onInit() {
         follower().setStartingPose(new Pose(105, 135, Math.toRadians(270)));

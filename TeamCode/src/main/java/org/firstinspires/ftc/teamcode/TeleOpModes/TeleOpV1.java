@@ -1,6 +1,16 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
-import org.firstinspires.ftc.teamcode.Robot.Constants;
+/**
+ * This is Team 30099 OmicronX's Code
+ * Authors: Maximus Xiao, Alex Zhang
+ * Season: FTC Decode (2025-2026)
+ * Event: SoCal Group H League Meet 0
+ * Type: TeleOp
+ * Alliance: Any
+ * Contains a Basic TeleOp with manual functions
+ */
+
+import org.firstinspires.ftc.teamcode.Constants;
 
 import dev.nextftc.core.commands.delays.Delay;
 import dev.nextftc.core.commands.groups.SequentialGroup;
@@ -17,9 +27,9 @@ import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="simple")
-public class Tele extends NextFTCOpMode {
-    public Tele() {
+@TeleOp(name="TeleOp Version 1")
+public class TeleOpV1 extends NextFTCOpMode {
+    public TeleOpV1() {
         addComponents(
                 BindingsComponent.INSTANCE,
                 BulkReadComponent.INSTANCE,
@@ -37,8 +47,6 @@ public class Tele extends NextFTCOpMode {
     public ServoEx hood = new ServoEx("hood");
 
     public DriverControlledCommand drive;
-
-    public Boolean isRunning = false;
 
     @Override
     public void onStartButtonPressed() {
@@ -70,7 +78,7 @@ public class Tele extends NextFTCOpMode {
                 new SequentialGroup(
                         new InstantCommand(() -> {fwl.setPower(1); fwr.setPower(1);}),
                         new Delay(0.5),
-                        new InstantCommand(() -> {fwl.setPower(0.45); fwr.setPower(0.45);})
+                        new InstantCommand(() -> {fwl.setPower(0.4); fwr.setPower(0.4);})
                 )
         );
         Gamepads.gamepad1().cross().whenBecomesTrue(

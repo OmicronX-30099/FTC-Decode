@@ -1,4 +1,15 @@
-package org.firstinspires.ftc.teamcode.TeleOpModes;
+package org.firstinspires.ftc.teamcode.AutoOpModes;
+
+/**
+ * This is Team 30099 OmicronX's Code
+ * Authors: Achintya Akula, Maximus Xiao
+ * Season: FTC Decode (2025-2026)
+ * Event: SoCal Group H League Meet 0
+ * Type: AutoOpMode
+ * Alliance: Red
+ * Autonomous OpMode to score an ideal 12 balls
+ * Had an average of 10-11 balls during testing, but made one max run of 12 balls
+ */
 
 import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
@@ -22,12 +33,12 @@ import dev.nextftc.core.commands.delays.WaitUntil;
 
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
-import org.firstinspires.ftc.teamcode.Robot.Constants;
+import org.firstinspires.ftc.teamcode.Constants;
 
-@Autonomous(name="Left Side Auto - 12ball")
-public class LeftPathing extends NextFTCOpMode {
+@Autonomous(name="Right Side Auto - 12ball")
+public class RedAuto extends NextFTCOpMode {
 
-    public LeftPathing() {
+    public RedAuto() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 new PedroComponent(Constants::createFollower),
@@ -75,73 +86,31 @@ public class LeftPathing extends NextFTCOpMode {
             new InstantCommand(() -> fwm.setPower(0.52))
     );
     public Command shootSequenceShort = new SequentialGroup(
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelShort,
             new Delay(0.25),
-
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
             new InstantCommand(() -> intake.setPower(1)),
-
             flywheelAccelShort,
             new Delay(0.2),
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             flywheelAccelShort,
             new Delay(0.2),
-            //push fix
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-
             new Delay(0.5),
             new InstantCommand(() -> fwm.setPower(-0.3))
     );
-    public Command shootSequenceFar = new SequentialGroup(
-            //push fix
-            new InstantCommand(() -> kicker.setPosition(0.25)),
-            new Delay(0.0005),
-            new InstantCommand(() -> kicker.setPosition(0)),
-
-            flywheelAccelFar,
-            new InstantCommand(() -> intake.setPower(1)),
-
-            //push fix
-            new InstantCommand(() -> kicker.setPosition(0.25)),
-            new Delay(0.15),
-            new InstantCommand(() -> kicker.setPosition(0)),
-
-            flywheelAccelFar,
-            //push fix
-            new InstantCommand(() -> kicker.setPosition(0.25)),
-            new Delay(0.15),
-            new InstantCommand(() -> kicker.setPosition(0)),
-
-            flywheelAccelFar,
-            //push fix
-            new InstantCommand(() -> kicker.setPosition(0.25)),
-            new Delay(0.15),
-            new InstantCommand(() -> kicker.setPosition(0)),
-
-            new Delay(0.5),
-            new InstantCommand(() -> fwm.setPower(-0.3))
-    );
-
-
-
-
     @Override
     public void onInit() {
-        follower().setStartingPose(new Pose(34.4, 134.370, Math.toRadians(270)));
+        follower().setStartingPose(new Pose(109.6, 134.37, Math.toRadians(270)));
         buildPaths();
     }
     @Override
@@ -186,79 +155,79 @@ public class LeftPathing extends NextFTCOpMode {
         Path1 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(34.400, 134.370), new Pose(39.000, 105.000))
+                        new BezierLine(new Pose(109.600, 134.370), new Pose(105.000, 105.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-90), Math.toRadians(-50))
+                .setLinearHeadingInterpolation(Math.toRadians(-90), Math.toRadians(-130))
                 .build();
 
         Path2 = follower()
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(39.000, 105.000),
-                                new Pose(54.895, 97.591),
-                                new Pose(44.000, 85.000)
+                                new Pose(105.000, 105.000),
+                                new Pose(89.105, 97.591),
+                                new Pose(100.000, 85.000)
                         )
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-50), Math.toRadians(-180))
+                .setLinearHeadingInterpolation(Math.toRadians(-130), Math.toRadians(0))
                 .build();
 
         Path3 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(44.000, 85.000), new Pose(17.5, 85.000))
+                        new BezierLine(new Pose(100.000, 85.000), new Pose(126.500, 85.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-180))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
 
         Path4 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(17.000, 85.000), new Pose(39.000, 105.000))
+                        new BezierLine(new Pose(127.000, 85.000), new Pose(105.000, 105.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-50))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
-        //complete
+
         Path5 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(39.000,105.000), new Pose(41.500,60.00))
+                        new BezierLine(new Pose(105.000,105.000), new Pose(102.500,60.00))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-50), Math.toRadians(-180))
+                .setLinearHeadingInterpolation(Math.toRadians(-130), Math.toRadians(0))
                 .build();
 
         Path6 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(41.500, 60.000), new Pose(12.000, 60.000))
+                        new BezierLine(new Pose(102.500, 60.000), new Pose(132.000, 60.000))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-180))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
                 .build();
 
         Path7 = follower()
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(12.000, 60.000),
-                                new Pose(39.514, 55.956),
-                                new Pose(39.000, 105.000)
+                                new Pose(132.000, 60.000),
+                                new Pose(104.486, 55.956),
+                                new Pose(105.000, 105.000)
                         )
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-50))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
 
         Path8 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(39, 105), new Pose(44.000, 35.500))
+                        new BezierLine(new Pose(105, 105), new Pose(100.000, 35.500))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-50), Math.toRadians(-180))
+                .setLinearHeadingInterpolation(Math.toRadians(-130), Math.toRadians(0))
                 .build();
 
         Path9 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(44.000, 35.500), new Pose(12.000, 35.500))
+                        new BezierLine(new Pose(100.000, 35.500), new Pose(132.000, 35.500))
                 )
                 .setTangentHeadingInterpolation()
                 .build();
@@ -266,16 +235,16 @@ public class LeftPathing extends NextFTCOpMode {
         Path10 = follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(12.000, 35.500), new Pose(39,105 ))
+                        new BezierLine(new Pose(132.000, 35.500), new Pose(105,105 ))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-180), Math.toRadians(-50))
+                .setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(-130))
                 .build();
         Path11 = follower()
                 .pathBuilder()
                 .addPath(
                         new BezierLine(new Pose(105.000, 105.000), new Pose(120, 70))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(-50), Math.toRadians(0))
+                .setLinearHeadingInterpolation(Math.toRadians(-130), Math.toRadians(-180))
                 .build();
     }
 }

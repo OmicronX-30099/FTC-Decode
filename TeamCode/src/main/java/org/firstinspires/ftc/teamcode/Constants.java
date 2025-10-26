@@ -1,6 +1,15 @@
-package org.firstinspires.ftc.teamcode.Robot;
+package org.firstinspires.ftc.teamcode;
 
-import com.pedropathing.control.PIDFCoefficients;
+/**
+ * This is Team 30099 OmicronX's Code
+ * Authors: Achintya Akula
+ * Season: FTC Decode (2025-2026)
+ * Event: SoCal Group H League Meet 0
+ * Type: Constants
+ * Alliance: Any
+ * PedroPathing Constants for robot localization
+ */
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;

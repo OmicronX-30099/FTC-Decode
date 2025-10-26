@@ -1,9 +1,16 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
-import com.pedropathing.paths.PathChain;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+/**
+ * This is Team 30099 OmicronX's Code
+ * Authors: Achintya Akula, Maximus Xiao, Alex Zhang
+ * Season: FTC Decode (2025-2026)
+ * Event: SoCal Group H League Meet 0
+ * Type: TeleOp
+ * Alliance: Any
+ * Contains a triple ball sequence change from Version 1
+ */
 
-import org.firstinspires.ftc.teamcode.Robot.Constants;
+import org.firstinspires.ftc.teamcode.Constants;
 
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.commands.delays.Delay;
@@ -21,9 +28,11 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
 
-@TeleOp(name="teleop2 i guess")
-public class Try2Teleop extends NextFTCOpMode {
-    public Try2Teleop() {
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+@TeleOp(name="TeleOp Version 2")
+public class TeleOpV2 extends NextFTCOpMode {
+    public TeleOpV2() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 BindingsComponent.INSTANCE,
@@ -48,40 +57,19 @@ public class Try2Teleop extends NextFTCOpMode {
     public Command shootSequenceShort;
     public Command shootSequenceFar;
 
-    public PathChain toShort;
-    public PathChain toFar;
-
     public DriverControlledCommand drive;
 
     @Override
     public void onInit() {
-        //follower().setStartingPose(current_pose);
         buildCommands();
     }
-    /*
-    public void buildPaths() {
-        toShort = follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(follower().getPose(), new Pose(105.000, 105.000))
-                )
-                .setLinearHeadingInterpolation(follower().getHeading(), Math.toRadians(-135))
-                .build();
-        toFar = follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(follower().getPose(), new Pose(85.000, 85.000))
-                )
-                .setLinearHeadingInterpolation(follower().getHeading(), Math.toRadians(-130))
-                .build();
-    }*/
 
     public void buildCommands() {
         push = new SequentialGroup(
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0))
-                );
+        );
 
         flywheelAccelShort = new SequentialGroup(
                 new InstantCommand(() -> fwm.setPower(1)),
@@ -96,36 +84,47 @@ public class Try2Teleop extends NextFTCOpMode {
                 new InstantCommand(() -> fwm.setPower(0.52))
         );
         shootSequenceShort = new SequentialGroup(
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.0005),
                 new InstantCommand(() -> kicker.setPosition(0)),
-
                 flywheelAccelShort,
                 new Delay(0.25),
-
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0)),
-                new InstantCommand(() -> intake.setPower(1))
-
+                new InstantCommand(() -> intake.setPower(1)),
+                flywheelAccelShort,
+                new Delay(0.2),
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+                flywheelAccelShort,
+                new Delay(0.2),
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+                new Delay(0.5),
+                new InstantCommand(() -> fwm.setPower(-0.3))
         );
         shootSequenceFar = new SequentialGroup(
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.0005),
                 new InstantCommand(() -> kicker.setPosition(0)),
-
                 flywheelAccelFar,
                 new InstantCommand(() -> intake.setPower(1)),
-
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0))
-
-
+                new InstantCommand(() -> kicker.setPosition(0)),
+                flywheelAccelFar,
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+                flywheelAccelFar,
+                new InstantCommand(() -> kicker.setPosition(0.25)),
+                new Delay(0.15),
+                new InstantCommand(() -> kicker.setPosition(0)),
+                new Delay(0.5),
+                new InstantCommand(() -> fwm.setPower(-0.3))
         );
     }
     @Override
@@ -152,16 +151,5 @@ public class Try2Teleop extends NextFTCOpMode {
                 .whenTrue(() -> intake.setPower(1*Gamepads.gamepad1().rightTrigger().get()))
                 .whenBecomesFalse(() -> intake.setPower(0))
         ;
-        Gamepads.gamepad1().dpadDown().whenBecomesTrue(
-                () -> drive.setScalar(0.2)
-        );
-        Gamepads.gamepad1().dpadUp().whenBecomesTrue(
-                () -> drive.setScalar(1)
-        );
-    }
-
-    @Override
-    public void onUpdate() {
-
     }
 }

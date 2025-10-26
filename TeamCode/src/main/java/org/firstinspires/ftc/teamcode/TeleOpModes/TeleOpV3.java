@@ -1,6 +1,18 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
-import org.firstinspires.ftc.teamcode.Robot.Constants;
+/**
+ * This is Team 30099 OmicronX's Code
+ * Authors: Achintya Akula
+ * Season: FTC Decode (2025-2026)
+ * Event: SoCal Group H League Meet 0
+ * Type: TeleOp
+ * Alliance: Any
+ * Contains a 3 -> 1 ball sequence change from Version 2, as well as an added driveScalar toggle
+ */
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.Constants;
 
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.commands.delays.Delay;
@@ -9,7 +21,6 @@ import dev.nextftc.core.commands.groups.SequentialGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.extensions.pedro.PedroComponent;
-import dev.nextftc.extensions.pedro.PedroDriverControlled;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
@@ -19,12 +30,9 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.impl.ServoEx;
 
-import com.pedropathing.paths.PathChain;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-@TeleOp(name="Test This Maximus For Teleop")
-public class NewTeleOp extends NextFTCOpMode {
-    public NewTeleOp() {
+@TeleOp(name="teleop2 i guess")
+public class TeleOpV3 extends NextFTCOpMode {
+    public TeleOpV3() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 BindingsComponent.INSTANCE,
@@ -49,34 +57,12 @@ public class NewTeleOp extends NextFTCOpMode {
     public Command shootSequenceShort;
     public Command shootSequenceFar;
 
-    public PathChain toShort;
-    public PathChain toFar;
-
     public DriverControlledCommand drive;
 
     @Override
     public void onInit() {
-        //follower().setStartingPose(current_pose);
         buildCommands();
     }
-    /*
-    public void buildPaths() {
-        toShort = follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(follower().getPose(), new Pose(105.000, 105.000))
-                )
-                .setLinearHeadingInterpolation(follower().getHeading(), Math.toRadians(-135))
-                .build();
-        toFar = follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(follower().getPose(), new Pose(85.000, 85.000))
-                )
-                .setLinearHeadingInterpolation(follower().getHeading(), Math.toRadians(-130))
-                .build();
-    }*/
-
     public void buildCommands() {
         push = new SequentialGroup(
                 new InstantCommand(() -> kicker.setPosition(0.25)),
@@ -97,65 +83,25 @@ public class NewTeleOp extends NextFTCOpMode {
                 new InstantCommand(() -> fwm.setPower(0.52))
         );
         shootSequenceShort = new SequentialGroup(
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.0005),
                 new InstantCommand(() -> kicker.setPosition(0)),
-
                 flywheelAccelShort,
                 new Delay(0.25),
-
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
                 new InstantCommand(() -> kicker.setPosition(0)),
-                new InstantCommand(() -> intake.setPower(1)),
-
-                flywheelAccelShort,
-                new Delay(0.2),
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                flywheelAccelShort,
-                new Delay(0.2),
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                new Delay(0.5),
-                new InstantCommand(() -> fwm.setPower(-0.3))
+                new InstantCommand(() -> intake.setPower(1))
         );
         shootSequenceFar = new SequentialGroup(
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.0005),
                 new InstantCommand(() -> kicker.setPosition(0)),
-
                 flywheelAccelFar,
                 new InstantCommand(() -> intake.setPower(1)),
-
-                //push fix
                 new InstantCommand(() -> kicker.setPosition(0.25)),
                 new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                flywheelAccelFar,
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                flywheelAccelFar,
-                //push fix
-                new InstantCommand(() -> kicker.setPosition(0.25)),
-                new Delay(0.15),
-                new InstantCommand(() -> kicker.setPosition(0)),
-
-                new Delay(0.5),
-                new InstantCommand(() -> fwm.setPower(-0.3))
+                new InstantCommand(() -> kicker.setPosition(0))
         );
     }
     @Override
@@ -179,13 +125,14 @@ public class NewTeleOp extends NextFTCOpMode {
                 .whenBecomesFalse(() -> intake.setPower(0))
         ;
         Gamepads.gamepad1().rightTrigger().greaterThan(0)
-                .whenTrue(() -> intake.setPower(1*Gamepads.gamepad1().rightTrigger().get()))
+                .whenTrue(() -> intake.setPower(Gamepads.gamepad1().rightTrigger().get()))
                 .whenBecomesFalse(() -> intake.setPower(0))
         ;
-    }
-
-    @Override
-    public void onUpdate() {
-
+        Gamepads.gamepad1().dpadDown().whenBecomesTrue(
+                () -> drive.setScalar(0.2)
+        );
+        Gamepads.gamepad1().dpadUp().whenBecomesTrue(
+                () -> drive.setScalar(1)
+        );
     }
 }
