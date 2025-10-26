@@ -32,7 +32,7 @@ import dev.nextftc.core.commands.delays.WaitUntil;
 
 import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constants.Constants;
 
 @Autonomous(name="Right Side Backup Auto")
 public class BackupRedAuto extends NextFTCOpMode {

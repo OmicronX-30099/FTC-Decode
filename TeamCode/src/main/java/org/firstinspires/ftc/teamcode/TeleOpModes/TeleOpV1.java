@@ -10,7 +10,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
  * Contains a Basic TeleOp with manual functions
  */
 
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constants.Constants;
 
 import dev.nextftc.core.commands.delays.Delay;
 import dev.nextftc.core.commands.groups.SequentialGroup;

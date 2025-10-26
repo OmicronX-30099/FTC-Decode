@@ -10,7 +10,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
  * Contains a triple ball sequence change from Version 1
  */
 
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constants.Constants;
 
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.commands.delays.Delay;
