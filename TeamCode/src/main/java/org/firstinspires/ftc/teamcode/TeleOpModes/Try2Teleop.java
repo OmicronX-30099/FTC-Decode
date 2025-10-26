@@ -152,8 +152,11 @@ public class Try2Teleop extends NextFTCOpMode {
                 .whenTrue(() -> intake.setPower(1*Gamepads.gamepad1().rightTrigger().get()))
                 .whenBecomesFalse(() -> intake.setPower(0))
         ;
-        Gamepads.gamepad1().triangle().whenBecomesTrue(
-                () -> drive.setScalar(0.5)
+        Gamepads.gamepad1().dpadDown().whenBecomesTrue(
+                () -> drive.setScalar(0.2)
+        );
+        Gamepads.gamepad1().dpadUp().whenBecomesTrue(
+                () -> drive.setScalar(1)
         );
     }
 
