@@ -13,11 +13,11 @@ public class TurretSubsystem implements Subsystem {
 
     public MotorEx turretMotor = new MotorEx("tur");
     public ControlSystem turretControl = ControlSystem.builder()
-            .posPid(0.04)
+            .posPid(0.012)
             .build()
     ;
 
-    public static double LOOP_LIMIT = 20;
+    public static double LOOP_LIMIT = 0;
     public static double LOOP_INDEX = 0;
     public static double LAST_RECORDED_TICKS = 0;
 
