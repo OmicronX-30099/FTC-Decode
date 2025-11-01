@@ -1,0 +1,11 @@
+package org.firstinspires.ftc.teamcode.Systems
+
+import dev.nextftc.core.subsystems.SubsystemGroup
+import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.GateSubsystem
+import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.IntakeSubsystem
+
+object IntakeSystem : SubsystemGroup(
+    GateSubsystem,
+    IntakeSubsystem
+) {
+}
