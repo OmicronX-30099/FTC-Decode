@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
 import org.firstinspires.ftc.teamcode.Subsystems.ShooterSubsystemGroup;
+import com.pedropathing.geometry.Pose;
 
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
@@ -21,6 +22,11 @@ public class TAimTest extends NextFTCOpMode {
                 BulkReadComponent.INSTANCE,
                 new PedroComponent(Constants::createFollower)
         );
+    }
+
+    @Override
+    public void onInit() {
+        follower().setStartPose(new Pose(2,2));
     }
     @Override
     public void onUpdate() {

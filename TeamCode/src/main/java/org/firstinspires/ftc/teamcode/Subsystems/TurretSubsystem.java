@@ -13,7 +13,7 @@ public class TurretSubsystem implements Subsystem {
 
     public MotorEx turretMotor = new MotorEx("tur");
     public ControlSystem turretControl = ControlSystem.builder()
-            .posPid(0.012)
+            .posPid(0.05)
             .build()
     ;
 
@@ -25,8 +25,8 @@ public class TurretSubsystem implements Subsystem {
         double x = currentPos.getX();
         double y = currentPos.getY();
         double heading = currentPos.getHeading();
-        double angle = Math.atan((-48-y)/(72-x));
-        double ticks = Math.round(((angle-heading)/(2*Math.PI)) * 384.5 * (100/24));
+        double angle = Math.atan((144-y)/(144-x));
+        double ticks = Math.round(((((heading-90)-angle)/(2*Math.PI)) * 384.5 * (100/24)) + 192.25);
         if (Math.abs(ticks-LAST_RECORDED_TICKS) >= 3) {
             turretControl.setGoal(new KineticState(LAST_RECORDED_TICKS));
             LAST_RECORDED_TICKS = ticks;
