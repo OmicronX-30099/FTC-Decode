@@ -19,6 +19,7 @@ import dev.nextftc.core.commands.delays.WaitUntil;
 import dev.nextftc.core.commands.groups.SequentialGroup;
 import dev.nextftc.core.commands.utility.InstantCommand;
 import dev.nextftc.core.components.BindingsComponent;
+import dev.nextftc.extensions.pedro.FollowPath;
 import dev.nextftc.extensions.pedro.PedroComponent;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
@@ -61,7 +62,7 @@ public class SomethingAuto extends NextFTCOpMode {
             new WaitUntil(() -> fwm.getVelocity() >= 1260),
             new InstantCommand(() -> fwm.setPower(0.52))
     );
-    private final Command shootSequenceShort = new SequentialGroup(
+    private final Command shootSeq = new SequentialGroup(
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
@@ -83,27 +84,62 @@ public class SomethingAuto extends NextFTCOpMode {
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(56.000, 8.000), new Pose(39.863, 34.936))
+                        new BezierLine(new Pose(56.000, 8.000), new Pose(71.664, 23.291))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
+                .setConstantHeadingInterpolation(Math.toRadians(180))
                 .build());
-
 
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(39.863, 34.936), new Pose(15.229, 35.160))
+                        new BezierLine(new Pose(71.664, 23.291), new Pose(39.863, 35.160))
                 )
-                .setTangentHeadingInterpolation()
+                .setConstantHeadingInterpolation(Math.toRadians(180))
+                .build());
+
+        Paths.add(follower()
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(39.863, 35.160), new Pose(14.109, 35.832))
+                )
+                .setConstantHeadingInterpolation(Math.toRadians(180))
+                .build());
+
+        Paths.add(follower()
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(14.109, 35.832), new Pose(71.440, 23.291))
+                )
+                .setConstantHeadingInterpolation(Math.toRadians(180))
                 .build());
 
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(15.229, 35.160),
-                                new Pose(25.530, 50.837),
-                                new Pose(72.784, 23.739)
+                                new Pose(71.440, 23.291),
+                                new Pose(67.185, 58.899),
+                                new Pose(38.967, 59.347)
+                        )
+                )
+                .setConstantHeadingInterpolation(Math.toRadians(180))
+                .build());
+
+        Paths.add(follower()
+                .pathBuilder()
+                .addPath(
+                        new BezierLine(new Pose(38.967, 59.347), new Pose(13.885, 59.347))
+                )
+                .setConstantHeadingInterpolation(Math.toRadians(180))
+                .build());
+
+        Paths.add(follower()
+                .pathBuilder()
+                .addPath(
+                        new BezierCurve(
+                                new Pose(13.885, 59.347),
+                                new Pose(41.655, 75.471),
+                                new Pose(71.664, 72.336)
                         )
                 )
                 .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(135))
@@ -112,64 +148,38 @@ public class SomethingAuto extends NextFTCOpMode {
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(72.784, 23.739), new Pose(38.743, 59.347))
+                        new BezierLine(new Pose(71.664, 72.336), new Pose(36.280, 106.824))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(180))
-                .build());
-
-        Paths.add(follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(new Pose(38.743, 59.347), new Pose(14.781, 59.795))
-                )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
+                .setConstantHeadingInterpolation(Math.toRadians(180))
                 .build());
 
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Pose(14.781, 59.795),
-                                new Pose(20.603, 71.216),
-                                new Pose(40.759, 76.143),
-                                new Pose(59.571, 83.981)
+                                new Pose(36.280, 106.824),
+                                new Pose(48.821, 88.908),
+                                new Pose(39.639, 83.981)
                         )
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(135))
+                .setConstantHeadingInterpolation(Math.toRadians(180))
                 .build());
 
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(59.571, 83.981), new Pose(34.936, 108.392))
+                        new BezierLine(new Pose(39.639, 83.981), new Pose(13.885, 83.533))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(135))
+                .setConstantHeadingInterpolation(Math.toRadians(180))
                 .build());
 
         Paths.add(follower()
                 .pathBuilder()
                 .addPath(
-                        new BezierLine(new Pose(34.936, 108.392), new Pose(46.134, 83.533))
+                        new BezierLine(new Pose(13.885, 83.533), new Pose(36.280, 106.824))
                 )
-                .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(180))
+                .setConstantHeadingInterpolation(Math.toRadians(180))
                 .build());
-
-        Paths.add(follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(new Pose(46.134, 83.533), new Pose(14.781, 83.533))
-                )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
-                .build());
-
-        Paths.add(follower()
-                .pathBuilder()
-                .addPath(
-                        new BezierLine(new Pose(14.781, 83.533), new Pose(33.816, 108.168))
-                )
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(135))
-                .build());
-
     }
     @Override
     public void onInit() {
@@ -179,6 +189,33 @@ public class SomethingAuto extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
+        kicker.setPosition(0);
+        new SequentialGroup(
+            new FollowPath(Paths.get(0)),
+            shootSeq,
+            new FollowPath(Paths.get(1)),
+            new InstantCommand(() -> intake.setPower(1)),
+            new FollowPath(Paths.get(2)),
+            new InstantCommand(() -> intake.setPower(0)),
+            new Delay(0.25),
+            new FollowPath(Paths.get(3)),
+            shootSeq,
+            new FollowPath(Paths.get(4)),
+            new InstantCommand (() -> intake.setPower(1)),
+            new FollowPath(Paths.get(5)),
+            new InstantCommand(() -> intake.setPower(0)),
+            new FollowPath(Paths.get(6)),
+            shootSeq,
+            new FollowPath(Paths.get(7)),
+            new FollowPath(Paths.get(8)),
+            new InstantCommand(() -> intake.setPower(1)),
+            new FollowPath(Paths.get(9)),
+            new InstantCommand(() -> intake.setPower(0)),
+            new FollowPath(Paths.get(10)),
+            shootSeq).schedule();
+
+
+
 
     }
 }
