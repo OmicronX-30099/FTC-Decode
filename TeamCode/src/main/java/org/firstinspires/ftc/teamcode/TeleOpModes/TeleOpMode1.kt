@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower;
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.HoodSubsystem
 
 @TeleOp(group = "TeleOpModes", name = "TeleOp1")
@@ -38,7 +39,8 @@ class TeleOpMode1 : NextFTCOpMode() {
     override fun onUpdate() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
         telemetry.addData("Hood Pos", HoodSubsystem.hoodServo.position)
+        telemetry.addData("Flywheel Velocity: ", FlywheelSubsystem.flywheelMotors.velocity)
         telemetry.update()
-        //ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
     }
 }
