@@ -10,11 +10,10 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.TurretSubsystem
 object ShooterSystem: SubsystemGroup(
     FlywheelSubsystem, HoodSubsystem, KickerSubsystem, TurretSubsystem
 ) {
-    lateinit var GOAL_POSE: Pose;
+    var GOAL_POSE: Pose = Pose(144.0,144.0);
     var CURRENT_TURRET_HEADING = 0;
     var CURRENT_FLYWHEEL_VELOCITY = 0;
     var CURRENT_HOOD_POSITION = 0;
-    var CURRENT_DISTANCE: Double = 0.0;
 
     var eq = 1
 
@@ -22,12 +21,16 @@ object ShooterSystem: SubsystemGroup(
 
     }
     fun calibrateFlywheelVelocity(currPose: Pose) {
+        var distance = currPose.distanceFrom(GOAL_POSE)
+        var vel = 0.0;
         when (eq) {
-            1 -> {var vel = 5.35256 * CURRENT_DISTANCE + 810.51282}
+            1 -> {vel = 5.35256 * distance + 810.51282}
+            2 -> {vel = 5.96847 * distance + 656.75676}
+            3 -> {vel = 5.66751 * distance + 686.83879}
         }
+        FlywheelSubsystem.setTargetVelocity(vel)
     }
     fun calibrateHoodPosition(currPose: Pose) {
-        CURRENT_DISTANCE = currPose.distanceFrom(GOAL_POSE)
         if (currPose.distanceFrom(GOAL_POSE) <= 7) {
             eq = 1
             HoodSubsystem.lowMode.schedule()
