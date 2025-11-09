@@ -36,15 +36,15 @@ object ShooterSystem: SubsystemGroup(
         ActiveOpMode.telemetry.addData("DISTANCE FROM GOAL", dist)
         if (dist <= 84.0) {
             eq = 1
-            HoodSubsystem.lowMode.schedule()
+            HoodSubsystem.hoodServo.position = 0.0
             ActiveOpMode.telemetry.addData("STATUS", "Setting to low mode")
         } else if (dist <= 120.0) {
             eq = 2
-            HoodSubsystem.mediumMode.schedule()
+            HoodSubsystem.hoodServo.position = 0.4
             ActiveOpMode.telemetry.addData("STATUS", "Setting to medium mode")
         } else {
             eq = 3
-            HoodSubsystem.highMode.schedule()
+            HoodSubsystem.hoodServo.position = 1.0
             ActiveOpMode.telemetry.addData("STATUS", "Setting to high mode")
         }
     }

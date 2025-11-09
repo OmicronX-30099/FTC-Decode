@@ -35,10 +35,11 @@ class TeleOpMode1 : NextFTCOpMode() {
 
     }
 
+
     override fun onUpdate() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
         telemetry.addData("Hood Pos", HoodSubsystem.hoodServo.position)
         telemetry.update()
-        //ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
     }
 }
