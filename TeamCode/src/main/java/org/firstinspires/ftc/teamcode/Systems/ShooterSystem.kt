@@ -34,11 +34,11 @@ object ShooterSystem: SubsystemGroup(
     fun calibrateHoodPosition(currPose: Pose) {
         var dist = currPose.distanceFrom(GOAL_POSE)
         ActiveOpMode.telemetry.addData("DISTANCE FROM GOAL", dist)
-        if (dist <= 7.0) {
+        if (dist <= 84.0) {
             eq = 1
             HoodSubsystem.hoodServo.position = 0.0
             ActiveOpMode.telemetry.addData("STATUS", "Setting to low mode")
-        } else if (dist <= 10.0) {
+        } else if (dist <= 120.0) {
             eq = 2
             HoodSubsystem.hoodServo.position = 0.4
             ActiveOpMode.telemetry.addData("STATUS", "Setting to medium mode")
