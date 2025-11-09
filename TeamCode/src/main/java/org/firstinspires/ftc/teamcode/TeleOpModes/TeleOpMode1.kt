@@ -26,31 +26,10 @@ class TeleOpMode1 : NextFTCOpMode() {
     }
 
     override fun onInit() {
-        var autoPose: Pose? = null;
-        follower.setStartingPose(autoPose)
-        telemetry.addData("OpMode Selected: ", "DEFAULT = RED")
-        telemetry.update()
-    }
-    override fun onWaitForStart() {
-        if (Gamepads.gamepad1.rightBumper.get()) {
-            telemetry.addData("OpMode Selected: ", "RED")
-            ShooterSystem.setAlliance(false)
-        } else if (Gamepads.gamepad1.leftBumper.get()) {
-            telemetry.addData("OpMode Selected: ", "BLUE")
-            ShooterSystem.setAlliance(true)
-        }
-        telemetry.update()
+        follower.setStartingPose(Pose(96.0,120.0,90.0))
     }
 
-    override fun onStartButtonPressed() {
-        Gamepads.gamepad1.dpadUp
-            .whenBecomesTrue {ShooterSystem.AUTO_AIM = !ShooterSystem.AUTO_AIM}
-        Gamepads.gamepad1.leftBumper
-            .whenBecomesTrue {ShooterSystem.calibrateShooter(follower.pose)}
-        Gamepads.gamepad1.rightTrigger
-            .inRange(0.0..1.0)
-            .whenBecomesTrue {IntakeSubsystem.setIntakePower(Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())}
-        Gamepads.gamepad1.rightBumper
-            .whenBecomesTrue {ShooterSystem.shoot}
+    override fun onUpdate() {
+        ShooterSystem.calibrateHoodPosition(follower.pose)
     }
 }
