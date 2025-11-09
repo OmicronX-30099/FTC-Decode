@@ -14,6 +14,7 @@ object ShooterSystem: SubsystemGroup(
     var CURRENT_TURRET_HEADING = 0;
     var CURRENT_FLYWHEEL_VELOCITY = 0;
     var CURRENT_HOOD_POSITION = 0;
+    var CURRENT_DISTANCE: Double = 0.0;
 
     var eq = 1
 
@@ -21,15 +22,21 @@ object ShooterSystem: SubsystemGroup(
 
     }
     fun calibrateFlywheelVelocity(currPose: Pose) {
-
+        when (eq) {
+            1 -> {var vel = 5.35256 * CURRENT_DISTANCE + 810.51282}
+        }
     }
     fun calibrateHoodPosition(currPose: Pose) {
+        CURRENT_DISTANCE = currPose.distanceFrom(GOAL_POSE)
         if (currPose.distanceFrom(GOAL_POSE) <= 7) {
             eq = 1
             HoodSubsystem.lowMode.schedule()
         } else if (currPose.distanceFrom(GOAL_POSE) <= 10) {
             eq = 2
             HoodSubsystem.mediumMode.schedule()
+        } else {
+            eq = 3
+            HoodSubsystem.highMode.schedule()
         }
     }
 }

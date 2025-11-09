@@ -25,7 +25,7 @@ class TeleOpMode1 : NextFTCOpMode() {
         )
     }
 
-    override fun onInit() {
+    override fun onStartButtonPressed() {
         follower.setStartingPose(Pose(96.0,120.0,90.0))
     }
 
