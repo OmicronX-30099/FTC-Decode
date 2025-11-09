@@ -32,11 +32,13 @@ object ShooterSystem: SubsystemGroup(
         FlywheelSubsystem.setTargetVelocity(vel)
     }
     fun calibrateHoodPosition(currPose: Pose) {
-        if (currPose.distanceFrom(GOAL_POSE) <= 7) {
+        var dist = currPose.distanceFrom(GOAL_POSE)
+        ActiveOpMode.telemetry.addData("DISTANCE FROM GOAL", dist)
+        if (dist <= 7.0) {
             eq = 1
             HoodSubsystem.hoodServo.position = 0.0
             ActiveOpMode.telemetry.addData("STATUS", "Setting to low mode")
-        } else if (currPose.distanceFrom(GOAL_POSE) <= 10) {
+        } else if (dist <= 10.0) {
             eq = 2
             HoodSubsystem.hoodServo.position = 0.4
             ActiveOpMode.telemetry.addData("STATUS", "Setting to medium mode")
