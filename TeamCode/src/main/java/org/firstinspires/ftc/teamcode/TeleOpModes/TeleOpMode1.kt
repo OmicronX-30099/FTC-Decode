@@ -29,6 +29,6 @@ class TeleOpMode1 : NextFTCOpMode() {
 
     override fun onUpdate() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
-        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        //ShooterSystem.calibrateFlywheelVelocity(follower.pose)
     }
 }

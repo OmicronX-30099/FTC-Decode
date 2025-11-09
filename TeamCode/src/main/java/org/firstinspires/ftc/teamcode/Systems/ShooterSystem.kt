@@ -33,13 +33,13 @@ object ShooterSystem: SubsystemGroup(
     fun calibrateHoodPosition(currPose: Pose) {
         if (currPose.distanceFrom(GOAL_POSE) <= 7) {
             eq = 1
-            HoodSubsystem.lowMode.schedule()
+            HoodSubsystem.hoodServo.position = 0.0
         } else if (currPose.distanceFrom(GOAL_POSE) <= 10) {
             eq = 2
-            HoodSubsystem.mediumMode.schedule()
+            HoodSubsystem.hoodServo.position = 0.4
         } else {
             eq = 3
-            HoodSubsystem.highMode.schedule()
+            HoodSubsystem.hoodServo.position = 1.0
         }
     }
 }
