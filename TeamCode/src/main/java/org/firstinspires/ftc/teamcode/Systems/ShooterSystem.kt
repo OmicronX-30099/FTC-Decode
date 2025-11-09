@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Systems
 
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.subsystems.SubsystemGroup
+import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.HoodSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
@@ -34,12 +35,15 @@ object ShooterSystem: SubsystemGroup(
         if (currPose.distanceFrom(GOAL_POSE) <= 7) {
             eq = 1
             HoodSubsystem.hoodServo.position = 0.0
+            ActiveOpMode.telemetry.addData("STATUS", "Setting to low mode")
         } else if (currPose.distanceFrom(GOAL_POSE) <= 10) {
             eq = 2
             HoodSubsystem.hoodServo.position = 0.4
+            ActiveOpMode.telemetry.addData("STATUS", "Setting to medium mode")
         } else {
             eq = 3
             HoodSubsystem.hoodServo.position = 1.0
+            ActiveOpMode.telemetry.addData("STATUS", "Setting to high mode")
         }
     }
 }
