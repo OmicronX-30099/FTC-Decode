@@ -57,9 +57,9 @@ class TeleOpMode1 : NextFTCOpMode() {
         Gamepads.gamepad1.leftBumper
             .whenBecomesTrue(KickerSubsystem.kick)
         drivetrain = PedroDriverControlled(
-            Gamepads.gamepad1.leftStickY,
-            Gamepads.gamepad1.leftStickX,
-            Gamepads.gamepad1.rightStickX,
+            -Gamepads.gamepad1.leftStickY,
+            -Gamepads.gamepad1.leftStickX,
+            -Gamepads.gamepad1.rightStickX,
             true,
         )
         drivetrain.schedule()
