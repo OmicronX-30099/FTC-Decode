@@ -51,7 +51,9 @@ class TeleOpMode1 : NextFTCOpMode() {
             .whenTrue{IntakeSubsystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())}
             .whenBecomesFalse(GateSubsystem.closeCommand.and(IntakeSubsystem.intake(0.0)))
         Gamepads.gamepad1.circle
-            .whenBecomesTrue { ShooterSystem.autoAim() }
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue { ShooterSystem.autoAim(true) }
+            .whenBecomesTrue { ShooterSystem.autoAim(false) }
         Gamepads.gamepad1.leftBumper
             .whenBecomesTrue(KickerSubsystem.kick)
         drivetrain = PedroDriverControlled(

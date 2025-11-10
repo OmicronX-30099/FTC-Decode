@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Systems
 
+import android.R
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.ftc.ActiveOpMode
@@ -35,8 +36,8 @@ object ShooterSystem: SubsystemGroup(
         ActiveOpMode.telemetry.addData("FLYWHEEL VELOCITY", FlywheelSubsystem.flywheelMotors.velocity)
         ActiveOpMode.telemetry.addData("HOOD POSITION", CURRENT_HOOD_POSITION)
     }
-    fun autoAim() {
-        AUTO_AIM = !AUTO_AIM;
+    fun autoAim(autobool: Boolean) {
+        AUTO_AIM = autobool
     }
     fun calibrateFlywheelVelocity(currPose: Pose) {
         var distance = currPose.distanceFrom(GOAL_POSE)
