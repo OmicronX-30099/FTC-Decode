@@ -11,8 +11,11 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower;
+import dev.nextftc.ftc.Gamepads
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.GateSubsystem
+import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.HoodSubsystem
 
@@ -33,7 +36,16 @@ class TeleOpMode1 : NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         follower.setStartingPose(Pose(96.0,120.0,90.0))
-
+        GateSubsystem.gateServo.position = 0.25
+        GateSubsystem.gateServo.position = 0.25
+        Gamepads.gamepad1.rightBumper
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue(GateSubsystem.openCommand)
+            .whenBecomesFalse(GateSubsystem.closeCommand)
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
+            .whenBecomesTrue(GateSubsystem.openCommand)
+            .whenTrue{IntakeSubsystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())}
+            .whenBecomesFalse(GateSubsystem.closeCommand)
     }
 
 
