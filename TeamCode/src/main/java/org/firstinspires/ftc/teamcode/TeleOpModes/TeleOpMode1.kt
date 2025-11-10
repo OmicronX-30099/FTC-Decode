@@ -35,7 +35,7 @@ class TeleOpMode1 : NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-        follower.setStartingPose(Pose(96.0,120.0,90.0))
+        follower.setStartingPose(Pose(96.0,120.0,0.0))
         GateSubsystem.gateServo.position = 0.25
         GateSubsystem.gateServo.position = 0.25
         Gamepads.gamepad1.rightBumper
@@ -45,7 +45,7 @@ class TeleOpMode1 : NextFTCOpMode() {
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(GateSubsystem.openCommand)
             .whenTrue{IntakeSubsystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())}
-            .whenBecomesFalse(GateSubsystem.closeCommand)
+            .whenBecomesFalse(GateSubsystem.closeCommand.and(IntakeSubsystem.intake(0.0)))
     }
 
 
@@ -53,6 +53,9 @@ class TeleOpMode1 : NextFTCOpMode() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
         telemetry.addData("Hood Pos", HoodSubsystem.hoodServo.position)
         telemetry.addData("Flywheel Velocity: ", FlywheelSubsystem.flywheelMotors.velocity)
+        telemetry.addData("X", follower.pose.x)
+        telemetry.addData("y", follower.pose.y)
+        telemetry.addData("h", follower.pose.heading)
         telemetry.update()
         ShooterSystem.calibrateFlywheelVelocity(follower.pose)
     }
