@@ -8,7 +8,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
 
 object KickerSubsystem : Subsystem {
-    val kickServo: ServoEx = ServoEx("k")
+    val kickServo: ServoEx = ServoEx("k", -1.0)
 
     val restMode: Command = SetPosition(kickServo, 0.0)
     val engagedMode: Command = SetPosition(kickServo, 0.25)

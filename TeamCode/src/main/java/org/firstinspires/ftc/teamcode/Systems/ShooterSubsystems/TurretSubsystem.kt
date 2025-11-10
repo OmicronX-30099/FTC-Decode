@@ -19,10 +19,3 @@ object TurretSubsystem : Subsystem {
         turretMotor.power = turretControl.calculate(turretMotor.state)
     }
 }
-
-/*
-        Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
-            .whenBecomesTrue(GateSubsystem.openCommand)
-            .whenTrue(IntakeSubsystem.intake(Gamepads.gamepad1.leftTrigger.get()))
-            .whenBecomesFalse(IntakeSubsystem.intake(0.0).and(GateSubsystem.closeCommand))
-*/

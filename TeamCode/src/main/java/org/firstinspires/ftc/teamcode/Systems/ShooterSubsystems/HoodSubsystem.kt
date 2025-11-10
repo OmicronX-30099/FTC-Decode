@@ -6,7 +6,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
 
 object HoodSubsystem : Subsystem {
-    val hoodServo: ServoEx = ServoEx("hood")
+    val hoodServo: ServoEx = ServoEx("hood",-0.1)
 
     val lowMode: Command = SetPosition(hoodServo, 0.0).requires(this)
     val mediumMode: Command = SetPosition(hoodServo, 0.4).requires(this)

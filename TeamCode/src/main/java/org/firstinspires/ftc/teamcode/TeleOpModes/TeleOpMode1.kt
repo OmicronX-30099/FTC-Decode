@@ -11,15 +11,18 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower;
+import dev.nextftc.extensions.pedro.PedroDriverControlled
 import dev.nextftc.ftc.Gamepads
+import dev.nextftc.hardware.driving.DriverControlledCommand
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.GateSubsystem
 import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.HoodSubsystem
+import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 
-@TeleOp(group = "TeleOpModes", name = "TeleOp1")
+@TeleOp(group = "TeleOpModes", name = "Final TeleOp 1")
 class TeleOpMode1 : NextFTCOpMode() {
     init {
         addComponents(
@@ -30,15 +33,15 @@ class TeleOpMode1 : NextFTCOpMode() {
         )
     }
 
+    lateinit var drivetrain: DriverControlledCommand
+
     override fun onInit() {
-        GateSubsystem.gateServo.position = 0.27
-        HoodSubsystem.hoodServo.position = 0.6
+        GateSubsystem.gateServo.position = 0.3
+        HoodSubsystem.hoodServo.position = 0.1
     }
 
     override fun onStartButtonPressed() {
         follower.setStartingPose(Pose(96.0,120.0,0.0))
-        GateSubsystem.gateServo.position = 0.25
-        GateSubsystem.gateServo.position = 0.25
         Gamepads.gamepad1.rightBumper
             .toggleOnBecomesTrue()
             .whenBecomesTrue(GateSubsystem.openCommand)
@@ -47,17 +50,30 @@ class TeleOpMode1 : NextFTCOpMode() {
             .whenBecomesTrue(GateSubsystem.openCommand)
             .whenTrue{IntakeSubsystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())}
             .whenBecomesFalse(GateSubsystem.closeCommand.and(IntakeSubsystem.intake(0.0)))
+        Gamepads.gamepad1.circle
+            .whenBecomesTrue { ShooterSystem.autoAim() }
+        Gamepads.gamepad1.leftBumper
+            .whenBecomesTrue(KickerSubsystem.kick)
+        drivetrain = PedroDriverControlled(
+            Gamepads.gamepad1.leftStickY,
+            Gamepads.gamepad1.leftStickX,
+            Gamepads.gamepad1.rightStickX,
+            true,
+        )
+        drivetrain.schedule()
+        Gamepads.gamepad1.dpadUp
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue {drivetrain.scalar = 0.2}
+            .whenBecomesFalse { drivetrain.scalar = 1.0 }
     }
 
 
     override fun onUpdate() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
-        telemetry.addData("Hood Pos", HoodSubsystem.hoodServo.position)
-        telemetry.addData("Flywheel Velocity: ", FlywheelSubsystem.flywheelMotors.velocity)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
         telemetry.addData("X", follower.pose.x)
         telemetry.addData("y", follower.pose.y)
         telemetry.addData("h", follower.pose.heading)
         telemetry.update()
-        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
     }
 }

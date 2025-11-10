@@ -7,10 +7,4 @@ import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.GateSubsystem
 import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.IntakeSubsystem
 
 object IntakeSystem: SubsystemGroup(IntakeSubsystem, GateSubsystem) {
-    fun intake(intakePower: Double): Command {
-        return ParallelGroup(
-            GateSubsystem.openCommand,
-            intake(intakePower)
-        ).requires(this)
-    }
 }
