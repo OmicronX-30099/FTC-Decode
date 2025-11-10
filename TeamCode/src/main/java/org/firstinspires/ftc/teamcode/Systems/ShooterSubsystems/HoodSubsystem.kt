@@ -8,9 +8,9 @@ import dev.nextftc.hardware.positionable.SetPosition
 object HoodSubsystem : Subsystem {
     val hoodServo: ServoEx = ServoEx("hood")
 
-    val lowMode: Command = SetPosition(hoodServo, 0.0)
-    val mediumMode: Command = SetPosition(hoodServo, 0.4)
-    val highMode: Command = SetPosition(hoodServo, 1.0)
+    val lowMode: Command = SetPosition(hoodServo, 0.0).requires(this)
+    val mediumMode: Command = SetPosition(hoodServo, 0.4).requires(this)
+    val highMode: Command = SetPosition(hoodServo, 1.0).requires(this)
 
     override fun initialize() {
         hoodServo.position = 0.0

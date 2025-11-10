@@ -31,6 +31,7 @@ class TeleOpMode1 : NextFTCOpMode() {
     }
 
     override fun onInit() {
+        GateSubsystem.gateServo.position = 0.25
         HoodSubsystem.hoodServo.position = 0.0
     }
 

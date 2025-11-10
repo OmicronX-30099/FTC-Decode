@@ -25,9 +25,9 @@ object ShooterSystem: SubsystemGroup(
         var distance = currPose.distanceFrom(GOAL_POSE)
         var vel = 0.0;
         when (eq) {
-            1 -> {vel = 5.35256 * distance + 820.51282}
-            2 -> {vel = 5.96847 * distance + 665.75676}
-            3 -> {vel = 5.66751 * distance + 675.83879}
+            1 -> {vel = 5.35256 * distance + 820.5}
+            2 -> {vel = 5.96847 * distance + 665.75}
+            3 -> {vel = 5.66751 * distance + 675.8}
         }
         ActiveOpMode.telemetry.addData("targetvel", vel)
         FlywheelSubsystem.setTargetVelocity(vel)

@@ -17,9 +17,5 @@ object KickerSubsystem : Subsystem {
         engagedMode,
         Delay(0.15),
         restMode
-    )
-
-    override fun initialize() {
-        kickServo.position = 0.0
-    }
+    ).requires(this)
 }
