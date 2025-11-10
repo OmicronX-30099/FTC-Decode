@@ -28,6 +28,10 @@ object ShooterSystem: SubsystemGroup
             KickerSubsystem.disengageKicker
         ).requires(this)
 
+
+    fun autoAim() {
+        AUTO_AIM = !AUTO_AIM
+    }
     fun calibrateHoodPosition(currPose: Pose) {
         var distance = currPose.distanceFrom(GOAL_POSE)
         when (distance) {
