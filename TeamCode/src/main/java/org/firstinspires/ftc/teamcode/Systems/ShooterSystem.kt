@@ -47,6 +47,7 @@ object ShooterSystem: SubsystemGroup(
             2 -> {vel = 5.96847 * distance + 665.75}
             3 -> {vel = 5.66751 * distance + 675.8}
         }
+        FlywheelSubsystem.setTargetVelocity(vel)
         CURRENT_FLYWHEEL_VELOCITY = vel
     }
     fun calibrateHoodPosition(currPose: Pose) {
