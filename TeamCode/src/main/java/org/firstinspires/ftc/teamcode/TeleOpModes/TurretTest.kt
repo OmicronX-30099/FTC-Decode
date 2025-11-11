@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes
 
 import com.pedropathing.geometry.Pose
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import java.lang.Math.toRadians
 
+@TeleOp
 class TurretTest: NextFTCOpMode() {
     init {
         addComponents(
