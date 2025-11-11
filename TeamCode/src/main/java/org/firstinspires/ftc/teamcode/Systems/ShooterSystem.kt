@@ -47,13 +47,23 @@ object ShooterSystem: SubsystemGroup
                                     CURRENT_HOOD_POSITION = 1.0}
         }
     }
-    fun calibrateFlywheelVelocity(currPose: Pose) {
+    fun calibrateFlywheelVelocity(currPose: Pose, on: Boolean) {
         var distance = currPose.distanceFrom(GOAL_POSE)
         var vel = 0.0;
-        when (eq) {
-            1 -> {vel = 5.35256 * distance + 820.5}
-            2 -> {vel = 5.96847 * distance + 665.75}
-            3 -> {vel = 5.66751 * distance + 675.8}
+        if (on) {
+            when (eq) {
+                1 -> {
+                    vel = 5.35256 * distance + 820.5
+                }
+
+                2 -> {
+                    vel = 5.96847 * distance + 665.75
+                }
+
+                3 -> {
+                    vel = 5.66751 * distance + 675.8
+                }
+            }
         }
         TARGET_FLYWHEEL_VELOCITY = vel
         FlywheelSubsystem.setFlywheelVelocity(vel)

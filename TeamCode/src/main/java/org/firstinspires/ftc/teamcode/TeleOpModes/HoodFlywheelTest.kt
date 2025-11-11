@@ -39,7 +39,7 @@ class HoodFlywheelTest: NextFTCOpMode() {
     override fun onUpdate() {
         if (ShooterSystem.AUTO_AIM) {
             ShooterSystem.calibrateHoodPosition(follower.pose)
-            ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+            ShooterSystem.calibrateFlywheelVelocity(follower.pose, true)
         }
         telemetry.update()
     }
