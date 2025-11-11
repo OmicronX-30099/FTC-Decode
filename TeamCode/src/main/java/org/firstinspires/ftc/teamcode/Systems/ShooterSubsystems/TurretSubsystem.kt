@@ -9,7 +9,7 @@ object TurretSubsystem: Subsystem {
     val turretMotor: MotorEx = MotorEx("tur")
 
     val turretControl: ControlSystem = ControlSystem.builder()
-        .posPid(0.03,0.0,0.0)
+        .posPid(0.0,0.0,0.0)
         .build()
 
     fun setTurretPosition(position: Double) {
