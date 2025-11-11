@@ -31,7 +31,11 @@ object ShooterSystem: SubsystemGroup
 
 
     fun autoAim() {
-        AUTO_AIM = !AUTO_AIM
+        if (AUTO_AIM == true) {
+            AUTO_AIM = false
+        } else {
+            AUTO_AIM = true
+        }
     }
     fun calibrateHoodPosition(currPose: Pose) {
         var distance = currPose.distanceFrom(GOAL_POSE)
