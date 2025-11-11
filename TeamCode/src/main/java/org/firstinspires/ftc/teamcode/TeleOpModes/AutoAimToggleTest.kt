@@ -11,13 +11,13 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 class AutoAimToggleTest: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(IntakeSystem),
-            SubsystemComponent(ShooterSystem)
+            SubsystemComponent(IntakeSystem, ShooterSystem),
         )
     }
 
     override fun onInit() {
         telemetry.addLine("This OpMode is meant to test the auto aim toggling feature. Run it and press the circle to test. Look at telemetry to see if auto aim status has changed")
+        telemetry.update()
     }
     override fun onStartButtonPressed() {
         Gamepads.gamepad1.circle
