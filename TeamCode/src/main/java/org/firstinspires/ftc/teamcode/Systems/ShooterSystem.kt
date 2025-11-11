@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.FlywheelSubsyste
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.HoodSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.TurretSubsystem
+import kotlin.math.*
 
 object ShooterSystem: SubsystemGroup
     (FlywheelSubsystem, HoodSubsystem, TurretSubsystem, KickerSubsystem) {
@@ -56,6 +57,15 @@ object ShooterSystem: SubsystemGroup
         }
         TARGET_FLYWHEEL_VELOCITY = vel
         FlywheelSubsystem.setFlywheelVelocity(vel)
+    }
+
+    fun calibrateTurretPosition(currPose: Pose) {
+        var angle = atan((GOAL_POSE.y-currPose.y)/(GOAL_POSE.x-currPose.x))
+        var ticks = (currPose.heading-angle) / (2 * PI) * (100 / 24) * 384.5 + 192.5;
+        if (abs(round(ticks) - TARGET_TURRET_HEADING) >= 5) {
+            TurretSubsystem.setTurretPosition(ticks)
+            TARGET_TURRET_HEADING = ticks
+        }
     }
 
     override fun periodic() {
