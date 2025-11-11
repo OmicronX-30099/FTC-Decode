@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
+import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 
@@ -12,6 +14,8 @@ class AutoAimToggleTest: NextFTCOpMode() {
     init {
         addComponents(
             SubsystemComponent(IntakeSystem, ShooterSystem),
+            BindingsComponent,
+            BulkReadComponent
         )
     }
 
