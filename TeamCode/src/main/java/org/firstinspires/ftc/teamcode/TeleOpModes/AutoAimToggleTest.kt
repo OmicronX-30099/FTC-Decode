@@ -20,7 +20,7 @@ class AutoAimToggleTest: NextFTCOpMode() {
         telemetry.update()
     }
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.circle
+        Gamepads.gamepad1.leftBumper
             .whenBecomesTrue { ShooterSystem.autoAim() }
     }
 
