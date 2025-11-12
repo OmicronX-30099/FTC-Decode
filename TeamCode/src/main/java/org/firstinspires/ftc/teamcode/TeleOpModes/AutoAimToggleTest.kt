@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes
 
 import com.pedropathing.follower.Follower
+import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.groups.SequentialGroup
@@ -39,6 +40,7 @@ class AutoAimToggleTest: NextFTCOpMode() {
         telemetry.update()
     }
     override fun onStartButtonPressed() {
+        follower.setStartingPose(Pose(0.0, 0.0, 0.0))
         Gamepads.gamepad1.circle
             .whenBecomesTrue { ShooterSystem.autoAim()}
         Gamepads.gamepad1.rightBumper
