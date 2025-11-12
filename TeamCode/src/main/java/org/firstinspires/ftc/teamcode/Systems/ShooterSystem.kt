@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Systems
 
+import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.TurretSubsystem
 import kotlin.math.*
 
+@Configurable
 object ShooterSystem: SubsystemGroup
     (FlywheelSubsystem, HoodSubsystem, TurretSubsystem, KickerSubsystem) {
 
@@ -21,6 +23,7 @@ object ShooterSystem: SubsystemGroup
     var TARGET_FLYWHEEL_VELOCITY: Double = 0.0;
     var CURRENT_HOOD_POSITION: Double = 0.0;
     var eq: Int = 1;
+    var TARGET_TICK_CONSTANT: Double = -50.0;
 
     val kickBall: Command
         get() = SequentialGroup(
@@ -68,8 +71,8 @@ object ShooterSystem: SubsystemGroup
     }
 
     fun calibrateTurretPosition(currPose: Pose) {
-        var angle = atan(-(GOAL_POSE.y+currPose.y)/(GOAL_POSE.x-currPose.x))
-        var ticks = ((-currPose.heading-angle) / (2 * PI)) * (100 / 24) * 384.5+192.5+225;
+        var angle = atan((GOAL_POSE.y-currPose.y)/(GOAL_POSE.x-currPose.x))
+        var ticks = ((angle-(currPose.heading*180/PI)) * 360/384.5 * (100.0 / 24.0))+TARGET_TICK_CONSTANT
         if (abs(round(ticks) - TARGET_TURRET_HEADING) >= 0) {
             TurretSubsystem.setTurretPosition(ticks)
             TARGET_TURRET_HEADING = ticks
