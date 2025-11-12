@@ -47,31 +47,29 @@ object ShooterSystem: SubsystemGroup
                                     CURRENT_HOOD_POSITION = 1.0}
         }
     }
-    fun calibrateFlywheelVelocity(currPose: Pose, on: Boolean) {
+    fun calibrateFlywheelVelocity(currPose: Pose) {
         var distance = currPose.distanceFrom(GOAL_POSE)
-        var vel = 0.0;
-        if (on) {
-            when (eq) {
-                1 -> {
-                    vel = 5.35256 * distance + 820.5
-                }
+        var vel: Double = 0.0;
+        when (eq) {
+            1 -> {
+                vel = 5.35256 * distance + 820.5
+            }
 
-                2 -> {
-                    vel = 5.96847 * distance + 665.75
-                }
+            2 -> {
+                vel = 5.96847 * distance + 665.75
+            }
 
-                3 -> {
-                    vel = 5.66751 * distance + 675.8
-                }
+            3 -> {
+                vel = 5.66751 * distance + 675.8
             }
         }
-        TARGET_FLYWHEEL_VELOCITY = vel
+        TARGET_FLYWHEEL_VELOCITY = 0.0
         FlywheelSubsystem.setFlywheelVelocity(vel)
     }
 
     fun calibrateTurretPosition(currPose: Pose) {
-        var angle = atan((GOAL_POSE.x-currPose.x)/(GOAL_POSE.y-currPose.y))
-        var ticks = (currPose.heading-angle) / (2 * PI) * (100 / 24) * 384.5 + 192.5;
+        var angle = atan((-GOAL_POSE.x-currPose.x)/(GOAL_POSE.y-currPose.y))
+        var ticks = (-currPose.heading+angle) / (2 * PI) * (100 / 24) * 384.5;
         if (abs(round(ticks) - TARGET_TURRET_HEADING) >= 5) {
             TurretSubsystem.setTurretPosition(ticks)
             TARGET_TURRET_HEADING = ticks

@@ -4,6 +4,7 @@ import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.core.units.deg
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.Gamepads
@@ -39,6 +40,9 @@ class TurretTest: NextFTCOpMode() {
         if (ShooterSystem.AUTO_AIM) {
             ShooterSystem.calibrateTurretPosition(follower.pose)
         }
+        telemetry.addData("x",follower.pose.x)
+        telemetry.addData("y",follower.pose.y)
+        telemetry.addData("h",follower.heading.deg)
         telemetry.update()
     }
 }

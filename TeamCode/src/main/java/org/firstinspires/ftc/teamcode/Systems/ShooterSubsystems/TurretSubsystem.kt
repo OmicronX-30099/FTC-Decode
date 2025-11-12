@@ -3,13 +3,15 @@ package org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
 
 object TurretSubsystem: Subsystem {
     val turretMotor: MotorEx = MotorEx("tur")
 
     val turretControl: ControlSystem = ControlSystem.builder()
-        .posPid(0.0,0.0,0.0)
+        .posPid(0.03,0.0,0.0)
         .build()
 
     fun setTurretPosition(position: Double) {
@@ -18,5 +20,6 @@ object TurretSubsystem: Subsystem {
 
     override fun periodic() {
         turretMotor.power = turretControl.calculate(turretMotor.state)
+        ActiveOpMode.telemetry.addData("Turret live pos", turretMotor.currentPosition)
     }
 }

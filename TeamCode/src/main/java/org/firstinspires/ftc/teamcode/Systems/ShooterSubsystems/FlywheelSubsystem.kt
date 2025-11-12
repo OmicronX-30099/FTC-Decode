@@ -5,6 +5,7 @@ import dev.nextftc.control.KineticState
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.controllable.MotorGroup
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 
 object FlywheelSubsystem: Subsystem {
     val flywheelLeftMotor: MotorEx = MotorEx("fwl")
@@ -18,10 +19,14 @@ object FlywheelSubsystem: Subsystem {
         .build()
 
     fun setFlywheelVelocity(vel: Double) {
-        flywheelControl.goal = KineticState(0.0,vel)
+        flywheelControl.goal = KineticState(0.0, vel)
     }
 
     override fun periodic() {
-        flywheelMotors.power = flywheelControl.calculate(flywheelMotors.state)
+        if (ShooterSystem.AUTO_AIM) {
+            flywheelMotors.power = flywheelControl.calculate(flywheelMotors.state)
+        } else {
+            flywheelMotors.power = 0.0
+        }
     }
 }
