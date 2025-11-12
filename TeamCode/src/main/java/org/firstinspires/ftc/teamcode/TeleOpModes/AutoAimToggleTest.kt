@@ -40,7 +40,7 @@ class AutoAimToggleTest: NextFTCOpMode() {
         telemetry.update()
     }
     override fun onStartButtonPressed() {
-        follower.setStartingPose(Pose(0.0, 0.0, 0.0))
+        follower.setStartingPose(Pose(96.0, 120.0, -90.0))
         Gamepads.gamepad1.circle
             .whenBecomesTrue { ShooterSystem.autoAim()}
         Gamepads.gamepad1.rightBumper
@@ -69,6 +69,8 @@ class AutoAimToggleTest: NextFTCOpMode() {
 
     override fun onUpdate() {
         telemetry.update()
-        ShooterSystem.FullTurretAim(follower.pose)
+        ShooterSystem.calibrateHoodPosition(follower.pose)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        ShooterSystem.calibrateTurretPosition(follower.pose)
     }
 }
