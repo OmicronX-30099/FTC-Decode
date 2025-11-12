@@ -69,7 +69,7 @@ object ShooterSystem: SubsystemGroup
 
     fun calibrateTurretPosition(currPose: Pose) {
         var angle = atan((GOAL_POSE.x-currPose.x)/(GOAL_POSE.y-currPose.y))
-        var ticks = (((currPose.heading-90)+angle) / (2*PI)) * (100/24) * 384.5 * -1
+        var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
         if (abs(round(ticks) - TARGET_TURRET_HEADING) >= 0) {
             TurretSubsystem.setTurretPosition(ticks)
             TARGET_TURRET_HEADING = ticks
