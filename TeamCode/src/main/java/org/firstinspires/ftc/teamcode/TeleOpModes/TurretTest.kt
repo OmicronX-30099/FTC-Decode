@@ -31,7 +31,7 @@ class TurretTest: NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-        follower.setStartingPose(Pose(96.0,120.0,toRadians(90.0)))
+        follower.setStartingPose(Pose(96.0,120.0,toRadians(-90.0)))
         Gamepads.gamepad1.circle
             .whenBecomesTrue { ShooterSystem.autoAim() }
     }

@@ -27,7 +27,7 @@ object ShooterSystem: SubsystemGroup
             KickerSubsystem.engageKicker,
             Delay(0.15),
             KickerSubsystem.disengageKicker
-        ).requires(this)
+        )
 
 
     fun autoAim() {

@@ -11,10 +11,10 @@ object IntakeSystem: SubsystemGroup(GateSubsystem, IntakeSubsystem) {
         get() = ParallelGroup(
             GateSubsystem.openGate,
             IntakeSubsystem.intake(1.0)
-        ).requires(this)
+        )
     val stopIntake: Command
         get() = ParallelGroup(
             IntakeSubsystem.intake(1.0),
             GateSubsystem.closeGate
-        ).requires(this)
+        )
 }
