@@ -72,8 +72,6 @@ class AutoAimToggleTest: NextFTCOpMode() {
 
     override fun onUpdate() {
         telemetry.update()
-        ShooterSystem.calibrateHoodPosition(follower.pose)
-        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
-        ShooterSystem.calibrateTurretPosition(follower.pose)
+        ShooterSystem.calibrateShooter(follower.pose)
     }
 }

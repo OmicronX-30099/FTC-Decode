@@ -76,7 +76,7 @@ object ShooterSystem: SubsystemGroup
         }
     }
 
-    fun FullTurretAim(currPose: Pose) {
+    fun calibrateShooter(currPose: Pose) {
         if (AUTO_AIM) {
             calibrateTurretPosition(currPose)
             calibrateHoodPosition(currPose)
