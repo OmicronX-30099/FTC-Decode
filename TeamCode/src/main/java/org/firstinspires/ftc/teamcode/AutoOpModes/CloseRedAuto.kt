@@ -47,7 +47,7 @@ class CloseRedAuto: NextFTCOpMode() {
         follower.setStartingPose(Pose(109.6, 134.37, (-PI/2)))
         buildPaths()
         routine = SequentialGroup(
-            InstantCommand(ShooterSystem::autoAim),
+            InstantCommand{ShooterSystem.autoAim()},
             FollowPath(path1, true, 1.0),
             IntakeSystem.startIntake,
         )

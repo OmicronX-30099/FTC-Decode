@@ -21,7 +21,9 @@ import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import dev.nextftc.core.commands.delays.Delay;
+import dev.nextftc.core.commands.utility.InstantCommand
 import kotlin.math.*;
+import kotlin.time.Instant
 
 @TeleOp(name="Auto Aim Test")
 class AutoAimToggleTest: NextFTCOpMode() {
@@ -51,6 +53,7 @@ class AutoAimToggleTest: NextFTCOpMode() {
         Gamepads.gamepad1.leftBumper
             .whenBecomesTrue(
                 SequentialGroup(
+                    IntakeSubsystem.intake(1.0),
                     KickerSubsystem.engageKicker,
                     Delay(0.15),
                     KickerSubsystem.disengageKicker,
