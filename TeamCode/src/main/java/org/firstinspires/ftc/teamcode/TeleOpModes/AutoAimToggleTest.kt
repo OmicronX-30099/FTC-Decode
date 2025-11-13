@@ -21,6 +21,7 @@ import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
+import kotlin.math.*;
 
 @TeleOp(name="Auto Aim Test")
 class AutoAimToggleTest: NextFTCOpMode() {
@@ -65,6 +66,8 @@ class AutoAimToggleTest: NextFTCOpMode() {
             .toggleOnBecomesTrue()
             .whenBecomesTrue {drivetrain.scalar = 0.2}
             .whenBecomesFalse { drivetrain.scalar = 1.0 }
+        Gamepads.gamepad2.dpadDown
+            .whenBecomesTrue { follower.pose = Pose(144.0,0.0,(PI/2)) }
     }
 
     override fun onUpdate() {
