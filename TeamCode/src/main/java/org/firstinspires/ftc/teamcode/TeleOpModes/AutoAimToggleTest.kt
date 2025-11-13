@@ -14,13 +14,13 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.driving.DriverControlledCommand
-import kotlinx.coroutines.Delay
 import org.firstinspires.ftc.teamcode.Constants
 import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.GateSubsystem
 import org.firstinspires.ftc.teamcode.Systems.IntakeSubsystems.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
+import dev.nextftc.core.commands.delays.Delay;
 import kotlin.math.*;
 
 @TeleOp(name="Auto Aim Test")
@@ -44,16 +44,34 @@ class AutoAimToggleTest: NextFTCOpMode() {
         follower.setStartingPose(Pose(96.0, 120.0, (-PI/2)))
         Gamepads.gamepad1.circle
             .whenBecomesTrue { ShooterSystem.autoAim()}
-        Gamepads.gamepad1.rightBumper
+        Gamepads.gamepad1.square
             .toggleOnBecomesTrue()
             .whenBecomesTrue(GateSubsystem.openGate)
             .whenBecomesFalse(GateSubsystem.closeGate)
+        Gamepads.gamepad1.leftBumper
+            .whenBecomesTrue(
+                SequentialGroup(
+                    KickerSubsystem.engageKicker,
+                    Delay(0.15),
+                    KickerSubsystem.disengageKicker,
+                    Delay(0.35),
+                    KickerSubsystem.engageKicker,
+                    Delay(0.15),
+                    KickerSubsystem.disengageKicker,
+                    Delay(0.35),
+                    KickerSubsystem.engageKicker,
+                    Delay(0.15),
+                    KickerSubsystem.disengageKicker
+                )
+            )
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(GateSubsystem.openGate)
             .whenTrue{ IntakeSubsystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())}
             .whenBecomesFalse(GateSubsystem.closeGate.and(IntakeSubsystem.intake(0.0)))
-        Gamepads.gamepad1.leftBumper
-            .whenBecomesTrue(SequentialGroup(KickerSubsystem.engageKicker, dev.nextftc.core.commands.delays.Delay(0.15),
+        Gamepads.gamepad1.rightBumper
+            .whenBecomesTrue(SequentialGroup(
+                KickerSubsystem.engageKicker,
+                Delay(0.15),
                 KickerSubsystem.disengageKicker))
         drivetrain = PedroDriverControlled(
             -Gamepads.gamepad1.leftStickY,
@@ -61,11 +79,12 @@ class AutoAimToggleTest: NextFTCOpMode() {
             -Gamepads.gamepad1.rightStickX,
             true,
         )
+        drivetrain.scalar = 0.8
         drivetrain.schedule()
         Gamepads.gamepad1.dpadUp
             .toggleOnBecomesTrue()
             .whenBecomesTrue {drivetrain.scalar = 0.2}
-            .whenBecomesFalse { drivetrain.scalar = 1.0 }
+            .whenBecomesFalse { drivetrain.scalar = 0.8 }
         Gamepads.gamepad2.dpadDown
             .whenBecomesTrue { follower.pose = Pose(144.0,0.0,(PI/2)) }
     }
