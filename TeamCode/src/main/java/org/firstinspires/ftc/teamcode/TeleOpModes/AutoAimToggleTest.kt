@@ -89,7 +89,7 @@ class AutoAimToggleTest: NextFTCOpMode() {
             .whenBecomesTrue {drivetrain.scalar = 0.2}
             .whenBecomesFalse { drivetrain.scalar = 0.8 }
         Gamepads.gamepad2.dpadDown
-            .whenBecomesTrue { follower.pose = Pose(144.0,0.0,(PI/2)) }
+            .whenBecomesTrue { follower.pose = Pose(135.3,9.0,(PI/2)) }
     }
 
     override fun onUpdate() {
