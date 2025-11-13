@@ -52,7 +52,7 @@ object ShooterSystem: SubsystemGroup
         var vel: Double = 0.0;
         when (eq) {
             1 -> {
-                vel = 5.35256 * distance + 820.5
+                vel = 5.35256 * distance + 805.5
             }
 
             2 -> {
@@ -60,7 +60,7 @@ object ShooterSystem: SubsystemGroup
             }
 
             3 -> {
-                vel = 5.66751 * distance + 675.8
+                vel = 5.875 * distance + 675.8
             }
         }
         TARGET_FLYWHEEL_VELOCITY = vel
