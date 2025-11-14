@@ -15,11 +15,11 @@ import kotlin.math.*
 object ShooterSystem: SubsystemGroup
     (FlywheelSubsystem, HoodSubsystem, TurretSubsystem, KickerSubsystem) {
 
-    var GOAL_POSE: Pose = Pose(144.0,144.0)
-    var AUTO_AIM: Boolean = false
-    var TARGET_TURRET_HEADING: Double = 0.0
-    var TARGET_FLYWHEEL_VELOCITY: Double = 0.0
-    var CURRENT_HOOD_POSITION: Double = 0.0
+    var GOAL_POSE: Pose = Pose(140.0,140.0)
+    var AUTO_AIM: Boolean = false;
+    var TARGET_TURRET_HEADING: Double = 0.0;
+    var TARGET_FLYWHEEL_VELOCITY: Double = 0.0;
+    var CURRENT_HOOD_POSITION: Double = 0.0;
     var eq: Int = 1;
 
     val kickBall: Command
@@ -52,15 +52,15 @@ object ShooterSystem: SubsystemGroup
         var vel: Double = 0.0;
         when (eq) {
             1 -> {
-                vel = 5.35256 * distance + 820.5
+                vel = 5.35 * distance + 805.5
             }
 
             2 -> {
-                vel = 5.96847 * distance + 665.75
+                vel = 5.96 * distance + 665.75
             }
 
             3 -> {
-                vel = 5.875 * distance + 680.8
+                vel = 5.875 * distance + 730.8
             }
         }
         TARGET_FLYWHEEL_VELOCITY = vel
@@ -68,16 +68,12 @@ object ShooterSystem: SubsystemGroup
     }
 
     fun calibrateTurretPosition(currPose: Pose) {
-        var angle = atan((GOAL_POSE.x-currPose.x)/(GOAL_POSE.y-currPose.y))
+        var angle = atan2(GOAL_POSE.x-currPose.x,GOAL_POSE.y-currPose.y)
         var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
         if (abs(round(ticks) - TARGET_TURRET_HEADING) >= 0) {
             TurretSubsystem.setTurretPosition(ticks)
             TARGET_TURRET_HEADING = ticks
         }
-    }
-
-    fun TurnOffShooter() {
-        FlywheelSubsystem.setFlywheelVelocity(0.0)
     }
 
     fun calibrateShooter(currPose: Pose) {

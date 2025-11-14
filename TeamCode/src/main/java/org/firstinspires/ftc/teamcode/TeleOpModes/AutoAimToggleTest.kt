@@ -22,6 +22,7 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import dev.nextftc.core.commands.delays.Delay;
 import dev.nextftc.core.commands.utility.InstantCommand
+import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.TurretSubsystem.turretMotor
 import kotlin.math.*;
 import kotlin.time.Instant
 
@@ -43,7 +44,7 @@ class AutoAimToggleTest: NextFTCOpMode() {
         telemetry.update()
     }
     override fun onStartButtonPressed() {
-        follower.setStartingPose(Pose(96.0, 120.0, (-PI/2)))
+        follower.setStartingPose(Pose(8.7, 9.0, (-PI/2)))
         Gamepads.gamepad1.circle
             .whenBecomesTrue { ShooterSystem.autoAim()}
         Gamepads.gamepad1.square
