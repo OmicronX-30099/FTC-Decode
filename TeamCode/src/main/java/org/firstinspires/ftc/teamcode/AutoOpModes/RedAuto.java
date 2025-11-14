@@ -1,16 +1,5 @@
 package org.firstinspires.ftc.teamcode.AutoOpModes;
 
-/**
- * This is Team 30099 OmicronX's Code
- * Authors: Achintya Akula, Maximus Xiao
- * Season: FTC Decode (2025-2026)
- * Event: SoCal Group H League Meet 0
- * Type: AutoOpMode
- * Alliance: Red
- * Autonomous OpMode to score an ideal 12 balls
- * Had an average of 10-11 balls during testing, but made one max run of 12 balls
- */
-
 import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
@@ -55,6 +44,7 @@ public class RedAuto extends NextFTCOpMode {
     public ServoEx kicker = new ServoEx("k");
     public ServoEx hood = new ServoEx("hood");
     public MotorEx turretMotor = new MotorEx("tur");
+    public ServoEx gate = new ServoEx("gate");
 
     public Boolean FWM = false;
 
@@ -142,24 +132,30 @@ public class RedAuto extends NextFTCOpMode {
                 shootSequenceShort,
                 new FollowPath(Path2, true),
                 new InstantCommand(() -> intake.setPower(1)),
+                new InstantCommand(() -> gate.setPosition(0.6)),
                 new FollowPath(Path3, true),
-                new InstantCommand(() -> intake.setPower(0.5)),
+                new InstantCommand(() -> intake.setPower(0.3)),
+                new InstantCommand(() -> gate.setPosition(0.25)),
                 new FollowPath(Path4, true),
                 new InstantCommand(() -> intake.setPower(0)),
                 new Delay(0.25),
                 shootSequenceShort,
                 new FollowPath(Path5, true),
                 new InstantCommand(() -> intake.setPower(1)),
+                new InstantCommand(() -> gate.setPosition(0.6)),
                 new FollowPath(Path6, true),
-                new InstantCommand(() -> intake.setPower(0.5)),
+                new InstantCommand(() -> intake.setPower(0.3)),
+                new InstantCommand(() -> gate.setPosition(0.25)),
                 new FollowPath(Path7, true),
                 new InstantCommand(() -> intake.setPower(0)),
                 new Delay(0.25),
                 shootSequenceShort,
                 new FollowPath(Path8, true),
                 new InstantCommand(() -> intake.setPower(1)),
+                new InstantCommand(() -> gate.setPosition(0.6)),
                 new FollowPath(Path9, true),
-                new InstantCommand(() -> intake.setPower(0.5)),
+                new InstantCommand(() -> intake.setPower(0.3)),
+                new InstantCommand(() -> gate.setPosition(0.25)),
                 new FollowPath(Path10, true),
                 new InstantCommand(() -> intake.setPower(0)),
                 new Delay(0.25),
