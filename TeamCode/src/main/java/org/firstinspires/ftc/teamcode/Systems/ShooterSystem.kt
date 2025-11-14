@@ -1,93 +1,95 @@
 package org.firstinspires.ftc.teamcode.Systems
 
 import com.pedropathing.geometry.Pose
+import dev.nextftc.control.ControlSystem
+import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
-import dev.nextftc.core.subsystems.SubsystemGroup
-import dev.nextftc.ftc.ActiveOpMode
-import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.FlywheelSubsystem
-import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.HoodSubsystem
-import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.KickerSubsystem
-import org.firstinspires.ftc.teamcode.Systems.ShooterSubsystems.TurretSubsystem
-import kotlin.math.*
+import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.hardware.controllable.MotorGroup
+import dev.nextftc.hardware.impl.MotorEx
+import dev.nextftc.hardware.impl.ServoEx
+import dev.nextftc.hardware.positionable.SetPosition
 
-object ShooterSystem: SubsystemGroup
-    (FlywheelSubsystem, HoodSubsystem, TurretSubsystem, KickerSubsystem) {
-
-    var GOAL_POSE: Pose = Pose(140.0,140.0)
+class ShooterSystem: Subsystem {
+    // Defining system variables at top for easy access
     var AUTO_AIM: Boolean = false;
-    var TARGET_TURRET_HEADING: Double = 0.0;
-    var TARGET_FLYWHEEL_VELOCITY: Double = 0.0;
-    var CURRENT_HOOD_POSITION: Double = 0.0;
-    var eq: Int = 1;
+    var TURRET_GOAL: Double = 0.0
+    var FLYWHEEL_GOAL: Double = 0.0
+    var HOOD_GOAL: Double = 0.0
+    var GOAL_POSE: Pose = Pose(144.0,144.0)
+    var FLYWHEEL_EQ: Int = 1
 
-    val kickBall: Command
+    // Defining key mechanical components
+    // Flywheel components
+    val fwl: MotorEx = MotorEx("fwl")
+    val fwr: MotorEx = MotorEx("fwr")
+    val fwm: MotorGroup = MotorGroup(fwr,fwl)
+    // ControlSystem with velocity PID for flywheel
+    val flywheelControl: ControlSystem = ControlSystem.builder()
+        .velPid(0.01,0.0,0.0)
+        .basicFF(0.00033,0.0,0.07)
+        .build()
+
+    // Turret
+    val turretMotor: MotorEx = MotorEx("tur")
+    // ControlSystem with positional PID for turret
+    val turretControl: ControlSystem = ControlSystem.builder()
+        .posPid(0.03,0.0,0.0)
+        .build()
+
+    // Hood
+    val hoodServo: ServoEx = ServoEx("hood")
+
+    // Kicker
+    val kickServo: ServoEx = ServoEx("k")
+
+    // Servo SetPosition commands for two different kicker positions
+    val engageKickerCommand: Command = SetPosition(kickServo, 0.25).requires(kickServo)
+    val disengageKickerCommand: Command = SetPosition(kickServo, 0.0).requires(kickServo)
+
+    /**
+     * Compound command for launching ball
+     * Includes:
+     *     Engage Kicker
+     *     Wait for 0.15 seconds for it to move up
+     *     Disengage Kicker
+    **/
+    val kickCommand: Command
         get() = SequentialGroup(
-            KickerSubsystem.engageKicker,
+            engageKickerCommand,
             Delay(0.15),
-            KickerSubsystem.disengageKicker
+            disengageKickerCommand
         )
 
-
-    fun autoAim() {
-        AUTO_AIM = !AUTO_AIM
-    }
     fun calibrateHoodPosition(currPose: Pose) {
         var distance = currPose.distanceFrom(GOAL_POSE)
         when (distance) {
-            in 0.0..84.0 ->   { HoodSubsystem.lowMode.schedule()
-                                    eq = 1
-                                    CURRENT_HOOD_POSITION = 0.0}
-            in 84.0..120.0 -> { HoodSubsystem.mediumMode.schedule()
-                                    eq = 2
-                                    CURRENT_HOOD_POSITION = 0.4}
-            else ->                 { HoodSubsystem.highMode.schedule()
-                                    eq = 3
-                                    CURRENT_HOOD_POSITION = 1.0}
-        }
-    }
-    fun calibrateFlywheelVelocity(currPose: Pose) {
-        var distance = currPose.distanceFrom(GOAL_POSE)
-        var vel: Double = 0.0;
-        when (eq) {
-            1 -> {
-                vel = 5.35 * distance + 805.5
-            }
-
-            2 -> {
-                vel = 5.96 * distance + 665.75
-            }
-
-            3 -> {
-                vel = 5.875 * distance + 730.8
-            }
-        }
-        TARGET_FLYWHEEL_VELOCITY = vel
-        FlywheelSubsystem.setFlywheelVelocity(vel)
-    }
-
-    fun calibrateTurretPosition(currPose: Pose) {
-        var angle = atan2(GOAL_POSE.x-currPose.x,GOAL_POSE.y-currPose.y)
-        var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
-        if (abs(round(ticks) - TARGET_TURRET_HEADING) >= 0) {
-            TurretSubsystem.setTurretPosition(ticks)
-            TARGET_TURRET_HEADING = ticks
+            in 0.0..84.0 ->   {FLYWHEEL_EQ = 1;
+                                     HOOD_GOAL = 0.0}
+            in 84.0..120.0 -> {
+                                     HOOD_GOAL = 0.4}
+            else ->                 {
+                                     HOOD_GOAL = 1.0}
         }
     }
 
-    fun calibrateShooter(currPose: Pose) {
-        if (AUTO_AIM) {
-            calibrateTurretPosition(currPose)
-            calibrateHoodPosition(currPose)
-            calibrateFlywheelVelocity(currPose)
-        }
+    // Function to toggle autoAim on and off
+    fun autoAim(on: Boolean) {
+        AUTO_AIM = on
     }
 
+    // Function to organize looped things including motor to ControlSystem bindings with autoAim toggle
+    // Also uses a write to static object variable method
     override fun periodic() {
-        ActiveOpMode.telemetry.addData("Target Turret Heading", TARGET_TURRET_HEADING)
-        ActiveOpMode.telemetry.addData("Target Flywheel Vel", TARGET_FLYWHEEL_VELOCITY)
-        ActiveOpMode.telemetry.addData("Current Hood Position", CURRENT_HOOD_POSITION)
-        ActiveOpMode.telemetry.addData("AutoAim Status", AUTO_AIM)
+        if (AUTO_AIM) {
+            turretControl.goal = KineticState(TURRET_GOAL)
+            flywheelControl.goal = KineticState(0.0,FLYWHEEL_GOAL)
+            fwm.power = flywheelControl.calculate(fwm.state)
+            hoodServo.position = HOOD_GOAL
+        }
+        // Turret should be powered no matter the case
+        turretMotor.power = turretControl.calculate(turretMotor.state)
     }
 }
