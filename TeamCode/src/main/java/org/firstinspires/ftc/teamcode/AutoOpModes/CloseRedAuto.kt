@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.AutoOpModes
+/*package org.firstinspires.ftc.teamcode.AutoOpModes
 import dev.nextftc.core.commands.delays.Delay
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
@@ -210,4 +210,4 @@ class CloseRedAuto: NextFTCOpMode() {
             .setLinearHeadingInterpolation(Math.toRadians(-130.0), Math.toRadians(-180.0))
             .build()
     }
-}
+}*/
