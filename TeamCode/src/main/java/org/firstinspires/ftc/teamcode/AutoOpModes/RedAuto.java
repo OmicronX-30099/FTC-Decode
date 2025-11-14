@@ -66,7 +66,7 @@ public class RedAuto extends NextFTCOpMode {
             .build();
 
     public ControlSystem turretControl = ControlSystem.builder()
-            .velPid(0.03,0.0,0.0)
+            .velPid(0.003,0.0,0.0)
             .build();
 
     public static Pose current_pose;
@@ -166,9 +166,9 @@ public class RedAuto extends NextFTCOpMode {
     @Override
     public void onUpdate() {
         current_pose = follower().getPose();
-        fwm.setPower(flywheelControl.calculate(fwm.getState()));
+        turretMotor.setPower(turretControl.calculate(turretMotor.getState()));
         if (FWM) {
-            turretMotor.setPower(turretControl.calculate(turretMotor.getState()));
+            fwm.setPower(flywheelControl.calculate(fwm.getState()));
         }
 
     }
