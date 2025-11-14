@@ -66,7 +66,7 @@ public class RedAuto extends NextFTCOpMode {
             .build();
 
     public ControlSystem turretControl = ControlSystem.builder()
-            .velPid(0.003,0.0,0.0)
+            .velPid(0.05,0.0,0.0)
             .build();
 
     public static Pose current_pose;
@@ -127,7 +127,7 @@ public class RedAuto extends NextFTCOpMode {
         kicker.setPosition(0);
         push.schedule();
         new SequentialGroup(
-                new InstantCommand(() -> turretControl.setGoal(new KineticState(0.0))),
+                //new InstantCommand(() -> turretControl.setGoal(new KineticState(0.0))),
                 new FollowPath(Path1, true),
                 shootSequenceShort,
                 new FollowPath(Path2, true),
