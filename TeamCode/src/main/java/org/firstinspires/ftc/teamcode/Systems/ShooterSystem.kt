@@ -16,10 +16,10 @@ object ShooterSystem: SubsystemGroup
     (FlywheelSubsystem, HoodSubsystem, TurretSubsystem, KickerSubsystem) {
 
     var GOAL_POSE: Pose = Pose(144.0,144.0)
-    var AUTO_AIM: Boolean = false;
-    var TARGET_TURRET_HEADING: Double = 0.0;
-    var TARGET_FLYWHEEL_VELOCITY: Double = 0.0;
-    var CURRENT_HOOD_POSITION: Double = 0.0;
+    var AUTO_AIM: Boolean = false
+    var TARGET_TURRET_HEADING: Double = 0.0
+    var TARGET_FLYWHEEL_VELOCITY: Double = 0.0
+    var CURRENT_HOOD_POSITION: Double = 0.0
     var eq: Int = 1;
 
     val kickBall: Command
@@ -74,6 +74,10 @@ object ShooterSystem: SubsystemGroup
             TurretSubsystem.setTurretPosition(ticks)
             TARGET_TURRET_HEADING = ticks
         }
+    }
+
+    fun TurnOffShooter() {
+        FlywheelSubsystem.setFlywheelVelocity(0.0)
     }
 
     fun calibrateShooter(currPose: Pose) {
