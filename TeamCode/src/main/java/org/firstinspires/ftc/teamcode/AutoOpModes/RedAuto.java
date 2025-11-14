@@ -56,6 +56,8 @@ public class RedAuto extends NextFTCOpMode {
     public ServoEx hood = new ServoEx("hood");
     public MotorEx turretMotor = new MotorEx("tur");
 
+    public Boolean FWM = false;
+
     public PathChain Path1;
     public PathChain Path2;
     public PathChain Path3;
@@ -88,36 +90,42 @@ public class RedAuto extends NextFTCOpMode {
     public Command flywheelAccelShort = new SequentialGroup(
             new InstantCommand(() -> flywheelControl.setGoal(new KineticState(1030))),
             new InstantCommand(() -> hood.setPosition(0)),
-            new WaitUntil(() -> fwm.getVelocity() == 1030)
+            new WaitUntil(() -> fwm.getVelocity() == 1040)
     );
+
+    public Command waitThingy = new WaitUntil(() -> fwm.getVelocity()==1030);
+
     public Command flywheelAccelFar = new SequentialGroup(
             new InstantCommand(() -> fwm.setPower(1)),
             new InstantCommand(() -> hood.setPosition(0.3)),
             new WaitUntil(() -> fwm.getVelocity() >= 1260),
-            new InstantCommand(() -> fwm.setPower(0.52))
+            waitThingy
     );
+
     public Command shootSequenceShort = new SequentialGroup(
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.0005),
             new InstantCommand(() -> kicker.setPosition(0)),
+            new InstantCommand(() -> FWM=true),
             flywheelAccelShort,
             new Delay(0.25),
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
             new InstantCommand(() -> intake.setPower(1)),
-            flywheelAccelShort,
+            waitThingy,
             new Delay(0.2),
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
-            flywheelAccelShort,
+            waitThingy,
             new Delay(0.2),
             new InstantCommand(() -> kicker.setPosition(0.25)),
             new Delay(0.15),
             new InstantCommand(() -> kicker.setPosition(0)),
             new Delay(0.5),
-            new InstantCommand(() -> fwm.setPower(-0.3))
+            new InstantCommand(() -> fwm.setPower(-0.3)),
+            new InstantCommand(() -> FWM=false)
     );
     @Override
     public void onInit() {
@@ -163,7 +171,9 @@ public class RedAuto extends NextFTCOpMode {
     public void onUpdate() {
         current_pose = follower().getPose();
         fwm.setPower(flywheelControl.calculate(fwm.getState()));
-        turretMotor.setPower(turretControl.calculate(turretMotor.getState()));
+        if (FWM) {
+            turretMotor.setPower(turretControl.calculate(turretMotor.getState()));
+        }
 
     }
     public void buildPaths() {
