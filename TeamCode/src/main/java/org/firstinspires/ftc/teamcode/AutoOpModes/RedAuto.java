@@ -128,7 +128,7 @@ public class RedAuto extends NextFTCOpMode {
         push.schedule();
         new SequentialGroup(
                 //new InstantCommand(() -> turretControl.setGoal(new KineticState(0.0))),
-                new FollowPath(Path1, true),
+                new FollowPath(Path1),
                 shootSequenceShort,
                 new FollowPath(Path2, true),
                 new InstantCommand(() -> intake.setPower(1)),
