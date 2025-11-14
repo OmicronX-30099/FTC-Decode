@@ -6,11 +6,16 @@ import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.controllable.MotorGroup
 import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
+import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.round
 
 class ShooterSystem: Subsystem {
     // Defining system variables at top for easy access
@@ -18,8 +23,25 @@ class ShooterSystem: Subsystem {
     var TURRET_GOAL: Double = 0.0
     var FLYWHEEL_GOAL: Double = 0.0
     var HOOD_GOAL: Double = 0.0
-    var GOAL_POSE: Pose = Pose(144.0,144.0)
+    var GOAL_POSE: Pose = Pose(140.0,140.0)
     var FLYWHEEL_EQ: Int = 1
+
+    // Function to toggle autoAim on and off
+    fun autoAim(on: Boolean) {
+        AUTO_AIM = on
+    }
+
+    // Command for autonomous use to turn on auto aiming
+    val autoAimOnCommand: Command
+        get() = InstantCommand {
+            this.autoAim(true)
+        }
+
+    // Command for autonomous use to turn off auto aiming
+    val autoAimOffCommand: Command
+        get() = InstantCommand {
+            this.autoAim(false)
+        }
 
     // Defining key mechanical components
     // Flywheel components
@@ -63,21 +85,60 @@ class ShooterSystem: Subsystem {
             disengageKickerCommand
         )
 
+    // Method to calculate hood position, writes to system variable
     fun calibrateHoodPosition(currPose: Pose) {
+        // Dont execute rest if auto aim is false
+        if (!AUTO_AIM) {
+            return
+        }
         var distance = currPose.distanceFrom(GOAL_POSE)
         when (distance) {
             in 0.0..84.0 ->   {FLYWHEEL_EQ = 1;
                                      HOOD_GOAL = 0.0}
-            in 84.0..120.0 -> {
+            in 84.0..120.0 -> {FLYWHEEL_EQ = 1;
                                      HOOD_GOAL = 0.4}
-            else ->                 {
+            else ->                 {FLYWHEEL_EQ = 1;
                                      HOOD_GOAL = 1.0}
         }
     }
 
-    // Function to toggle autoAim on and off
-    fun autoAim(on: Boolean) {
-        AUTO_AIM = on
+    // Function to calculate flywheel velocity and write it to system variable, will be set to controlSystem in periodic function
+    fun calibrateFlywheelVelocity(currPose: Pose) {
+        // Dont execute rest if auto aim is false
+        if (!AUTO_AIM) {
+            return
+        }
+        var distance = currPose.distanceFrom(GOAL_POSE)
+        var vel: Double = 0.0;
+        when (FLYWHEEL_EQ) {
+            1 -> {
+                vel = 5.35 * distance + 805.5
+            }
+
+            2 -> {
+                vel = 5.96 * distance + 665.75
+            }
+
+            3 -> {
+                vel = 5.875 * distance + 730.8
+            }
+        }
+        if (vel != FLYWHEEL_GOAL) {
+            FLYWHEEL_GOAL = vel
+        }
+    }
+
+    // Function to calculate turret position and write to system variable, will be assigned to control sys in the periodic
+    fun calibrateTurretPosition(currPose: Pose) {
+        // Dont execute rest if auto aim is false
+        if (!AUTO_AIM) {
+            return
+        }
+        var angle = atan2(GOAL_POSE.x-currPose.x,GOAL_POSE.y-currPose.y)
+        var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
+        if (abs(round(ticks) - TURRET_GOAL) >= 0) {
+            TURRET_GOAL = ticks
+        }
     }
 
     // Function to organize looped things including motor to ControlSystem bindings with autoAim toggle
