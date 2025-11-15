@@ -21,11 +21,11 @@ object ShooterSystem: Subsystem {
     // Defining system variables at top for easy access
     var AUTO_AIM: Boolean = false;
     // Change this variable to -384.5 for Blue, and 0 for red
-    var TURRET_GOAL: Double = 0.0
+    var TURRET_GOAL: Double = 0.0;
     var FLYWHEEL_GOAL: Double = 0.0
     var HOOD_GOAL: Double = 0.0
     // Change goal pose to (4,144) for Blue
-    var GOAL_POSE: Pose = Pose(140.0,140.0)
+    var GOAL_POSE: Pose = Pose(2.0,142.0)
     var FLYWHEEL_EQ: Int = 1
 
     // Function to toggle autoAim on and off
@@ -96,7 +96,7 @@ object ShooterSystem: Subsystem {
         var distance = currPose.distanceFrom(GOAL_POSE)
         when (distance) {
             in 0.0..84.0 ->   {FLYWHEEL_EQ = 1;
-                                     HOOD_GOAL = 0.0}
+                                     HOOD_GOAL = 0.2}
             in 84.0..120.0 -> {FLYWHEEL_EQ = 1;
                                      HOOD_GOAL = 0.4}
             else ->                 {FLYWHEEL_EQ = 1;
@@ -105,7 +105,7 @@ object ShooterSystem: Subsystem {
     }
 
     // Function to calculate flywheel velocity and write it to system variable, will be set to controlSystem in periodic function
-    fun calibrateFlywheelVelocity(currPose: Pose) {
+    fun calibrateFlywheelVelocity(currPose: Pose, auto: Boolean) {
         // Dont execute rest if auto aim is false
         if (!AUTO_AIM) {
             return
@@ -114,7 +114,7 @@ object ShooterSystem: Subsystem {
         var vel: Double = 0.0;
         when (FLYWHEEL_EQ) {
             1 -> {
-                vel = 5.7 * distance + 805.5
+                vel = 5.5 * distance + 810.5
             }
 
             2 -> {
@@ -126,7 +126,13 @@ object ShooterSystem: Subsystem {
             }
         }
         if (vel != FLYWHEEL_GOAL) {
-            FLYWHEEL_GOAL = vel
+            if (auto) {
+                FLYWHEEL_GOAL = 1170.0
+            }
+            else {
+                FLYWHEEL_GOAL = vel
+            }
+
         }
     }
 
@@ -142,11 +148,11 @@ object ShooterSystem: Subsystem {
             TURRET_GOAL = ticks
         }
     }
-
+    /*
     fun turnOffShooter() {
         FLYWHEEL_GOAL = 0.0
         flywheelControl.goal = KineticState(0.0, 0.0)
-    }
+    }*/
 
     // Function to organize looped things including motor to ControlSystem bindings with autoAim toggle
     // Also uses a write to static object variable method
@@ -157,7 +163,7 @@ object ShooterSystem: Subsystem {
             fwm.power = flywheelControl.calculate(fwm.state)
             hoodServo.position = HOOD_GOAL
         } else {
-            fwm.power = -0.3
+            fwm.power = -0.2
         }
         // Turret should be powered no matter the case
         turretMotor.power = turretControl.calculate(turretMotor.state)

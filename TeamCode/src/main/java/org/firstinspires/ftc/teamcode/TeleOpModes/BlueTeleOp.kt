@@ -32,7 +32,7 @@ class BlueTeleOp: NextFTCOpMode() {
     lateinit var drivetrain: DriverControlledCommand;
 
     override fun onInit() {
-        follower.setStartingPose(Pose(60.0,60.0,0.0))
+        follower.setStartingPose(Pose(48.0,96.0,0.0))
     }
 
     override fun onStartButtonPressed() {
@@ -77,7 +77,7 @@ class BlueTeleOp: NextFTCOpMode() {
 
     override fun onUpdate() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
-        ShooterSystem.calibrateTurretPosition(follower.pose)
-        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        //ShooterSystem.calibrateTurretPosition(follower.pose)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose, false)
     }
 }

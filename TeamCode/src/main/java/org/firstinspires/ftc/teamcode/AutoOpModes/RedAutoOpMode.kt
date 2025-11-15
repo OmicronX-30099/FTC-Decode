@@ -41,9 +41,9 @@ class RedAutoOpMode: NextFTCOpMode() {
     val threeBallCommand = SequentialGroup(
         Delay(1.0),
         ShooterSystem.kickCommand,
-        Delay(0.9),
+        Delay(1.1),
         ShooterSystem.kickCommand,
-        Delay(0.25),
+        Delay(0.15),
         ShooterSystem.autoAimOffCommand
     )
 
@@ -67,24 +67,23 @@ class RedAutoOpMode: NextFTCOpMode() {
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path3,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(2.0),
+            Delay(1.95),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path4,true,1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path5,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(2.0),
+            Delay(1.95),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path6,true,1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path7,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(2.0),
+            Delay(1.95),
             IntakeSystem.startIntakeCommand,
-            threeBallCommand,
-            FollowPath(Path8, true, 1.0)
+            threeBallCommand
         )
         main.schedule()
     }
@@ -93,7 +92,7 @@ class RedAutoOpMode: NextFTCOpMode() {
         telemetry.addData("Autoaim: ", ShooterSystem.AUTO_AIM)
         telemetry.addData("FLywheel Goal", ShooterSystem.FLYWHEEL_GOAL)
         telemetry.update()
-        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose, true)
         ShooterSystem.calibrateHoodPosition(follower.pose)
         ShooterSystem.calibrateTurretPosition(follower.pose)
 
@@ -179,13 +178,5 @@ class RedAutoOpMode: NextFTCOpMode() {
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
-        Path8 = follower
-            .pathBuilder()
-            .addPath(
-                BezierLine(Pose(96.0,96.0),Pose(115.0,79.0))
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(0.0))
-            .build()
-
     }
 }

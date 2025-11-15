@@ -42,8 +42,9 @@ class BlueAutoOpMode: NextFTCOpMode() {
     val threeBallCommand = SequentialGroup(
         Delay(1.0),
         ShooterSystem.kickCommand,
-        Delay(0.55),
+        Delay(1.1),
         ShooterSystem.kickCommand,
+        Delay(0.15),
         ShooterSystem.autoAimOffCommand
     )
 
@@ -58,33 +59,32 @@ class BlueAutoOpMode: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         var main = SequentialGroup(
-            FollowPath(Path1,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            FollowPath(Path1,true,1.0),
+            Delay(0.75),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path2,true,0.7),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path3,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            Delay(1.95),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path4,true,1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path5,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            Delay(1.95),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path6,true,1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path7,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            Delay(1.95),
             IntakeSystem.startIntakeCommand,
-            threeBallCommand,
-            FollowPath(Path8, true, 1.0)
+            threeBallCommand
         )
         main.schedule()
     }
@@ -93,7 +93,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
         telemetry.addData("Autoaim: ", ShooterSystem.AUTO_AIM)
         telemetry.addData("FLywheel Goal", ShooterSystem.FLYWHEEL_GOAL)
         telemetry.update()
-        ShooterSystem.calibrateFlywheelVelocity(follower.pose)
+        ShooterSystem.calibrateFlywheelVelocity(follower.pose,  true)
         ShooterSystem.calibrateHoodPosition(follower.pose)
         ShooterSystem.calibrateTurretPosition(follower.pose)
 
@@ -113,7 +113,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
             .addPath(
                 BezierCurve(
                     Pose(48.000, 96.000),
-                    Pose(76.600, 77.85),
+                    Pose(76.600, 77.850),
                     Pose(-48.500, 85.000),
                     Pose(71.400, 75.000),
                     Pose(19.750, 77.000)
@@ -132,7 +132,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
         Path3 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(21.080, 71.0), Pose(60.000, 72.000))
+                BezierLine(Pose(19.750, 77.000), Pose(48.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
@@ -141,9 +141,9 @@ class BlueAutoOpMode: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(60.000, 72.000),
+                    Pose(48.000, 96.000),
                     Pose(69.000, 61.350),
-                    Pose(11.000, 57.000)
+                    Pose(12.000, 57.000)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
@@ -152,7 +152,10 @@ class BlueAutoOpMode: NextFTCOpMode() {
         Path5 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(11.000, 57.000), Pose(60.000, 72.000))
+                BezierCurve(Pose(12.000, 57.000),
+                    Pose(46.000,60.000),
+                    Pose(48.000, 96.000)
+                )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
@@ -161,8 +164,8 @@ class BlueAutoOpMode: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(60.000, 72.000),
-                    Pose(59.300, 33.180),
+                    Pose(48.000, 96.000),
+                    Pose(44.000, 23.000),
                     Pose(12.000, 35.500)
                 )
             )
@@ -172,17 +175,9 @@ class BlueAutoOpMode: NextFTCOpMode() {
         Path7 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(12.000, 35.500), Pose(60.000, 72.000))
+                BezierLine(Pose(12.000, 35.500), Pose(48.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-        Path8 = follower
-            .pathBuilder()
-            .addPath(
-                BezierLine(Pose(60.0,72.0),Pose(60.0,60.0))
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
     }
 }
