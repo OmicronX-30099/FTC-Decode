@@ -41,8 +41,9 @@ class RedAutoOpMode: NextFTCOpMode() {
     val threeBallCommand = SequentialGroup(
         Delay(1.0),
         ShooterSystem.kickCommand,
-        Delay(0.55),
+        Delay(0.9),
         ShooterSystem.kickCommand,
+        Delay(0.25),
         ShooterSystem.autoAimOffCommand
     )
 
@@ -57,30 +58,30 @@ class RedAutoOpMode: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         var main = SequentialGroup(
-            FollowPath(Path1,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            FollowPath(Path1,true,1.0),
+            Delay(0.75),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path2,true,0.7),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path3,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            Delay(2.0),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path4,true,1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path5,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            Delay(2.0),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path6,true,1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path7,true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(0.85),
+            Delay(2.0),
             IntakeSystem.startIntakeCommand,
             threeBallCommand,
             FollowPath(Path8, true, 1.0)
@@ -131,7 +132,7 @@ class RedAutoOpMode: NextFTCOpMode() {
         Path3 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(122.920, 71.0), Pose(84.000, 72.000))
+                BezierLine(Pose(124.250, 77.000), Pose(96.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
@@ -140,9 +141,9 @@ class RedAutoOpMode: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(84.000, 72.000),
+                    Pose(96.000, 96.000),
                     Pose(75.000, 61.350),
-                    Pose(133.000, 57.000)
+                    Pose(132.000, 57.000)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
@@ -151,7 +152,10 @@ class RedAutoOpMode: NextFTCOpMode() {
         Path5 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(133.000, 57.000), Pose(84.000, 72.000))
+                BezierCurve(Pose(132.000, 57.000),
+                    Pose(98.000,60.000),
+                    Pose(96.000, 96.000)
+                )
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
@@ -160,8 +164,8 @@ class RedAutoOpMode: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(84.000, 72.000),
-                    Pose(84.700, 33.180),
+                    Pose(96.000, 96.000),
+                    Pose(80.000, 23.000),
                     Pose(132.000, 35.500)
                 )
             )
@@ -171,14 +175,14 @@ class RedAutoOpMode: NextFTCOpMode() {
         Path7 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(133.000, 35.500), Pose(84.000, 72.000))
+                BezierLine(Pose(132.000, 35.500), Pose(96.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         Path8 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(84.0,72.0),Pose(84.0,60.0))
+                BezierLine(Pose(96.0,96.0),Pose(115.0,79.0))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()

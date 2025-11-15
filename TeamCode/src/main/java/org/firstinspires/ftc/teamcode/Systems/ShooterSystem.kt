@@ -114,11 +114,11 @@ object ShooterSystem: Subsystem {
         var vel: Double = 0.0;
         when (FLYWHEEL_EQ) {
             1 -> {
-                vel = 5.35 * distance + 805.5
+                vel = 5.7 * distance + 805.5
             }
 
             2 -> {
-                vel = 5.96 * distance + 665.75
+                vel = 5.9 * distance + 675.75
             }
 
             3 -> {
