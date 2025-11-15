@@ -56,7 +56,7 @@ class BlueTeleOp: NextFTCOpMode() {
             .whenBecomesTrue { follower.pose = Pose(135.2,8.9,(PI/2)) }
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(IntakeSystem.openGateCommand)
-            .whenTrue(IntakeSystem.intakeCommand(Gamepads.gamepad1.rightTrigger.get()- Gamepads.gamepad1.leftTrigger.get()))
+            .whenTrue{IntakeSystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get()- Gamepads.gamepad1.leftTrigger.get())}
             .whenBecomesFalse(IntakeSystem.closeGateCommand.and(IntakeSystem.intakeCommand(0.0)))
         Gamepads.gamepad1.rightBumper
             .whenBecomesTrue(ShooterSystem.kickCommand)
