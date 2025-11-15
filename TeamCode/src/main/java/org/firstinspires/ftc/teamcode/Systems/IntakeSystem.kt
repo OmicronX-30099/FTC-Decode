@@ -11,7 +11,7 @@ import dev.nextftc.hardware.powerable.SetPower
 object IntakeSystem: Subsystem {
     // Defining key mechanical components
     val intakeMotor: MotorEx = MotorEx("intake")
-    val gateServo: ServoEx = ServoEx("gate")
+    val gateServo: ServoEx = ServoEx("gate",-0.1)
 
     // Servo setPosition Commands for opening and closing gate
     val openGateCommand: Command = SetPosition(gateServo, 0.8).requires(gateServo)

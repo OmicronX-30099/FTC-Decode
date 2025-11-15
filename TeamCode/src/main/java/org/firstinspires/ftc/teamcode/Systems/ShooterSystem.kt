@@ -62,10 +62,10 @@ object ShooterSystem: Subsystem {
         .build()
 
     // Hood
-    val hoodServo: ServoEx = ServoEx("hood")
+    val hoodServo: ServoEx = ServoEx("hood",-0.1)
 
     // Kicker
-    val kickServo: ServoEx = ServoEx("k")
+    val kickServo: ServoEx = ServoEx("k",-0.1)
 
     // Servo SetPosition commands for two different kicker positions
     val engageKickerCommand: Command = SetPosition(kickServo, 0.25).requires(kickServo)
@@ -139,6 +139,11 @@ object ShooterSystem: Subsystem {
         if (abs(round(ticks) - TURRET_GOAL) >= 0) {
             TURRET_GOAL = ticks
         }
+    }
+
+    fun turnOffShooter() {
+        FLYWHEEL_GOAL = 0.0
+        flywheelControl.goal = KineticState(0.0, 0.0)
     }
 
     // Function to organize looped things including motor to ControlSystem bindings with autoAim toggle
