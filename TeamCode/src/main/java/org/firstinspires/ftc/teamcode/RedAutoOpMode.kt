@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 
 
-@Autonomous
+@Autonomous(name = "Red 12 ball Auto", group = "AutoOpModes")
 class RedAutoOpMode: NextFTCOpMode() {
     init {
         addComponents(

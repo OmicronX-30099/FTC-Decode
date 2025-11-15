@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import kotlin.math.PI
 
 
-@Autonomous
+@Autonomous(name = "Blue 12 ball Auto", group = "AutoOpModes")
 class BlueAutoOpMode: NextFTCOpMode() {
     init {
         addComponents(
