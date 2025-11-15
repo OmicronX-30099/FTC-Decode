@@ -24,6 +24,7 @@ object ShooterSystem: Subsystem {
     var TURRET_GOAL: Double = 0.0
     var FLYWHEEL_GOAL: Double = 0.0
     var HOOD_GOAL: Double = 0.0
+    // Change goal pose to (4,144) for Blue
     var GOAL_POSE: Pose = Pose(140.0,140.0)
     var FLYWHEEL_EQ: Int = 1
 
