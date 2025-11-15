@@ -18,8 +18,8 @@ import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
 import kotlin.math.PI
 
-@TeleOp(name="Red Teleop", group = "TeleOpModes")
-class TeleOp1: NextFTCOpMode() {
+@TeleOp(name="Blue Teleop", group = "TeleOpModes")
+class BlueTeleOp: NextFTCOpMode() {
     init {
         addComponents(
             BindingsComponent,
@@ -32,7 +32,7 @@ class TeleOp1: NextFTCOpMode() {
     lateinit var drivetrain: DriverControlledCommand;
 
     override fun onInit() {
-        follower.setStartingPose(Pose(84.0,60.0,0.0))
+        follower.setStartingPose(Pose(60.0,60.0,0.0))
     }
 
     override fun onStartButtonPressed() {
@@ -53,7 +53,7 @@ class TeleOp1: NextFTCOpMode() {
             .whenBecomesTrue { drivetrain.scalar = 0.2 }
             .whenBecomesFalse { drivetrain.scalar = 0.9 }
         Gamepads.gamepad1.dpadDown
-            .whenBecomesTrue { follower.pose = Pose(135.3,9.0,(PI/2)) }
+            .whenBecomesTrue { follower.pose = Pose(135.2,8.9,(PI/2)) }
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(IntakeSystem.openGateCommand)
             .whenTrue(IntakeSystem.intakeCommand(Gamepads.gamepad1.rightTrigger.get()- Gamepads.gamepad1.leftTrigger.get()))
