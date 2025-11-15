@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.TeleOpModes
 
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -14,6 +16,7 @@ import dev.nextftc.hardware.driving.DriverControlledCommand
 import org.firstinspires.ftc.teamcode.Constants
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
+import kotlin.math.PI
 
 @TeleOp(name="Red Teleop", group = "TeleOpModes")
 class TeleOp1: NextFTCOpMode() {
@@ -29,7 +32,7 @@ class TeleOp1: NextFTCOpMode() {
     lateinit var drivetrain: DriverControlledCommand;
 
     override fun onInit() {
-        follower.setStartingPose(Pose(84.0,50.0,0.0))
+        follower.setStartingPose(Pose(84.0,60.0,0.0))
     }
 
     override fun onStartButtonPressed() {
@@ -45,11 +48,31 @@ class TeleOp1: NextFTCOpMode() {
             .toggleOnBecomesTrue()
             .whenBecomesTrue { drivetrain.scalar = 0.45 }
             .whenBecomesFalse { drivetrain.scalar = 0.9 }
-        Gamepads.gamepad1.dpadDown
+        Gamepads.gamepad1.dpadUp
             .toggleOnBecomesTrue()
             .whenBecomesTrue { drivetrain.scalar = 0.2 }
             .whenBecomesFalse { drivetrain.scalar = 0.9 }
-        Gamepads.gamepad1.
+        Gamepads.gamepad1.dpadDown
+            .whenBecomesTrue { follower.pose = Pose(135.3,9.0,(PI/2)) }
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
+            .whenBecomesTrue(IntakeSystem.openGateCommand)
+            .whenTrue(IntakeSystem.intakeCommand(Gamepads.gamepad1.rightTrigger.get()- Gamepads.gamepad1.leftTrigger.get()))
+            .whenBecomesFalse(IntakeSystem.closeGateCommand.and(IntakeSystem.intakeCommand(0.0)))
+        Gamepads.gamepad1.rightBumper
+            .whenBecomesTrue(ShooterSystem.kickCommand)
+        Gamepads.gamepad1.square
+            .whenBecomesTrue(SequentialGroup(
+                IntakeSystem.intakeCommand(1.0),
+                ShooterSystem.kickCommand,
+                Delay(0.4),
+                ShooterSystem.kickCommand,
+                Delay(0.45),
+                ShooterSystem.kickCommand
+            ))
+        Gamepads.gamepad1.circle
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue(ShooterSystem.autoAimOnCommand)
+            .whenBecomesFalse(ShooterSystem.autoAimOffCommand)
     }
 
     override fun onUpdate() {

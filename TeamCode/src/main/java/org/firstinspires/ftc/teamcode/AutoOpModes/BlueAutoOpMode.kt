@@ -179,7 +179,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
         Path8 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(60.0,72.0),Pose(60.0,50.0))
+                BezierLine(Pose(60.0,72.0),Pose(60.0,60.0))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()

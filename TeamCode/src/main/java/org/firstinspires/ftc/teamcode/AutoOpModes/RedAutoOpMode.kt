@@ -178,7 +178,7 @@ class RedAutoOpMode: NextFTCOpMode() {
         Path8 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(84.0,72.0),Pose(84.0,50.0))
+                BezierLine(Pose(84.0,72.0),Pose(84.0,60.0))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
