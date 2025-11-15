@@ -114,9 +114,9 @@ class BlueAutoOpMode: NextFTCOpMode() {
                 BezierCurve(
                     Pose(48.000, 96.000),
                     Pose(76.600, 77.85),
-                    Pose(-46.000, 85.000),
+                    Pose(-48.500, 85.000),
                     Pose(71.400, 75.000),
-                    Pose(21.080, 71.0)
+                    Pose(19.400, 72.95)
                     /*
                     Pose(96.000, 96.000),
                     Pose(87.650, 77.85),
