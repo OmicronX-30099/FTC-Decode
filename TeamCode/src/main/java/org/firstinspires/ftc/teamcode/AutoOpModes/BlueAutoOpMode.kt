@@ -116,7 +116,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
                     Pose(76.600, 77.85),
                     Pose(-48.500, 85.000),
                     Pose(71.400, 75.000),
-                    Pose(19.400, 72.95)
+                    Pose(19.750, 77.000)
                     /*
                     Pose(96.000, 96.000),
                     Pose(87.650, 77.85),

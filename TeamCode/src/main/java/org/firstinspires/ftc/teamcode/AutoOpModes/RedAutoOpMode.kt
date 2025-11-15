@@ -115,7 +115,7 @@ class RedAutoOpMode: NextFTCOpMode() {
                     Pose(67.400, 77.850),
                     Pose(192.500, 85.000),
                     Pose(72.600, 75.000),
-                    Pose(124.600, 72.950)
+                    Pose(124.250, 77.000)
                     /*
                     Pose(96.000, 96.000),
                     Pose(87.650, 77.85),
