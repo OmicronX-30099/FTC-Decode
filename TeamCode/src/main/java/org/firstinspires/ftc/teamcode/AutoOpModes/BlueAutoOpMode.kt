@@ -49,7 +49,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
 
     override fun onInit() {
         Paths()
-        follower.setStartingPose(Pose(34.4,134.37, PI))
+        follower.setStartingPose(Pose(32.4,134.05, PI))
         telemetry.addData("Autoaim: ", ShooterSystem.AUTO_AIM)
         telemetry.addData("FLywheel Goal", ShooterSystem.FLYWHEEL_GOAL)
         telemetry.update()
@@ -103,7 +103,7 @@ class BlueAutoOpMode: NextFTCOpMode() {
         Path1 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(34.400, 134.370), Pose(48.000, 96.000))
+                BezierLine(Pose(32.400, 134.050), Pose(48.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()

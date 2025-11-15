@@ -48,7 +48,7 @@ class RedAutoOpMode: NextFTCOpMode() {
 
     override fun onInit() {
         Paths()
-        follower.setStartingPose(Pose(109.6,134.37, 0.0))
+        follower.setStartingPose(Pose(111.6,134.05, 0.0))
         telemetry.addData("Autoaim: ", ShooterSystem.AUTO_AIM)
         telemetry.addData("FLywheel Goal", ShooterSystem.FLYWHEEL_GOAL)
         telemetry.update()
@@ -102,7 +102,7 @@ class RedAutoOpMode: NextFTCOpMode() {
         Path1 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(109.600, 134.370), Pose(96.000, 96.000))
+                BezierLine(Pose(111.600, 134.050), Pose(96.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
