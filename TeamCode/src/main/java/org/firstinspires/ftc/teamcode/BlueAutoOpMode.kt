@@ -1,14 +1,11 @@
 package org.firstinspires.ftc.teamcode
 
-import com.pedropathing.follower.Follower
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
-import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.delays.Delay
-import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
@@ -18,14 +15,12 @@ import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.Systems.IntakeSystem
 import org.firstinspires.ftc.teamcode.Systems.ShooterSystem
-import kotlin.math.PI
 
 
 @Autonomous
-class AutoOpMode: NextFTCOpMode() {
+class BlueAutoOpMode: NextFTCOpMode() {
     init {
         addComponents(
             BindingsComponent,
@@ -43,7 +38,6 @@ class AutoOpMode: NextFTCOpMode() {
     lateinit var Path6: PathChain
     lateinit var Path7: PathChain
     lateinit var Path8: PathChain
-    var tempVar: Boolean = true
     val threeBallCommand = SequentialGroup(
         Delay(1.0),
         ShooterSystem.kickCommand,
@@ -181,14 +175,14 @@ class AutoOpMode: NextFTCOpMode() {
         Path7 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(133.000, 35.500), Pose(84.000, 12.000))
+                BezierLine(Pose(133.000, 35.500), Pose(84.000, 72.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         Path8 = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(84.0,12.0),Pose(84.0,50.0))
+                BezierLine(Pose(84.0,72.0),Pose(84.0,50.0))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()

@@ -20,6 +20,7 @@ import kotlin.math.round
 object ShooterSystem: Subsystem {
     // Defining system variables at top for easy access
     var AUTO_AIM: Boolean = false;
+    // Change this variable to -384.5 for Blue, and 0 for red
     var TURRET_GOAL: Double = 0.0
     var FLYWHEEL_GOAL: Double = 0.0
     var HOOD_GOAL: Double = 0.0
