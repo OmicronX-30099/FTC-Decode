@@ -1,4 +1,4 @@
-/*package org.firstinspires.ftc.teamcode.TeleOpModes
+package org.firstinspires.ftc.teamcode.TeleOpModes
 
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
@@ -39,8 +39,16 @@ class TeleOp1: NextFTCOpMode() {
             -Gamepads.gamepad1.rightStickX,
             true
         )
-        drivetrain.scalar = 0.8
+        drivetrain.scalar = 0.9
         drivetrain.schedule()
+        Gamepads.gamepad1.leftBumper
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue { drivetrain.scalar = 0.45 }
+            .whenBecomesFalse { drivetrain.scalar = 0.9 }
+        Gamepads.gamepad1.dpadDown
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue { drivetrain.scalar = 0.2 }
+            .whenBecomesFalse { drivetrain.scalar = 0.9 }
         Gamepads.gamepad1.
     }
 
@@ -49,4 +57,4 @@ class TeleOp1: NextFTCOpMode() {
         ShooterSystem.calibrateTurretPosition(follower.pose)
         ShooterSystem.calibrateFlywheelVelocity(follower.pose)
     }
-}*/
+}
