@@ -8,7 +8,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
 import dev.nextftc.hardware.powerable.SetPower
 
-class IntakeSystem: Subsystem {
+object IntakeSystem: Subsystem {
     // Defining key mechanical components
     val intakeMotor: MotorEx = MotorEx("intake")
     val gateServo: ServoEx = ServoEx("gate")

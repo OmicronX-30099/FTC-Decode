@@ -17,7 +17,7 @@ import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.round
 
-class ShooterSystem: Subsystem {
+object ShooterSystem: Subsystem {
     // Defining system variables at top for easy access
     var AUTO_AIM: Boolean = false;
     var TURRET_GOAL: Double = 0.0
