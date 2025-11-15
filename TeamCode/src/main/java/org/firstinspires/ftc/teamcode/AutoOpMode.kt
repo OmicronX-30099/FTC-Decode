@@ -42,6 +42,7 @@ class AutoOpMode: NextFTCOpMode() {
     lateinit var Path5: PathChain
     lateinit var Path6: PathChain
     lateinit var Path7: PathChain
+    lateinit var Path8: PathChain
     var tempVar: Boolean = true
     val threeBallCommand = SequentialGroup(
         Delay(1.0),
@@ -67,24 +68,32 @@ class AutoOpMode: NextFTCOpMode() {
             Delay(0.45),
             InstantCommand{IntakeSystem.intakeMotor.power = 1.0},
             threeBallCommand,
-            InstantCommand{ShooterSystem.fwm.power = -0.3 },
             IntakeSystem.startIntakeCommand,
             FollowPath(Path2,true,0.7),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path3,true,1.0),
-
+            ShooterSystem.autoAimOnCommand,
+            Delay(0.45),
+            InstantCommand{IntakeSystem.intakeMotor.power = 1.0},
+            threeBallCommand,
             IntakeSystem.startIntakeCommand,
             FollowPath(Path4,true,1.0),
-            Delay(1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path5,true,1.0),
-            Delay(1.0),
+            ShooterSystem.autoAimOnCommand,
+            Delay(0.45),
+            InstantCommand{IntakeSystem.intakeMotor.power = 1.0},
+            threeBallCommand,
             IntakeSystem.startIntakeCommand,
             FollowPath(Path6,true,1.0),
-            Delay(1.0),
             IntakeSystem.stopIntakeCommand,
             FollowPath(Path7,true,1.0),
-            Delay(1.0)
+            ShooterSystem.autoAimOnCommand,
+            Delay(0.55),
+            InstantCommand{IntakeSystem.intakeMotor.power = 1.0},
+            threeBallCommand,
+            IntakeSystem.startIntakeCommand,
+            FollowPath(Path8, true, 1.0)
         )
         main.schedule()
     }
@@ -173,6 +182,13 @@ class AutoOpMode: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierLine(Pose(133.000, 35.500), Pose(84.000, 12.000))
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
+            .build()
+        Path8 = follower
+            .pathBuilder()
+            .addPath(
+                BezierLine(Pose(84.0,12.0),Pose(84.0,50.0))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()

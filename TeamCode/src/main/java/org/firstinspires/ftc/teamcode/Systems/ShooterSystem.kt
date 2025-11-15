@@ -154,6 +154,8 @@ object ShooterSystem: Subsystem {
             flywheelControl.goal = KineticState(0.0,FLYWHEEL_GOAL)
             fwm.power = flywheelControl.calculate(fwm.state)
             hoodServo.position = HOOD_GOAL
+        } else {
+            fwm.power = -0.3
         }
         // Turret should be powered no matter the case
         turretMotor.power = turretControl.calculate(turretMotor.state)
