@@ -74,7 +74,6 @@ class BlueTeleOp: NextFTCOpMode() {
             .whenBecomesTrue(ShooterSystem.autoAimOnCommand)
             .whenBecomesFalse(ShooterSystem.autoAimOffCommand)
     }
-
     override fun onUpdate() {
         ShooterSystem.calibrateHoodPosition(follower.pose)
         ShooterSystem.calibrateTurretPosition(follower.pose)
