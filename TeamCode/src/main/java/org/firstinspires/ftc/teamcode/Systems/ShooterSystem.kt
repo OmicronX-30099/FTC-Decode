@@ -25,7 +25,7 @@ object ShooterSystem: Subsystem {
     var FLYWHEEL_GOAL: Double = 0.0
     var HOOD_GOAL: Double = 0.0
     // Change goal pose to (4,144) for Blue
-    var GOAL_POSE: Pose = Pose(2.0,142.0)
+    var GOAL_POSE: Pose = Pose(142.0,142.0)
     var FLYWHEEL_EQ: Int = 1
 
     // Function to toggle autoAim on and off
@@ -52,7 +52,7 @@ object ShooterSystem: Subsystem {
     val fwm: MotorGroup = MotorGroup(fwr,fwl)
     // ControlSystem with velocity PID for flywheel
     val flywheelControl: ControlSystem = ControlSystem.builder()
-        .velPid(0.01,0.0,0.0)
+        .velPid(0.02,0.0,0.0)
         .basicFF(0.00033,0.0,0.07)
         .build()
 
@@ -60,7 +60,7 @@ object ShooterSystem: Subsystem {
     val turretMotor: MotorEx = MotorEx("tur")
     // ControlSystem with positional PID for turret
     val turretControl: ControlSystem = ControlSystem.builder()
-        .posPid(0.03,0.0,0.0)
+        .posPid(0.02,0.0,0.0)
         .build()
 
     // Hood
@@ -97,9 +97,9 @@ object ShooterSystem: Subsystem {
         when (distance) {
             in 0.0..84.0 ->   {FLYWHEEL_EQ = 1;
                                      HOOD_GOAL = 0.2}
-            in 84.0..120.0 -> {FLYWHEEL_EQ = 1;
+            in 84.0..120.0 -> {FLYWHEEL_EQ = 2;
                                      HOOD_GOAL = 0.4}
-            else ->                 {FLYWHEEL_EQ = 1;
+            else ->                 {FLYWHEEL_EQ = 3;
                                      HOOD_GOAL = 1.0}
         }
     }
@@ -114,7 +114,7 @@ object ShooterSystem: Subsystem {
         var vel: Double = 0.0;
         when (FLYWHEEL_EQ) {
             1 -> {
-                vel = 5.5 * distance + 810.5
+                vel = 5.2675 * distance + 805.5
             }
 
             2 -> {
@@ -122,12 +122,12 @@ object ShooterSystem: Subsystem {
             }
 
             3 -> {
-                vel = 5.875 * distance + 730.8
+                vel = 5.875 * distance + 715.8
             }
         }
         if (vel != FLYWHEEL_GOAL) {
             if (auto) {
-                FLYWHEEL_GOAL = 1170.0
+                FLYWHEEL_GOAL = 1150.0
             }
             else {
                 FLYWHEEL_GOAL = vel
@@ -161,11 +161,11 @@ object ShooterSystem: Subsystem {
             turretControl.goal = KineticState(TURRET_GOAL)
             flywheelControl.goal = KineticState(0.0,FLYWHEEL_GOAL)
             fwm.power = flywheelControl.calculate(fwm.state)
-            hoodServo.position = HOOD_GOAL
         } else {
             fwm.power = -0.2
         }
         // Turret should be powered no matter the case
         turretMotor.power = turretControl.calculate(turretMotor.state)
+        hoodServo.position = HOOD_GOAL
     }
 }
