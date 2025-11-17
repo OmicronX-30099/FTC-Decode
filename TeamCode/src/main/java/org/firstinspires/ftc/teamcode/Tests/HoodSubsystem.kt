@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.Tests
 
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.subsystems.Subsystem

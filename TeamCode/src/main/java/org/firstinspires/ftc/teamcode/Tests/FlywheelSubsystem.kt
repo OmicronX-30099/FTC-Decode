@@ -1,6 +1,5 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.Tests
 
-import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
