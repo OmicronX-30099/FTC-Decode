@@ -21,7 +21,7 @@ object LimelightVisionSubsystem: Subsystem {
             return LimelightStatus.NO_TARGETS_DETECTED
         } else {
             val result = LimelightStatus.TARGETS_DETECTED
-            result.setResults(latestResult.tx, latestResult.ty, latestResult.ta)
+            result.setResults(latestResult.tx, latestResult.ty, latestResult.ta, latestResult.botpose)
             return result
         }
     }
