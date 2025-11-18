@@ -19,10 +19,10 @@ object TurretSubsystem: Subsystem {
         turretAutoAim = !turretAutoAim
     }
 
-    fun setPosition(ticks: Double) {
-        if ((turretAutoAim) && (ticks != currentTurretPos)) {
-            currentTurretPos = ticks
-            turretControl.goal = KineticState(ticks, 0.0,0.0)
+    fun setPosition(targetTicks: Double) {
+        if ((turretAutoAim) && (targetTicks != currentTurretPos)) {
+            currentTurretPos = targetTicks
+            turretControl.goal = KineticState(targetTicks, 0.0,0.0)
         }
     }
 

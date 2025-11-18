@@ -9,9 +9,10 @@ import kotlin.properties.Delegates
 
 object LimelightVisionSubsystem: Subsystem {
     val limelight: Limelight3A = ActiveOpMode.hardwareMap["limelight"] as Limelight3A
+
     var currentPipeline: Int by Delegates.notNull()
     var currentStatus: LimelightStatus = LimelightStatus.NO_TARGETS_DETECTED
-    lateinit var latestResult: LLResult;
+    lateinit var latestResult: LLResult
 
     fun getStatus(): LimelightStatus {
         if (!latestResult.isValid) {
@@ -19,7 +20,7 @@ object LimelightVisionSubsystem: Subsystem {
         } else if (latestResult == null) {
             return LimelightStatus.NO_TARGETS_DETECTED
         } else {
-            var result = LimelightStatus.TARGETS_DETECTED
+            val result = LimelightStatus.TARGETS_DETECTED
             result.setResults(latestResult.tx, latestResult.ty, latestResult.ta)
             return result
         }
