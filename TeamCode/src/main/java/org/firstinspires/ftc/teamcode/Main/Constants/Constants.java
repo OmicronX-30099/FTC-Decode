@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Master.Constants;
+package org.firstinspires.ftc.teamcode.Main.Constants;
 
 import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.follower.Follower;
