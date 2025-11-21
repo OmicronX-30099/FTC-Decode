@@ -4,6 +4,7 @@ import com.pedropathing.geometry.Pose
 import dev.nextftc.core.subsystems.Subsystem
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import kotlin.properties.Delegates
+import kotlin.math.round
 
 object CalculationSubsystem: Subsystem {
     val goalPose: Pose = Pose(0,141)
@@ -31,6 +32,6 @@ object CalculationSubsystem: Subsystem {
             var angle = atan2(goalPose.x-pedroPose.x,goalPose.y-pedroPose.y)
             targetTurretPos = (((pedroPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
         }
-        return targetTurretPose
+        return round(targetTurretPose)
     }
 }
