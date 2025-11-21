@@ -7,7 +7,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.Util.TurretState
 import kotlin.properties.Delegates
 
-object TurretSubsystem: Subsystem {
+object TurretSubsystemLLT: Subsystem {
     // Definition of hardware
     val turretMotor: MotorEx = MotorEx("turret")
     // Definition of control system with velocity pid

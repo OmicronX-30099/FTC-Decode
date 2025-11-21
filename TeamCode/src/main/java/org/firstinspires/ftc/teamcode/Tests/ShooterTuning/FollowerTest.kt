@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Tests
+package org.firstinspires.ftc.teamcode.Tests.ShooterTuning
 
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.extensions.pedro.PedroComponent
