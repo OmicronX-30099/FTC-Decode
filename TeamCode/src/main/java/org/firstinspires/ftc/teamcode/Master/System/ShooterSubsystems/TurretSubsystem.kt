@@ -7,10 +7,12 @@ import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.Util.TurretState
 import kotlin.properties.Delegates
 
+// Subsystem to manage turretMotor and turret auto-aiming
 object TurretSubsystem: Subsystem {
     // Definition of hardware
     val turretMotor: MotorEx = MotorEx("turret")
-    // Definition of control system with velocity pid
+
+    // Definition of control system with positional pid
     val turretControl: ControlSystem = ControlSystem.builder()
         .posPid(0.025,0.0,0.0)
         .build()
@@ -27,6 +29,7 @@ object TurretSubsystem: Subsystem {
     // Function to set position of turret
     fun setTurretPosition(turretPos: Double) {
         // Sets turret position to calculated position and writes to system state
+        // Enforces auto aim lock here
         if (turretAutoAim) {
             turretControl.goal = KineticState(turretPos)
             currentTurretPosition = turretPos
@@ -43,6 +46,7 @@ object TurretSubsystem: Subsystem {
     }
     // Function to set power as calculated by control system
     override fun periodic() {
+        // Turret is still powered when auto aim is off, it will hold current position.
         turretMotor.power = turretControl.calculate(turretMotor.state)
     }
 }

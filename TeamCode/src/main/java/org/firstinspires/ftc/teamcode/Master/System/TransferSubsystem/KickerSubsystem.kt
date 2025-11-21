@@ -8,7 +8,7 @@ import dev.nextftc.hardware.positionable.SetPosition
 // Subsystem singleton to control kicker servo that kicks the ball
 object KickerSubsystem: Subsystem {
     // Definition of kicker servo
-    val kickerServo: ServoEx = ServoEx("kick")
+    val kickerServo: ServoEx = ServoEx("kick",-0.1)
 
     // Pre-defined final values for servo positions
     val engagedPos: Double = 0.0

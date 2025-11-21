@@ -8,7 +8,7 @@ import dev.nextftc.hardware.positionable.SetPosition
 // Subsystem singleton to control shooter gate servo
 object ShooterGateSubsystem: Subsystem {
     // Declaration of gate servo
-    val shooterGateServo: ServoEx = ServoEx("s_gate")
+    val shooterGateServo: ServoEx = ServoEx("s_gate",-0.1)
 
     // Definition of servo position
     val openPos: Double = 0.0
