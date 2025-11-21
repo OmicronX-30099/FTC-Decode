@@ -23,4 +23,14 @@ object CalculationSubsystem: Subsystem {
         }
         return targetHoodPose
     }
+    fun calculateTurretPosition(limelightStatus: LimelightStatus, pedroPose: Pose = Pose(0.0,0.0), currentTurretPos: Double): Double {
+        var targetTurretPos: Double by Delegates.notNull()
+        if (limelightStatus == LimelightStatus.TARGETS_DETECTED) {
+            targetTurretPos: Double = ((limelightStatus.targetX / 360) * (100 / 24) * 384.5 * -1) + currentTurretPos
+        } else {
+            var angle = atan2(goalPose.x-pedroPose.x,goalPose.y-pedroPose.y)
+            targetTurretPos = (((pedroPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
+        }
+        return targetTurretPose
+    }
 }
