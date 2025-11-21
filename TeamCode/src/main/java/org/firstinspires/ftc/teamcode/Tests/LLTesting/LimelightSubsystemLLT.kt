@@ -18,7 +18,7 @@ object LimelightSubsystemLLT: Subsystem {
         var result = this.getResult()
         var theta = -1 * result.tx
         var ticks = (theta / 360) * (100 / 24) * 384.5
-        return this.normalizeTurret(ticks+turretTicks)
+        return Math.round(this.normalizeTurret(ticks+turretTicks))
     }
     fun normalizeTurret(ticks: Double): Double {
         var normalized = ticks % (38450/24)
