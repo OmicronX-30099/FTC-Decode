@@ -6,6 +6,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import kotlin.properties.Delegates
 
 object CalculationSubsystem: Subsystem {
+    val goalPose: Pose = Pose(0,141)
     fun calculateHoodPosition(botPose: Pose3D?, pedroPose: Pose = Pose(0.0,0.0)): Double {
         lateinit var currPose: Pose
         var targetHoodPose: Double by Delegates.notNull()
@@ -14,6 +15,12 @@ object CalculationSubsystem: Subsystem {
         } else {
             currPose = pedroPose
         }
-        return 0.0
+        var distanceToGoal = currPose.distanceFrom(currPose)
+        when (distanceToGoal) {
+            in 0.0..<3.0 -> targetHoodPose = 0.0
+            in 3.0..<5.0 -> targetHoodPose = 0.0
+            else -> targetHoodPose = 0.0
+        }
+        return targetHoodPose
     }
 }
