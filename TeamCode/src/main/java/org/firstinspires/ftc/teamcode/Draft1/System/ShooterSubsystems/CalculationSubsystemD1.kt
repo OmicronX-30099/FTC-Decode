@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Master.System.ShooterSubsystems
+package org.firstinspires.ftc.teamcode.Draft1.System.ShooterSubsystems
 
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.subsystems.Subsystem
@@ -9,7 +9,9 @@ import kotlin.math.atan2
 import kotlin.properties.Delegates
 import kotlin.math.round
 
+// Subsystem to handle all calculations concerning shooter
 object CalculationSubsystem: Subsystem {
+    // Goal Pose, differs by red and blue
     val goalPose: Pose = Pose(0.0,141.0)
     fun calculateHoodPosition(botPose: Pose3D?, pedroPose: Pose = Pose(0.0,0.0)): Double {
         lateinit var currPose: Pose
