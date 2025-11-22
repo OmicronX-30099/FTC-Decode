@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.Util.HoodState
 import kotlin.properties.Delegates
 
 // Subsystem to control servo-controlled hood
-object HoodSubsystem: Subsystem {
+object HoodSubsystemD1: Subsystem {
     // Declaration of hardware
     val hoodServo: ServoEx = ServoEx("hood",-0.1)
 

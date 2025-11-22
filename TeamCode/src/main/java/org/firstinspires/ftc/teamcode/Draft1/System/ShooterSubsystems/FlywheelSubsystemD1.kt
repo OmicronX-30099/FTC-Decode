@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Util.FlywheelState
 import kotlin.properties.Delegates
 
 // Subsystem to control flywheel motors
-object FlywheelSubsystem: Subsystem {
+object FlywheelSubsystemD1: Subsystem {
     // Definition of hardware
     val leftFlywheelMotor: MotorEx = MotorEx("fwl")
     val rightFlywheelMotor: MotorEx = MotorEx("fwr")

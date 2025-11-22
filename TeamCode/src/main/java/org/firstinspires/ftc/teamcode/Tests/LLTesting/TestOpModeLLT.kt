@@ -4,7 +4,7 @@ import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.teamcode.Master.System.ShooterSubsystems.TurretSubsystemLLT
+import org.firstinspires.ftc.teamcode.Draft1.System.ShooterSubsystems.TurretSubsystemLLT
 
 class TestOpModeLLT: NextFTCOpMode() {
     init {

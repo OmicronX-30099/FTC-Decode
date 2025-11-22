@@ -8,12 +8,11 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.driving.DriverControlledCommand
-import org.firstinspires.ftc.teamcode.Main.Constants.Constants
 
 class FollowerTest: NextFTCOpMode() {
     init {
         addComponents(
-            PedroComponent(Constants::createFollower),
+//            PedroComponent(Constants::createFollower),
             BulkReadComponent,
             BindingsComponent
         )

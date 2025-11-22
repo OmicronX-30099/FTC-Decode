@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Util.LimelightStatus
 import kotlin.properties.Delegates
 
 // Subsystem to manage limelight camera vision
-object LimelightSubsystem: Subsystem {
+object LimelightSubsystemD1: Subsystem {
     // Declaration of hardware
     val limelight: Limelight3A = ActiveOpMode.hardwareMap["limelight"] as Limelight3A
 

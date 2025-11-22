@@ -10,7 +10,7 @@ import kotlin.properties.Delegates
 import kotlin.math.round
 
 // Subsystem to handle all calculations concerning shooter
-object CalculationSubsystem: Subsystem {
+object CalculationSubsystemD1: Subsystem {
     // Goal Pose, differs by red and blue
     val goalPose: Pose = Pose(0.0,141.0)
     fun calculateHoodPosition(botPose: Pose3D?, pedroPose: Pose = Pose(0.0,0.0)): Double {

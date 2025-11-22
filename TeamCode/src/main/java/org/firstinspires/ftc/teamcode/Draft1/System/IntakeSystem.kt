@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Master.System
+package org.firstinspires.ftc.teamcode.Draft1.System
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.subsystems.SubsystemGroup
-import org.firstinspires.ftc.teamcode.Master.System.IntakeSubsystems.IntakeGateSubsystem
-import org.firstinspires.ftc.teamcode.Master.System.IntakeSubsystems.IntakeSubsystem
+import org.firstinspires.ftc.teamcode.Draft1.System.IntakeSubsystems.IntakeGateSubsystem
+import org.firstinspires.ftc.teamcode.Draft1.System.IntakeSubsystems.IntakeSubsystem
 
 // Subsystem group to store compound intaking commands
 object IntakeSystem: SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem) {

@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Util.TurretState
 import kotlin.properties.Delegates
 
 // Subsystem to manage turretMotor and turret auto-aiming
-object TurretSubsystem: Subsystem {
+object TurretSubsystemD1: Subsystem {
     // Definition of hardware
     val turretMotor: MotorEx = MotorEx("turret")
 
