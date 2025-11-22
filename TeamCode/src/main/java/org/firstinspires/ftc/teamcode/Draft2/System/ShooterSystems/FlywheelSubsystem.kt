@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystems
 
 import dev.nextftc.control.ControlSystem
+import dev.nextftc.control.KineticState
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.controllable.MotorGroup
 import dev.nextftc.hardware.impl.MotorEx
@@ -23,6 +24,13 @@ object FlywheelSubsystem: Subsystem {
     // Declaration of variables to track autoAim and current Velocity
     var flywheelAutoAim: Boolean = false
     var currentFlywheelVelocity: Double = 0.0
+
+    fun setFlywheelVelocity(flywheelGoal: Double) {
+        if (flywheelAutoAim) {
+            flywheelControl.goal = KineticState(0.0,flywheelGoal)
+            currentFlywheelVelocity = flywheelGoal
+        }
+    }
 
     // Periodic function for turretSubsystem
     override fun periodic() {

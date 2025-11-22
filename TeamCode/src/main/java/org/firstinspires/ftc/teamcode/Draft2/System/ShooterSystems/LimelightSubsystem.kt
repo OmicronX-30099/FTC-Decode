@@ -5,6 +5,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.Util.Alliance
+import org.firstinspires.ftc.teamcode.Util.LimelightStatus
 import kotlin.properties.Delegates
 
 // Subsystem to manage Limelight
@@ -15,6 +16,20 @@ object LimelightSubsystem: Subsystem {
     // Variables to track latest LLResults and current pipeline
     lateinit var currentResult: LLResult
     var currentPipeline: Int by Delegates.notNull()
+
+    fun getResults(): LimelightStatus {
+        if (currentResult.isValid) {
+            if (currentResult != null) {
+                var result = LimelightStatus.TARGETS_DETECTED
+                result.setResults(currentResult.tx, currentResult.ty, currentResult.ta, currentResult.botpose)
+                return result
+            } else {
+                return LimelightStatus.NO_TARGETS_DETECTED
+            }
+        } else {
+            return LimelightStatus.INVALID_RESULTS
+        }
+    }
 
     // Function to switch between red and blue goal tracking
     fun setGoal(alliance: Alliance) {

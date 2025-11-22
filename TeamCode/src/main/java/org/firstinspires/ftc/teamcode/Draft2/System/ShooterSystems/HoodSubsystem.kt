@@ -12,6 +12,13 @@ object HoodSubsystem: Subsystem {
     var hoodAutoAim: Boolean = false
     var currentHoodPosition: Double = 0.3
 
+    fun setHoodPosition(hoodGoal: Double) {
+        if (hoodAutoAim) {
+            hoodServo.position = hoodGoal
+            currentHoodPosition = hoodGoal
+        }
+    }
+
     // Initialization function
     override fun initialize() {
         // Initializes servo to 0.3

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystems
 
 import dev.nextftc.control.ControlSystem
+import dev.nextftc.control.KineticState
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.MotorEx
 
@@ -17,6 +18,13 @@ object TurretSubsystem: Subsystem {
     // Declaration of variables to track autoAim and current Position
     var turretAutoAim: Boolean = false
     var currentTurretPosition: Double = 0.0
+
+    fun setTurretPosition(turretGoal: Double) {
+        if (turretAutoAim) {
+            turretControl.goal = KineticState(turretGoal)
+            currentTurretPosition = turretGoal
+        }
+    }
 
     // Initialization of turret
     override fun initialize() {
