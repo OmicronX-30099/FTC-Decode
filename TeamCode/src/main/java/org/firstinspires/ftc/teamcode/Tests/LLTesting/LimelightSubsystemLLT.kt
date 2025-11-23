@@ -25,7 +25,7 @@ object LimelightSubsystemLLT: Subsystem {
         return normalized
     }
     fun startLL() {
-        limelight.pipelineSwitch(6)
+        limelight.pipelineSwitch(1)
         limelight.start()
     }
 }

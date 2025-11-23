@@ -34,10 +34,10 @@ object LimelightSubsystem: Subsystem {
     // Function to switch between red and blue goal tracking
     fun setGoal(alliance: Alliance) {
         when (alliance) {
-            Alliance.RED -> {currentPipeline = 7
-                             limelight.pipelineSwitch(7)}
-            Alliance.BLUE -> {currentPipeline = 6
-                              limelight.pipelineSwitch(6)}
+            Alliance.RED -> {currentPipeline = 2
+                             limelight.pipelineSwitch(2)}
+            Alliance.BLUE -> {currentPipeline = 1
+                              limelight.pipelineSwitch(1)}
         }
     }
     // Functions to start and stop the limelight
