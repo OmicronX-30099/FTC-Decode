@@ -9,17 +9,17 @@ import kotlin.properties.Delegates
 
 object ShooterBrainSubsystem: Subsystem {
     // Coefficient of x^2 term
-    val flywheelEquationA: Double = 0.0;
+    val flywheelEquationA: Double = -24.993970450383305
     // Coefficient of xy term
-    val flywheelEquationB: Double = 0.0;
+    val flywheelEquationB: Double = -0.07154455960209152
     // Coefficient of y^2 term
-    val flywheelEquationC: Double = 0.0;
+    val flywheelEquationC: Double = 0.00019278705563574583
     // Coefficient of x
-    val flywheelEquationD: Double = 0.0;
+    val flywheelEquationD: Double = 116.26277827556967
     // Coefficient of y
-    val flywheelEquationE: Double = 0.0;
+    val flywheelEquationE: Double = -0.272675259634784
     // Constant term
-    val flywheelEquationF: Double = 0.0;
+    val flywheelEquationF: Double = 122.99485320234648
 
     lateinit var goalPos: Pose
 

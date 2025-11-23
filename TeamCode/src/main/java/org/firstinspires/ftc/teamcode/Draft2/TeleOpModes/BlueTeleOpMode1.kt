@@ -41,16 +41,21 @@ class BlueTeleOpMode1: NextFTCOpMode() {
         )
         drivetrain.scalar = 0.9
         drivetrain.schedule()
+
+        // Intaking mechanism with gate
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(IntakeSystem.openGateCommand)
             .whenTrue(IntakeSystem.intakeCommand(Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get()))
             .whenBecomesFalse(IntakeSystem.stopIntakeCommand)
+
         Gamepads.gamepad1.triangle
             .whenBecomesTrue  { ShooterSystem.switchAutoAim() }
         Gamepads.gamepad1.rightBumper
             .whenBecomesTrue(TransferSystem.pushBallCommand)
         Gamepads.gamepad1.leftBumper
             .whenBecomesTrue(TransferSystem.tripleBallCommand)
+        Gamepads.gamepad1.dpadUp
+            .whenBecomesTrue {  }
     }
     override fun onUpdate() {
         ShooterSystem.updateAll()
