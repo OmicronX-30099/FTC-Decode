@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.Draft2.System
 
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
-import org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystems.*
+import org.firstinspires.ftc.teamcode.Draft2.System.ShooterSubsystems.*
 import org.firstinspires.ftc.teamcode.Util.Alliance
 import org.firstinspires.ftc.teamcode.Util.LimelightStatus
 import kotlin.properties.Delegates
@@ -51,6 +51,11 @@ object ShooterSystem:
         updateTurret()
         updateHood()
         updateFlywheel()
+    }
+    fun switchAutoAim() {
+        TurretSubsystem.turretAutoAim = !TurretSubsystem.turretAutoAim
+        HoodSubsystem.hoodAutoAim = !HoodSubsystem.hoodAutoAim
+        FlywheelSubsystem.flywheelAutoAim = !FlywheelSubsystem.flywheelAutoAim
     }
     fun setAlliance(alliance: Alliance) {
         ShooterBrainSubsystem.goalPos = alliance.goalPose

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystems
+package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSubsystems
 
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState

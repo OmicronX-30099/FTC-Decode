@@ -8,7 +8,7 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Draft1.System.ShooterSubsystems.TurretSubsystemLLT
 
 @TeleOp(name="LL Test")
-class TestOpModeLLT: NextFTCOpMode() {
+class  TestOpModeLLT: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,

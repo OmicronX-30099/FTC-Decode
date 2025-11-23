@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystems
+package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSubsystems
 
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.subsystems.Subsystem

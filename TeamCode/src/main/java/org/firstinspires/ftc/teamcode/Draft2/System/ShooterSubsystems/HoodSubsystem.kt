@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystems
+package org.firstinspires.ftc.teamcode.Draft2.System.ShooterSubsystems
 
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.ServoEx
