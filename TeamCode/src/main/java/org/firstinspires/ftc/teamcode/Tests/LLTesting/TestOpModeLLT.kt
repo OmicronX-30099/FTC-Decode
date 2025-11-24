@@ -17,6 +17,11 @@ class  TestOpModeLLT: NextFTCOpMode() {
         )
     }
 
+    override fun onInit() {
+        telemetry.addData("Init", "Check")
+        telemetry.update()
+    }
+
     override fun onStartButtonPressed() {
         LimelightSubsystemLLT.startLL()
     }
