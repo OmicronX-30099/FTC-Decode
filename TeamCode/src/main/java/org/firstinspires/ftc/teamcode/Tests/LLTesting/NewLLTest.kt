@@ -23,7 +23,9 @@ class NewLLTest: NextFTCOpMode() {
     }
 
     override fun onUpdate() {
-        telemetry.addData("tx", ll.latestResult.tx)
-        telemetry.update()
+        var result = ll.latestResult
+        if (result.isValid && result != null)
+            telemetry.addData("tx", ll.latestResult.tx)
+            telemetry.update()
     }
 }
