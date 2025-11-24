@@ -18,6 +18,7 @@ object LimelightSubsystemLLT: Subsystem {
         var result = this.getResult()
         var theta = -1 * result.tx
         var ticks = (theta / 360) * (100 / 24) * 384.5
+        ActiveOpMode.telemetry.addData("Limelight target", Math.round(this.normalizeTurret(ticks+turretTicks)).toDouble())
         return Math.round(this.normalizeTurret(ticks+turretTicks)).toDouble()
     }
     fun normalizeTurret(ticks: Double): Double {
