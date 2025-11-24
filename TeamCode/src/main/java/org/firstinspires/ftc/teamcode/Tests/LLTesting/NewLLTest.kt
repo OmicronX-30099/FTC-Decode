@@ -31,7 +31,7 @@ class NewLLTest: NextFTCOpMode() {
                 telemetry.addData("tx", result.tx)
                 var ticks = ((result.tx)/360) * (100/24) * -1 * 384.5
                 telemetry.addData("ticks calculation", ticks)
-                telemetry.addData("compiled", ticks+turretMotor.currentPosition)
+                telemetry.addData("compiled", ticks + turretMotor.currentPosition)
                 telemetry.update()
         }
     }
