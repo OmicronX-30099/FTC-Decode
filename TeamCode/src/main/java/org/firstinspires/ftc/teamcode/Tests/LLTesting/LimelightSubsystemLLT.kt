@@ -23,6 +23,7 @@ object LimelightSubsystemLLT: Subsystem {
     }
     fun normalizeTurret(ticks: Double): Double {
         var normalized = ticks % (38450/24)
+        ActiveOpMode.telemetry.addData("normalizer", normalized)
         return normalized
     }
     fun startLL() {
