@@ -15,9 +15,10 @@ class NewLLTest: NextFTCOpMode() {
             BulkReadComponent,
         )
     }
-    var ll: Limelight3A = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "Limelight")
+    lateinit var ll: Limelight3A
 
     override fun onInit() {
+        ll = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "Limelight")
         ll.pipelineSwitch(1)
         ll.start()
     }
