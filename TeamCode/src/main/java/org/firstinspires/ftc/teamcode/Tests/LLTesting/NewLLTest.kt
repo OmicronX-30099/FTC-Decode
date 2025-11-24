@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Tests.LLTesting
 
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.control.ControlSystem
+import dev.nextftc.control.KineticState
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.NextFTCOpMode
@@ -17,6 +19,11 @@ class NewLLTest: NextFTCOpMode() {
         )
     }
     lateinit var ll: Limelight3A
+
+    val turretControl: ControlSystem = ControlSystem.builder()
+        .posPid(0.005,0.0,0.0)
+        .build()
+
     var turretMotor: MotorEx = MotorEx("turret")
 
     override fun onInit() {
@@ -32,7 +39,9 @@ class NewLLTest: NextFTCOpMode() {
                 var ticks = ((result.tx)/360) * (100/24) * -1 * 384.5
                 telemetry.addData("ticks calculation", ticks)
                 telemetry.addData("compiled", ticks + turretMotor.currentPosition)
-                telemetry.update()
+                turretControl.goal = KineticState(ticks + turretMotor.currentPosition)
         }
+        turretMotor.power = turretControl.calculate(turretMotor.state)
+        telemetry.update()
     }
 }

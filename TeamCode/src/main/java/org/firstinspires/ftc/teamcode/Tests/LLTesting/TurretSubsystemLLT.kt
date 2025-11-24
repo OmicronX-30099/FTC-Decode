@@ -31,7 +31,6 @@ object TurretSubsystemLLT: Subsystem {
         if (turretAutoAim) {
             turretControl.goal = KineticState(turretPos)
             currentTurretPosition = turretPos
-            ActiveOpMode.telemetry.addData("Setting turret to:",currentTurretPosition)
         }
     }
     // Function to return current state of turret with position and auto aim
