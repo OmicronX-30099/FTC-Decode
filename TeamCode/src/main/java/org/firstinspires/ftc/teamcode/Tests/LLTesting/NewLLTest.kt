@@ -17,7 +17,7 @@ class NewLLTest: NextFTCOpMode() {
         )
     }
     lateinit var ll: Limelight3A
-    var turretMotor: MotorEx = MotorEx("tur")
+    var turretMotor: MotorEx = MotorEx("turret")
 
     override fun onInit() {
         ll = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "Limelight")
