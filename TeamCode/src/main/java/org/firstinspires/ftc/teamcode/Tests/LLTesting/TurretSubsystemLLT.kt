@@ -13,7 +13,7 @@ object TurretSubsystemLLT: Subsystem {
     val turretMotor: MotorEx = MotorEx("turret")
     // Definition of control system with velocity pid
     val turretControl: ControlSystem = ControlSystem.builder()
-        .posPid(0.025,0.0,0.0)
+        .posPid(0.0005,0.0,0.0)
         .build()
 
     // Variables to track Turret Status
