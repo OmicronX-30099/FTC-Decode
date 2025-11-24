@@ -17,7 +17,7 @@ object TurretSubsystemLLT: Subsystem {
         .build()
 
     // Variables to track Turret Status
-    var currentTurretPosition: Double by Delegates.notNull()
+    var currentTurretPosition: Double = 0.0
     var turretAutoAim: Boolean = false
 
     // Function to toggle auto aim on and off for turret
