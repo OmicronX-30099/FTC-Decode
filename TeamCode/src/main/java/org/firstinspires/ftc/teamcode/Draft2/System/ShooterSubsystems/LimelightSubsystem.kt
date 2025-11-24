@@ -11,7 +11,7 @@ import kotlin.properties.Delegates
 // Subsystem to manage Limelight
 object LimelightSubsystem: Subsystem {
     // Definition of hardware
-    val limelight: Limelight3A = ActiveOpMode.hardwareMap["limelight"] as Limelight3A
+    val limelight: Limelight3A = ActiveOpMode.hardwareMap["Limelight"] as Limelight3A
 
     // Variables to track latest LLResults and current pipeline
     lateinit var currentResult: LLResult

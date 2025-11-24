@@ -6,7 +6,7 @@ import dev.nextftc.hardware.impl.ServoEx
 // Subsystem to manage Hood
 object HoodSubsystem: Subsystem {
     // Definition of hardware
-    val hoodServo: ServoEx = ServoEx("hoodServo")
+    val hoodServo: ServoEx = ServoEx("hood")
 
     // Variables to track hood autoAim and hood position
     var hoodAutoAim: Boolean = false

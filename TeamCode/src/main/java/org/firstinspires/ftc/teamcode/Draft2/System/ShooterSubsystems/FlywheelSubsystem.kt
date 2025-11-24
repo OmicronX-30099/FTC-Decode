@@ -9,8 +9,8 @@ import dev.nextftc.hardware.impl.MotorEx
 // Subsystem to manage Flywheel
 object FlywheelSubsystem: Subsystem {
     // Declaration of hardware
-    val leftFlywheelMotor: MotorEx = MotorEx("leftFlywheelMotor")
-    val rightFlywheelMotor: MotorEx = MotorEx("rightFlywheelMotor")
+    val leftFlywheelMotor: MotorEx = MotorEx("fwl")
+    val rightFlywheelMotor: MotorEx = MotorEx("fwr")
     val flywheelMotors: MotorGroup = MotorGroup(rightFlywheelMotor, leftFlywheelMotor)
     // Flywheel default power when autoAim is off
     val standByPower: Double = 0.25

@@ -6,7 +6,7 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 
 object LimelightSubsystemLLT: Subsystem {
-    val limelight: Limelight3A = ActiveOpMode.hardwareMap["limelight"] as Limelight3A
+    val limelight: Limelight3A = ActiveOpMode.hardwareMap["Limelight"] as Limelight3A
 
     lateinit var latestResult: LLResult
 

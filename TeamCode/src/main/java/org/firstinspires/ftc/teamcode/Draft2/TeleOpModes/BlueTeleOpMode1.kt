@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Constants.Constants
 import org.firstinspires.ftc.teamcode.Util.Alliance
 
 @TeleOp(name = "Blue TeleOp V1")
-class BlueTeleOpMode1: NextFTCOpMode() {
+class  BlueTeleOpMode1: NextFTCOpMode() {
     init {
         addComponents(
     BindingsComponent,
