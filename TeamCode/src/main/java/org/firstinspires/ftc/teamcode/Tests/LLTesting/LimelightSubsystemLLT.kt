@@ -17,12 +17,20 @@ object LimelightSubsystemLLT: Subsystem {
     }
     fun calculateTurretAngle(turretTicks: Double): Double {
         var result = this.getResult()
-        var theta = -1 * result.tx
-        ActiveOpMode.telemetry.addData("neg tx", theta)
-        var ticks = (theta / 360) * (100 / 24) * 384.5
-        ActiveOpMode.telemetry.addData("ticks thingy", ticks)
-        ActiveOpMode.telemetry.addData("Limelight target", Math.round(this.normalizeTurret(ticks+turretTicks)).toDouble())
-        return Math.round(this.normalizeTurret(ticks+turretTicks)).toDouble()
+        if (result.isValid && result != null) {
+            var theta = -1 * result.tx
+            ActiveOpMode.telemetry.addData("neg tx", theta)
+            var ticks = (theta / 360) * (100 / 24) * 384.5
+            ActiveOpMode.telemetry.addData("ticks thingy", ticks)
+            ActiveOpMode.telemetry.addData(
+                "Limelight target",
+                Math.round(this.normalizeTurret(ticks + turretTicks)).toDouble()
+            )
+            return Math.round(this.normalizeTurret(ticks+turretTicks)).toDouble()
+        } else {
+            ActiveOpMode.telemetry.addData("invalide", "result")
+            return turretTicks
+        }
     }
     fun normalizeTurret(ticks: Double): Double {
         var normalized = ticks % (38450/24)
