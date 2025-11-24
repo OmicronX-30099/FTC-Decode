@@ -5,6 +5,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
+import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.NextFTCOpMode
@@ -22,8 +23,11 @@ class NewLLTest: NextFTCOpMode() {
     }
     lateinit var ll: Limelight3A
 
+    @JvmField
+    var turretPID = PIDCoefficients(0.0005,0.0,0.0)
+
     val turretControl: ControlSystem = ControlSystem.builder()
-        .posPid(0.005,0.0,0.0)
+        .posPid(turretPID)
         .build()
 
     var turretMotor: MotorEx = MotorEx("turret")
