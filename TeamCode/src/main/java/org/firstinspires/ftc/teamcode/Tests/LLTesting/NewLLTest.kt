@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Tests.LLTesting
 
+import com.bylazar.configurables.annotations.Configurable
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.control.ControlSystem
@@ -10,6 +11,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
 
+@Configurable
 @TeleOp(name="new thingy pls work")
 class NewLLTest: NextFTCOpMode() {
     init {
