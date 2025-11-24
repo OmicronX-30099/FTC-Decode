@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Tests.LLTesting
 import com.bylazar.configurables.annotations.Configurable
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.util.ElapsedTime
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -23,6 +24,8 @@ class NewLLTest: NextFTCOpMode() {
     }
     lateinit var ll: Limelight3A
 
+    lateinit var elapsedtime: ElapsedTime
+
     @JvmField
     var turretPID = PIDCoefficients(0.0005,0.0,0.0)
 
@@ -36,6 +39,9 @@ class NewLLTest: NextFTCOpMode() {
         ll = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "Limelight")
         ll.pipelineSwitch(1)
         ll.start()
+        elapsedtime = ElapsedTime()
+        elapsedtime.reset()
+
     }
 
     override fun onUpdate() {
@@ -48,6 +54,8 @@ class NewLLTest: NextFTCOpMode() {
                 turretControl.goal = KineticState(ticks + turretMotor.currentPosition)
         }
         turretMotor.power = turretControl.calculate(turretMotor.state)
+        telemetry.addData("Loop Times", elapsedtime.milliseconds());
+        elapsedtime.reset();
         telemetry.update()
     }
 }
