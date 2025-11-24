@@ -6,7 +6,7 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 
 object LimelightSubsystemLLT: Subsystem {
-    val limelight: Limelight3A = ActiveOpMode.hardwareMap["Limelight"] as Limelight3A
+    lateinit var limelight: Limelight3A
 
     lateinit var latestResult: LLResult
 
@@ -27,5 +27,9 @@ object LimelightSubsystemLLT: Subsystem {
     fun startLL() {
         limelight.pipelineSwitch(1)
         limelight.start()
+    }
+
+    override fun initialize() {
+        limelight = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "Limelight")
     }
 }

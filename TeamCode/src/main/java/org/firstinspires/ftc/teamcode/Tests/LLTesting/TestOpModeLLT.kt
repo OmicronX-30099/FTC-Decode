@@ -31,5 +31,6 @@ class  TestOpModeLLT: NextFTCOpMode() {
         var turretState = TurretSubsystemLLT.getTurretState()
         var turretTarget = LimelightSubsystemLLT.calculateTurretAngle(turretState.currentTurretPosition)
         TurretSubsystemLLT.setTurretPosition(turretTarget)
+        telemetry.update()
     }
 }

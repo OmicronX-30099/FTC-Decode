@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Draft1.System.ShooterSubsystems
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.Util.TurretState
 import kotlin.properties.Delegates
@@ -30,6 +31,7 @@ object TurretSubsystemLLT: Subsystem {
         if (turretAutoAim) {
             turretControl.goal = KineticState(turretPos)
             currentTurretPosition = turretPos
+            ActiveOpMode.telemetry.addData("Setting turret to:",currentTurretPosition)
         }
     }
     // Function to return current state of turret with position and auto aim
@@ -37,10 +39,6 @@ object TurretSubsystemLLT: Subsystem {
         return TurretState(currentTurretPosition, turretAutoAim)
     }
 
-    // Function to reset motor encoder on initialization
-    override fun initialize() {
-        turretMotor.zero()
-    }
     // Function to set power as calculated by control system
     override fun periodic() {
         turretMotor.power = turretControl.calculate(turretMotor.state)
