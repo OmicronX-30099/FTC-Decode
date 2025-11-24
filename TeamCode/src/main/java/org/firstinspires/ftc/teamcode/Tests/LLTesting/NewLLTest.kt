@@ -29,7 +29,7 @@ class NewLLTest: NextFTCOpMode() {
     @JvmField
     var turretPID = PIDCoefficients(0.0005,0.0,0.0)
 
-    val turretControl: ControlSystem = ControlSystem.builder()
+    var turretControl: ControlSystem = ControlSystem.builder()
         .posPid(turretPID)
         .build()
 
