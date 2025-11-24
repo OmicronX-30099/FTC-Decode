@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.feedback.PIDCoefficients
+import dev.nextftc.control.feedforward.BasicFeedforwardParameters
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.NextFTCOpMode
@@ -29,8 +30,12 @@ class NewLLTest: NextFTCOpMode() {
     @JvmField
     var turretPID = PIDCoefficients(0.0005,0.0,0.0)
 
+    @JvmField
+    var turretFF = BasicFeedforwardParameters(0.0,0.0,0.0)
+
     var turretControl: ControlSystem = ControlSystem.builder()
         .posPid(turretPID)
+        .basicFF(turretFF)
         .build()
 
     var turretMotor: MotorEx = MotorEx("turret")
