@@ -12,8 +12,9 @@ object RGBSubsystem: Subsystem {
         rgbLight.position = 1.0
     }
     override fun periodic() {
-        if (looper > 45) {
+        if (looper >= 200.0) {
             rgbLight.position = Math.random()
+            looper = 0.0
         } else {
             looper += 1
         }
