@@ -29,7 +29,8 @@ class FollowerTest: NextFTCOpMode() {
         drivetrain = PedroDriverControlled(
             -Gamepads.gamepad1.leftStickY,
             -Gamepads.gamepad1.leftStickX,
-            -Gamepads.gamepad1.rightStickX
+            -Gamepads.gamepad1.rightStickX,
+            true
         )
         drivetrain.schedule()
     }
