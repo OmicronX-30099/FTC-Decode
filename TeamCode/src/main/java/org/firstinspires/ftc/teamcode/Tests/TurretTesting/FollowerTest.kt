@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Tests.TurretTesting
 
 import com.pedropathing.geometry.Pose
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -12,6 +13,7 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.driving.DriverControlledCommand
 import kotlin.math.PI
 
+@TeleOp(name="Follower tester with rgb")
 class FollowerTest: NextFTCOpMode() {
     init {
         addComponents(
