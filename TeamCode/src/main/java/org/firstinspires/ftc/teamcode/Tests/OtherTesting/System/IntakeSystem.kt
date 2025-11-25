@@ -13,9 +13,10 @@ object IntakeSystem: SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem) {
             IntakeSubsystem.intakeCommand(0.0)
         )
 
+    val openGateCommand: Command = IntakeGateSubsystem.openGateCommand
+        
     fun engageVariableIntake(intakePower: Double): Command {
         return SequentialGroup(
-            IntakeGateSubsystem.openGateCommand,
             IntakeSubsystem.intakeCommand(intakePower)
         )
     }
