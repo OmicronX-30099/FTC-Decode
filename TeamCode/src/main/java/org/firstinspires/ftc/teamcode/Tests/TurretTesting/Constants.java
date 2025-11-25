@@ -24,7 +24,7 @@ public class Constants {
             .centripetalScaling(0.0005)
             ;
 
-    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 0.75, 1);
+    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 0.75, 3);
 
     public static MecanumConstants driveConstants = new MecanumConstants()
             .maxPower(1)

@@ -23,7 +23,7 @@ class IntakeTransferTest: NextFTCOpMode() {
         telemetry.update()
     }
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.rightTrigger.greaterThan(0.0))
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(IntakeSystem.openGateCommand)
             .whenTrue(IntakeSystem.engageVariableIntake(Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get()))
             .whenBecomesFalse(IntakeSystem.disengageIntake)
