@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Tests.TurretTesting
 
+import com.pedropathing.geometry.Pose
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -24,6 +25,7 @@ class FollowerTest: NextFTCOpMode() {
     lateinit var drivetrain: DriverControlledCommand
 
     override fun onStartButtonPressed() {
+        follower.setStartingPose(Pose(8.7, 8.9, Math.toRadians(90.0)))
         drivetrain = PedroDriverControlled(
             -Gamepads.gamepad1.leftStickY,
             -Gamepads.gamepad1.leftStickX,
