@@ -1,8 +1,19 @@
+import dev.nextftc.core.components.BindingsComponent
+import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.ftc.Gamepads
+import dev.nextftc.ftc.NextFTCOpMode
+import dev.nextftc.ftc.components.BulkReadComponent
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.IntakeSystem
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.IntakeSystems.IntakeGateSubsystem
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystem
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.KickerSubsystem
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.ShooterGateSubsystem
+
 class IntakeTransferTest: NextFTCOpMode() {
     init {
         addComponents(
             BindingsComponent,
-            BulkReadsComponent,
+            BulkReadComponent,
             SubsystemComponent(IntakeSystem, TransferSystem)
         )
     }
