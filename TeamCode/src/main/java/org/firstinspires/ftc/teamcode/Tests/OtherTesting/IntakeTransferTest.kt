@@ -5,10 +5,9 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.IntakeSystem
-import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.IntakeSystems.IntakeGateSubsystem
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.IntakeSystems.*
 import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystem
-import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.KickerSubsystem
-import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.ShooterGateSubsystem
+import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.*
 
 @TeleOp(name="Intake Test")
 class IntakeTransferTest: NextFTCOpMode() {
@@ -25,7 +24,7 @@ class IntakeTransferTest: NextFTCOpMode() {
     override fun onStartButtonPressed() {
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(IntakeSystem.openGateCommand)
-            .whenTrue(IntakeSystem.engageVariableIntake(Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get()))
+            .whenTrue{ IntakeSubsystem.intakeMotor.power = (Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get())) }
             .whenBecomesFalse(IntakeSystem.disengageIntake)
         Gamepads.gamepad1.rightBumper
             .whenBecomesTrue(TransferSystem.transferBallCommand)
