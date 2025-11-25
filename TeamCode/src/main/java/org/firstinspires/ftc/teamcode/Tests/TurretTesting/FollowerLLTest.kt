@@ -54,7 +54,7 @@ class FollowerLLTest: NextFTCOpMode() {
         }
         telemetry.addData("Follower","pose = " + follower.pose.toString())
         telemetry.addData("Follower","x = " + follower.pose.x.toString())
-        telemetry.addData("Follower","y = " + (follower.pose.y - ).toString())
+        //telemetry.addData("Follower","y = " + (follower.pose.y - ).toString())
         telemetry.addData("Follower","heading = " + (follower.pose.heading * (180/ PI)).toString())
     }
 }

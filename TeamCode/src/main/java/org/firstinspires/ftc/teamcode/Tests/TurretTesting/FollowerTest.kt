@@ -34,7 +34,6 @@ class FollowerTest: NextFTCOpMode() {
             -Gamepads.gamepad1.rightStickX,
             true
         )
-        drivetrain.
         drivetrain.schedule()
     }
 

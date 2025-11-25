@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.Tests.TurretTesting
 
+import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.ServoEx
-
+@Configurable
 object RGBSubsystem: Subsystem {
     val rgbLight: ServoEx = ServoEx("rgbl")
 
