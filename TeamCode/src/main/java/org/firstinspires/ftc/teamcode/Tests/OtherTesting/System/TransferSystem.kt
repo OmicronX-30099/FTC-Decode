@@ -13,9 +13,10 @@ object TransferSystem: SubsystemGroup(KickerSubsystem, ShooterGateSubsystem) {
         get() = SequentialGroup(
             ShooterGateSubsystem.gateReleaseCommand,
             KickerSubsystem.kickBallCommand,
-            Delay(0.2),
+            Delay(0.15),
             KickerSubsystem.resetKickerCommand,
-            ShooterGateSubsystem.gateBlockCommand
+            ShooterGateSubsystem.gateBlockCommand,
+            Delay(0.15)
         )
 
     override fun initialize() {
