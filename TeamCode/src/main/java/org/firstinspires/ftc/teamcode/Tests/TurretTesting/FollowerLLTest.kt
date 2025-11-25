@@ -31,6 +31,8 @@ class FollowerLLTest: NextFTCOpMode() {
 
     override fun onInit() {
         ll = hardwareMap.get(Limelight3A::class.java, "Limelight")
+        ll.pipelineSwitch(1)
+        ll.start()
     }
     override fun onStartButtonPressed() {
         follower.setStartingPose(Pose(8.7, 8.9, Math.toRadians(90.0)))
