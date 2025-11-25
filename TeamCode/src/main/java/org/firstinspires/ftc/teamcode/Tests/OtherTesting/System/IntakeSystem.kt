@@ -16,9 +16,7 @@ object IntakeSystem: SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem) {
     val openGateCommand: Command = IntakeGateSubsystem.openGateCommand
         
     fun engageVariableIntake(intakePower: Double): Command {
-        return SequentialGroup(
-            IntakeSubsystem.intakeCommand(intakePower)
-        )
+        return IntakeSubsystem.intakeCommand(intakePower)
     }
 
     override fun initialize() {
