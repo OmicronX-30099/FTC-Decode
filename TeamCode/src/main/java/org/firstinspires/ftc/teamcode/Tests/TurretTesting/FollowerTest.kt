@@ -9,6 +9,7 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.driving.DriverControlledCommand
+import kotlin.math.PI
 
 class FollowerTest: NextFTCOpMode() {
     init {
@@ -35,6 +36,6 @@ class FollowerTest: NextFTCOpMode() {
         telemetry.addData("Follower","pose = " + follower.pose.toString())
         telemetry.addData("Follower","x = " + follower.pose.x.toString())
         telemetry.addData("Follower","y = " + follower.pose.y.toString())
-        telemetry.addData("Follower","heading = " + follower.pose.heading.toString())
+        telemetry.addData("Follower","heading = " + (follower.pose.heading * (180/ PI)).toString())
     }
 }
