@@ -10,6 +10,7 @@ object IntakeSubsystem: Subsystem {
     val intakeMotor: MotorEx = MotorEx("intake")
 
     fun intakeCommand(intakePower: Double): Command {
+        ActiveOpMode.telemetry.addData("Debug", "intake thingy")
         return SetPower(intakeMotor, intakePower)
     }
 
