@@ -18,6 +18,15 @@ object TransferSystem: SubsystemGroup(KickerSubsystem, ShooterGateSubsystem) {
             ShooterGateSubsystem.gateBlockCommand,
             Delay(0.15)
         )
+    
+    val tripleShootSequence: Command
+        get() = SequentialGroup(
+            transferBallCommand,
+            Delay(0.3),
+            transferBallCommand,
+            Delay(0.3),
+            transferBallCommand
+        )
 
     override fun initialize() {
         ActiveOpMode.telemetry.addData("System", "TransferSystem initialized")
