@@ -9,7 +9,7 @@ object RGBSubsystem: Subsystem {
     var looper: Double = 0.0
 
     override fun initialize() {
-        rgbLight.position = 1.0
+        rgbLight.position = 0.5
     }
     override fun periodic() {
         if (looper >= 200.0) {
