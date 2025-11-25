@@ -47,14 +47,14 @@ class FollowerLLTest: NextFTCOpMode() {
         var result = ll.latestResult
         if (result != null && result.isValid) {
             telemetry.addData("Limelight", "Target Detected")
-            follower.setStartingPose(Pose(result.botpose.position.x, result.botpose.position.x, result.botpose.orientation.yaw))
-            telemetry.addData("Limelight", "Reset follower to = " + Pose(result.botpose.position.x, result.botpose.position.x, result.botpose.orientation.yaw).toString())
+
+            telemetry.addData("Limelight", "Reset follower to = ")
         } else {
             telemetry.addData("Limelight", "No targets detected")
         }
         telemetry.addData("Follower","pose = " + follower.pose.toString())
         telemetry.addData("Follower","x = " + follower.pose.x.toString())
-        telemetry.addData("Follower","y = " + follower.pose.y.toString())
+        telemetry.addData("Follower","y = " + (follower.pose.y - ).toString())
         telemetry.addData("Follower","heading = " + (follower.pose.heading * (180/ PI)).toString())
     }
 }

@@ -7,7 +7,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.powerable.SetPower
 
 object IntakeSubsystem: Subsystem {
-    val intakeMotor: MotorEx = MotorEx("intake", 0.0)
+    val intakeMotor: MotorEx = MotorEx("intake")
 
     fun intakeCommand(intakePower: Double): Command {
         return SetPower(intakeMotor, intakePower)
