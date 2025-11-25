@@ -1,3 +1,4 @@
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystem
 import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.KickerSubsystem
 import org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems.ShooterGateSubsystem
 
+@TeleOp(name="Intake Test")
 class IntakeTransferTest: NextFTCOpMode() {
     init {
         addComponents(
