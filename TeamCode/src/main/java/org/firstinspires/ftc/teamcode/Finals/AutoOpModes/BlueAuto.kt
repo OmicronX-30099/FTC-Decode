@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes
+package org.firstinspires.ftc.teamcode.Draft2.AutoOpModes
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
-import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
@@ -14,18 +14,19 @@ import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.teamcode.Constants.Constants
-import org.firstinspires.ftc.teamcode.Draft2.System.IntakeSystem
-import org.firstinspires.ftc.teamcode.Draft2.System.ShooterSystem
-import org.firstinspires.ftc.teamcode.Draft2.System.TransferSystem
+import org.firstinspires.ftc.teamcode.Finals.Constants
+import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
+import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import kotlin.math.PI
 
-class DanAuto: NextFTCOpMode() {
+
+@Autonomous(name = "Blue Auto")
+class BlueAuto: NextFTCOpMode() {
     init {
         addComponents(
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent(ShooterSystem, IntakeSystem),
+            SubsystemComponent(ShooterSystem, PassiveSystem),
             PedroComponent(Constants::createFollower)
         )
     }
@@ -129,40 +130,40 @@ class DanAuto: NextFTCOpMode() {
      */
     override fun onStartButtonPressed() {
         var main = SequentialGroup(
-            InstantCommand{ShooterSystem.switchAutoAim()},
+            ShooterSystem.autoAimOnCommand,
             // Section 1: First throwing of Artifacts
             FollowPath(PathArray[0],true,1.0),
             Delay(0.75),
-            IntakeSystem.fullIntakeCommand,
-            TransferSystem.tripleBallCommand,
+            PassiveSystem.maxIntakeCommand,
+            PassiveSystem.tripleShootSequence,
             // Section 1 End. Section 2: Grab 1st set of Artifacts and throw
-            InstantCommand{ShooterSystem.switchAutoAim()},
+            ShooterSystem.autoAimOffCommand,
             FollowPath(PathArray[1],true,0.7),
-            IntakeSystem.stopIntakeCommand,
+            PassiveSystem.stopIntakeCommand,
             FollowPath(PathArray[2],true,1.0),
-            InstantCommand{ShooterSystem.switchAutoAim()},
+            ShooterSystem.autoAimOnCommand,
             Delay(1.95),
             // start throwing
-            IntakeSystem.fullIntakeCommand,
-            TransferSystem.tripleBallCommand,
-            InstantCommand{ShooterSystem.switchAutoAim()},
+            PassiveSystem.maxIntakeCommand,
+            PassiveSystem.tripleShootSequence,
+            ShooterSystem.autoAimOffCommand,
             // Section 2 End. Section 3: Grab 2nd set of Artifacts and throw
             FollowPath(PathArray[3],true,1.0),
-            IntakeSystem.stopIntakeCommand,
+            PassiveSystem.stopIntakeCommand,
             FollowPath(PathArray[4],true,1.0),
-            InstantCommand{ShooterSystem.switchAutoAim()},
+            ShooterSystem.autoAimOnCommand,
             Delay(1.95),
             // start throwing
-            IntakeSystem.fullIntakeCommand,
-            TransferSystem.tripleBallCommand,
+            PassiveSystem.maxIntakeCommand,
+            PassiveSystem.tripleShootSequence,
             // Section 3 End. Section 4: Grab last set and throw.
             FollowPath(PathArray[5],true,1.0),
-            IntakeSystem.stopIntakeCommand,
+            PassiveSystem.stopIntakeCommand,
             FollowPath(PathArray[6],true,1.0),
             Delay(1.95),
             // throw balls
-            IntakeSystem.fullIntakeCommand,
-            TransferSystem.tripleBallCommand
+            PassiveSystem.maxIntakeCommand,
+            PassiveSystem.tripleShootSequence
             // Section 5 End.
         )
         main.schedule()

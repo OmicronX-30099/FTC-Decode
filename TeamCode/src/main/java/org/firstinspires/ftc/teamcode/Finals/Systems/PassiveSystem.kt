@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.KickerSubsys
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.ShooterGateSubsystem
 
 object PassiveSystem:
+    // System for Intake, Kicker, and Gate
     SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem, KickerSubsystem, ShooterGateSubsystem)
 {
     val openGateCommand: Command = InstantCommand { IntakeGateSubsystem.openGate() }
