@@ -28,10 +28,10 @@ public class Constants {
 
     public static MecanumConstants driveConstants = new MecanumConstants()
             .maxPower(1)
-            .rightFrontMotorName("frontRightDriveMotor")
-            .rightRearMotorName("backRightDriveMotor")
-            .leftRearMotorName("backLeftDriveMotor")
-            .leftFrontMotorName("frontLeftDriveMotor")
+            .rightFrontMotorName("fr")
+            .rightRearMotorName("br")
+            .leftRearMotorName("bl")
+            .leftFrontMotorName("fl")
             .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
             .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
             .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
@@ -45,7 +45,7 @@ public class Constants {
             .forwardPodY(2.85582677)
             .strafePodX(-6.986692913)
             .distanceUnit(DistanceUnit.INCH)
-            .hardwareMapName("pinpointOdometryComputer")
+            .hardwareMapName("pipi")
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
             .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
             .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED);
