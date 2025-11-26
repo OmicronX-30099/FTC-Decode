@@ -8,6 +8,7 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.extensions.pedro.PedroDriverControlled
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
@@ -56,6 +57,9 @@ class BlueTeleOpV1: NextFTCOpMode() {
     }
 
     override fun onUpdate() {
+        ActiveOpMode.telemetry.addData("Follower", "x = "+follower.pose.x.toString())
+        ActiveOpMode.telemetry.addData("Follower", "y = "+follower.pose.y.toString())
+        ActiveOpMode.telemetry.addData("Follower", "heading = "+follower.pose.heading.toString())
         telemetry.update()
     }
 }
