@@ -60,6 +60,17 @@ object PassiveSystem:
             positionBall,
             pushBallCommand
         )
+    val altTripleShootSequence: Command
+        get() = SequentialGroup(
+            this.openGateCommand,
+            maxIntakeCommand,
+            Delay(0.5),
+            stopIntakeCommand,
+            pushBallCommand,
+            maxIntakeCommand,
+            Delay(0.15),
+            pushBallCommand
+        )
 
     fun intake(intakePower: Double) {
         IntakeSubsystem.intake(intakePower)
