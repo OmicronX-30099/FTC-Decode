@@ -11,6 +11,7 @@ import dev.nextftc.extensions.pedro.PedroDriverControlled
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
+import dev.nextftc.ftc.components.LoopTimeComponent
 import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.*
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
@@ -21,6 +22,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
         addComponents(
             BulkReadComponent,
             BindingsComponent,
+            LoopTimeComponent(),
             SubsystemComponent(PassiveSystem,ShooterSystem,IndicatorSystem),
             PedroComponent(Constants::createFollower)
         )
