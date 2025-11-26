@@ -44,15 +44,19 @@ object PassiveSystem:
             InstantCommand { ShooterGateSubsystem.blockGate() },
             Delay(0.2)
         )
-    val tripleShootSequence: Command
+    val positionBall: Command
         get() = SequentialGroup(
             this.maxIntakeCommand,
-            Delay(0.5),
-            this.mediumIntakeCommand,
+            Delay(0.35),
+            this.stopIntakeCommand
+        )
+    val tripleShootSequence: Command
+        get() = SequentialGroup(
+            positionBall,
             pushBallCommand,
-            Delay(0.3),
+            positionBall,
             pushBallCommand,
-            Delay(0.325),
+            positionBall,
             pushBallCommand
         )
 
