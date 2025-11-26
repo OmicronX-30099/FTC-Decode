@@ -21,7 +21,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
         addComponents(
             BulkReadComponent,
             BindingsComponent,
-            SubsystemComponent(PassiveSystem,ShooterSystem),
+            SubsystemComponent(PassiveSystem,ShooterSystem,IndicatorSystem),
             PedroComponent(Constants::createFollower)
         )
     }
