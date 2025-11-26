@@ -1,13 +1,9 @@
-package org.firstinspires.ftc.teamcode.Tests.OtherTesting;
+package org.firstinspires.ftc.teamcode.Resources;
 
 import com.bylazar.configurables.annotations.Configurable;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.ServoImpl;
-
-import dev.nextftc.hardware.impl.ServoEx;
 
 @Configurable
 @TeleOp

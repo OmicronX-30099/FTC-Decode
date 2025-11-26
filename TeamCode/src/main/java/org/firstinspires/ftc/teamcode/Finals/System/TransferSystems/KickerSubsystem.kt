@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode.Tests.OtherTesting.System.TransferSystems
+package org.firstinspires.ftc.teamcode.Finals.System.TransferSystems
 
-import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
-@Configurable
+
 object KickerSubsystem: Subsystem {
     val kickerServo: ServoEx = ServoEx("kicker",-0.1)
 
