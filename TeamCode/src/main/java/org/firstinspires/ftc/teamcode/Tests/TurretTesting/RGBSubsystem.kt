@@ -6,7 +6,7 @@ import dev.nextftc.hardware.impl.ServoEx
 
 @Configurable
 object RGBSubsystem: Subsystem {
-    val rgbLight: ServoEx = ServoEx("rgbl")
+    val rgbLight: ServoEx = ServoEx("RGBLight1")
 
     var looper: Double = 0.0
 

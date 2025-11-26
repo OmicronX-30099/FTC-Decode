@@ -11,8 +11,8 @@ import dev.nextftc.hardware.impl.MotorEx
 
 @Configurable
 object FlywheelSubsystem: Subsystem {
-    val fwl: MotorEx = MotorEx("fwl")
-    val fwr: MotorEx = MotorEx("fwr")
+    val fwl: MotorEx = MotorEx("leftFlywheelMotor")
+    val fwr: MotorEx = MotorEx("rightFlywheelMotor")
     val fwm: MotorGroup = MotorGroup(fwr,fwl)
 
     @JvmField

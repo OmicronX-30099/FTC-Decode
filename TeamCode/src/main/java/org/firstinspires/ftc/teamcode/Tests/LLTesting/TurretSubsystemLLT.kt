@@ -10,7 +10,7 @@ import kotlin.properties.Delegates
 
 object TurretSubsystemLLT: Subsystem {
     // Definition of hardware
-    val turretMotor: MotorEx = MotorEx("turret")
+    val turretMotor: MotorEx = MotorEx("turretMotor")
     // Definition of control system with velocity pid
     val turretControl: ControlSystem = ControlSystem.builder()
         .posPid(0.0005,0.0,0.0)

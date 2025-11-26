@@ -7,7 +7,7 @@ import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 
 object TurretSubsystem: Subsystem {
-    val turretMotor: MotorEx = MotorEx("turret")
+    val turretMotor: MotorEx = MotorEx("turretMotor")
     val turretControl: ControlSystem = ControlSystem.builder()
         .posPid(0.01,0.0,0.005)
         .build()

@@ -10,7 +10,7 @@ import dev.nextftc.hardware.impl.MotorEx
 
 @Configurable
 object Testsubsys: Subsystem {
-    val turretMotor: MotorEx = MotorEx("turret")
+    val turretMotor: MotorEx = MotorEx("turretMotor")
 
     @JvmField
     var turretPID = PIDCoefficients(0.02,0.0,0.001)

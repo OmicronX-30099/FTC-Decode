@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- Robot -->
+<Robot type="FirstInspires-FTC">
+    <!-- Control Hub Portal -->
+    <LynxUsbDevice name="Control Hub Portal" serialNumber="(embedded)" parentModuleAddress="173">
+        <!-- Control Hub Module -->
+        <LynxModule name="Control Hub" port="173">
+            <!-- C Hub Motors -->
+            <goBILDA5202SeriesMotor name="intakeMotor" port="0" />
+            <goBILDA5202SeriesMotor name="frontLeftDriveMotor" port="1" />
+            <goBILDA5202SeriesMotor name="backLeftDriveMotor" port="2" />
+            <goBILDA5202SeriesMotor name="turretMotor" port="3" />
+
+            <!-- C Hub Servos -->
+            <Servo name="leftIntakeGateServo" port="0"/>
+            <Servo name="kickerServo" port="1"/>
+<!--        <Servo name="" port="2"/>    -->
+<!--        <Servo name="" port="3"/>    -->
+<!--        <Servo name="" port="4"/>    -->
+            <Servo name="shooterGateServo" port="5"/>
+
+            <!-- GoBilda pinpoint -->
+            <goBILDAPinpoint name="pinpointOdometryComputer" port="0" bus="3"/>
+
+        </LynxModule>
+
+        <!-- Expansion Hub Module -->
+        <LynxModule name="Expansion Hub 2" port="2">
+            <!-- E Hub Motors -->
+            <goBILDA5202SeriesMotor name="leftFlywheelMotor" port="0" />
+            <goBILDA5202SeriesMotor name="rightFlywheelMotor" port="1" />
+            <goBILDA5202SeriesMotor name="frontRightDriveMotor" port="2" />
+            <goBILDA5202SeriesMotor name="backRightDriveMotor" port="3" />
+
+            <!-- E Hub Servos -->
+            <Servo name="hoodServo" port="0"/>
+<!--        <Servo name="" port="2"/>    -->
+<!--        <Servo name="" port="2"/>    -->
+            <Servo name="RGBLight1" port="3"/>
+<!--        <Servo name="" port="4"/>    -->
+            <Servo name="rightIntakeGateServo" port="5"/>
+        </LynxModule>
+
+        <EthernetDevice name="limelightSmartCamera" port="0" ipAddress="172.29.0.1" serialNumber="EthernetOverUsb:eth0:172.29.0.25"/>
+
+    </LynxUsbDevice>
+</Robot>

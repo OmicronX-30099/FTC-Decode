@@ -43,6 +43,6 @@ object LimelightSubsystemLLT: Subsystem {
     }
 
     override fun initialize() {
-        limelight = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "Limelight")
+        limelight = ActiveOpMode.hardwareMap.get(Limelight3A::class.java, "limelightSmartCamera")
     }
 }

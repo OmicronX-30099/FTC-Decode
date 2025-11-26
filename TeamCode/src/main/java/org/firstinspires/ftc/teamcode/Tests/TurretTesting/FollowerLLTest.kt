@@ -29,7 +29,7 @@ class FollowerLLTest: NextFTCOpMode() {
     lateinit var drivetrain: DriverControlledCommand
 
     override fun onInit() {
-        ll = hardwareMap.get(Limelight3A::class.java, "Limelight")
+        ll = hardwareMap.get(Limelight3A::class.java, "limelightSmartCamera")
         ll.pipelineSwitch(1)
         ll.start()
     }

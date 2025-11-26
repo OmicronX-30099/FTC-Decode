@@ -7,8 +7,8 @@ import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPositions
 
 object IntakeGateSubsystem: Subsystem {
-    val leftGateServo: ServoEx = ServoEx("lgate",-0.1)
-    val rightGateServo: ServoEx = ServoEx("rgate",-0.1)
+    val leftGateServo: ServoEx = ServoEx("leftIntakeGateServo",-0.1)
+    val rightGateServo: ServoEx = ServoEx("rightIntakeGateServo",-0.1)
 
     var leftGateOpenPosition: Double = 0.0
     var leftGateClosePosition: Double = 0.5

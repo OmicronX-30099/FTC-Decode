@@ -7,7 +7,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
 
 object ShooterGateSubsystem: Subsystem {
-    val shooterGateServo: ServoEx = ServoEx("sgate",-0.1)
+    val shooterGateServo: ServoEx = ServoEx("shooterGateServo",-0.1)
 
     var gateBlockingPosition: Double = 0.2
     var gateReleasedPosition: Double = 0.3

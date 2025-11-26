@@ -6,7 +6,7 @@ import dev.nextftc.hardware.impl.ServoEx
 
 @Configurable
 object HoodSubsystem: Subsystem {
-    val hoodServo: ServoEx = ServoEx("hood",-0.1)
+    val hoodServo: ServoEx = ServoEx("hoodServo",-0.1)
 
     @JvmField
     var hoodPos: Double = 0.0;
