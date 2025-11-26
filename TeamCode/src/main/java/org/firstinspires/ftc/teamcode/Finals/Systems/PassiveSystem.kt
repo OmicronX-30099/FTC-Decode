@@ -49,9 +49,9 @@ object PassiveSystem:
             InstantCommand { this.intake(1.0) },
             Delay(0.5),
             pushBallCommand,
-            Delay(0.15),
+            Delay(0.3),
             pushBallCommand,
-            Delay(0.175),
+            Delay(0.325),
             pushBallCommand
         )
 
