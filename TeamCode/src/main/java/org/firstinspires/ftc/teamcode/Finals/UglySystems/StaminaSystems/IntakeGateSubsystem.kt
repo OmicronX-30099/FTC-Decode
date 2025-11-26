@@ -14,8 +14,14 @@ object IntakeGateSubsystem: Subsystem {
     var rightGateOpenPosition: Double = 1.0
     var rightGateClosePosition: Double = 0.5
 
-    val openGateCommand: Command = SetPositions(leftGateServo to leftGateOpenPosition, rightGateServo to rightGateOpenPosition).requires(this)
-    val closeGateCommand: Command = SetPositions(leftGateServo to leftGateClosePosition, rightGateServo to rightGateClosePosition).requires(this)
+    fun openGate() {
+        leftGateServo.position = leftGateOpenPosition
+        rightGateServo.position = rightGateOpenPosition
+    }
+    fun closeGate() {
+        leftGateServo.position = leftGateClosePosition
+        rightGateServo.position = rightGateClosePosition
+    }
 
     override fun initialize() {
         leftGateServo.position = leftGateClosePosition
