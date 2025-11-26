@@ -51,6 +51,8 @@ class FollowerLLTest: NextFTCOpMode() {
             var adjusted_x = (result.botpose.position.x * (100/2.54)+72) + Math.cos(follower.pose.heading) * 4
             follower.setStartingPose(Pose(adjusted_x,adjusted_y,follower.pose.heading))
             telemetry.addData("Limelight", "Reset follower to = " + Pose(adjusted_x,adjusted_y,Math.toDegrees(follower.pose.heading)))
+            telemetry.addData("llx", (result.botpose.position.y * (100 / 2.54)) + 72)
+            telemetry.addData("lly", (result.botpose.position.x * (100 / 2.54) * -1) + 72)
         } else {
             telemetry.addData("Limelight", "No targets detected")
         }
