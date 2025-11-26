@@ -9,6 +9,7 @@ import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.HoodSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.TurretSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 import kotlin.math.atan2
 
@@ -33,7 +34,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         var quadCoeffB: Double = (flywheelEquationB * hoodPosition) + flywheelEquationE
         var quadCoeffC: Double = (flywheelEquationA * hoodPosition * hoodPosition) + (flywheelEquationD * hoodPosition) + (flywheelEquationF - distanceFromGoal)
         var discriminant: Double = (quadCoeffB * quadCoeffB) - (4 * quadCoeffA * quadCoeffC)
-        var velocity = (-1 * quadCoeffB - Math.sqrt(discriminant)) / (2 * quadCoeffA)
+        var velocity = (-1 * quadCoeffB + Math.sqrt(discriminant)) / (2 * quadCoeffA)
         FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,velocity)
     }
     fun calibrateTurret(currPose: Pose) {
@@ -57,6 +58,10 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     fun autoAimOff() {
         fullAutoAim = false
         FlywheelSubsystem.flywheelAutoAim = false
+    }
+
+    fun setAlliance(alliance: Alliance) {
+        this.goalPose = alliance.goalPose
     }
 
     override fun periodic() {

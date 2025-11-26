@@ -13,9 +13,10 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.*
+import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
-@TeleOp(name="TeleOp V1")
-class TeleOpV1: NextFTCOpMode() {
+@TeleOp(name="Blue TeleOp V1")
+class BlueTeleOpV1: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
@@ -29,6 +30,7 @@ class TeleOpV1: NextFTCOpMode() {
 
     override fun onInit() {
         follower.setStartingPose(Pose(24.0,72.0,Math.toRadians(90.0)))
+        ShooterSystem.setAlliance(Alliance.BLUE)
     }
     override fun onStartButtonPressed() {
         drivetrain = PedroDriverControlled(
