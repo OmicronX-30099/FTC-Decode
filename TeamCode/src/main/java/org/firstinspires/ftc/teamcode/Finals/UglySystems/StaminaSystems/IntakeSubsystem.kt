@@ -9,10 +9,7 @@ import dev.nextftc.hardware.powerable.SetPower
 object IntakeSubsystem: Subsystem {
     val intakeMotor: MotorEx = MotorEx("intake")
 
-    fun intakeCommand(intakePower: Double): Command {
-        ActiveOpMode.telemetry.addData("Debug", "intake thingy")
-        return SetPower(intakeMotor, intakePower)
-    }
+    fun intake(intakePower: Double) { intakeMotor.power = intakePower } 
 
     override fun initialize() {
     }
