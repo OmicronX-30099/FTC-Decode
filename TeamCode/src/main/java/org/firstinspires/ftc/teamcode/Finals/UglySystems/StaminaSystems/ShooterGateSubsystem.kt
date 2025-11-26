@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems
+package org.firstinspires.ftc.teamcode.Finals.UglySystems.StaminaSystems
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
@@ -11,8 +11,8 @@ object ShooterGateSubsystem: Subsystem {
     var gateBlockingPosition: Double = 0.2
     var gateReleasedPosition: Double = 0.3
 
-    val gateBlockCommand: Command = SetPosition(shooterGateServo,gateBlockingPosition).requires(this)
-    val gateReleaseCommand: Command = SetPosition(shooterGateServo,gateReleasedPosition).requires(this)
+    fun blockGate() { shooterGateServo.position = gateBlockingPosition }
+    fun releaseGate() { shooterGateServo.position = gateReleasedPosition }
 
     override fun initialize() {
         shooterGateServo.position = gateBlockingPosition
