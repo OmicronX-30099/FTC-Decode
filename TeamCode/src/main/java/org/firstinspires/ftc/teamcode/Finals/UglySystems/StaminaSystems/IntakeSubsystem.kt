@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems
+package org.firstinspires.ftc.teamcode.Finals.UglySystems.StaminaSystems
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
