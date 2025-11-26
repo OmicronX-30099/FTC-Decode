@@ -6,6 +6,7 @@ import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
+import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.HoodSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.TurretSubsystem
@@ -41,6 +42,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         var angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
         var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
         TurretSubsystem.turretControl.goal = KineticState(Math.round(ticks).toDouble())
+        ActiveOpMode.telemetry.addData("Turret", ticks)
     }
     fun calibrateHood(currPose: Pose) {
         var distanceFromGoal: Double = currPose.distanceFrom(goalPose)

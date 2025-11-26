@@ -54,4 +54,8 @@ class BlueTeleOpV1: NextFTCOpMode() {
             .whenBecomesTrue { ShooterSystem.autoAimOn() }
             .whenBecomesFalse { ShooterSystem.autoAimOff() }
     }
+
+    override fun onUpdate() {
+        telemetry.update()
+    }
 }
