@@ -42,7 +42,8 @@
             <Servo name="rightIntakeGateServo" port="5"/>
         </LynxModule>
 
-        <EthernetDevice name="limelightSmartCamera" port="0" ipAddress="172.29.0.1" serialNumber="EthernetOverUsb:eth0:172.29.0.25"/>
-
     </LynxUsbDevice>
+
+    <EthernetDevice name="limelightSmartCamera" port="0" ipAddress="172.29.0.1" serialNumber="EthernetOverUsb:eth0:172.29.0.25"/>
+
 </Robot>
