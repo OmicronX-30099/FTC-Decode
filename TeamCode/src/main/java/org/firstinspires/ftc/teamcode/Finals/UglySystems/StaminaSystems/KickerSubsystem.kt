@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems
+package org.firstinspires.ftc.teamcode.Finals.UglySystems.StaminaSystems
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
@@ -11,8 +11,8 @@ object KickerSubsystem: Subsystem {
     var kickBallPosition: Double = 0.2
     var kickerResetPosition: Double = 0.02
 
-    val kickBallCommand: Command = SetPosition(kickerServo,kickBallPosition).requires(this)
-    val resetKickerCommand: Command = SetPosition(kickerServo,kickerResetPosition).requires(this)
+    fun kickBall() { kickerServo.position = kickBallPosition }
+    fun resetKicker() { kickerServo.position = kickerResetPosition }
 
     override fun initialize() {
         kickerServo.position = kickerResetPosition
