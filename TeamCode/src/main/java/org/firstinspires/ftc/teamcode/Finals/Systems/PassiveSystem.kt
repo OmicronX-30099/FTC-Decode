@@ -27,7 +27,7 @@ object PassiveSystem:
         )
     val mediumIntakeCommand: Command
         get() = SequentialGroup(
-            InstantCommand{ IntakeSubsystem.intake(0.5) },
+            InstantCommand{ IntakeSubsystem.intake(0.4) },
             InstantCommand { IntakeGateSubsystem.openGate() }
         )
     val stopIntakeCommand: Command
