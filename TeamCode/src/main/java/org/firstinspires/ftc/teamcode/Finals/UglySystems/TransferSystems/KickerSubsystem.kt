@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.Finals.System.TransferSystems
+package org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPosition
 
@@ -17,7 +16,5 @@ object KickerSubsystem: Subsystem {
 
     override fun initialize() {
         kickerServo.position = kickerResetPosition
-        ActiveOpMode.telemetry.addData("KickerSubsystem", "kickerPosition = " + kickerServo.position.toString())
-        ActiveOpMode.telemetry.addData("System", "KickerSubsystem Initialized")
     }
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Tests.ShooterTuning
+package org.firstinspires.ftc.teamcode.Resources.ShooterTuning
 
 import com.bylazar.telemetry.PanelsTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp

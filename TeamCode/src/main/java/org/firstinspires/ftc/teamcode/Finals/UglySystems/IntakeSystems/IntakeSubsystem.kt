@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.System.IntakeSystems
+package org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
@@ -15,6 +15,5 @@ object IntakeSubsystem: Subsystem {
     }
 
     override fun initialize() {
-        ActiveOpMode.telemetry.addData("System", "IntakeSubsystem initialized")
     }
 }

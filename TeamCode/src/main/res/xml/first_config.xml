@@ -44,6 +44,4 @@
 
     </LynxUsbDevice>
 
-    <EthernetDevice name="limelightSmartCamera" port="0" ipAddress="172.29.0.1" serialNumber="EthernetOverUsb:eth0:172.29.0.25"/>
-
 </Robot>

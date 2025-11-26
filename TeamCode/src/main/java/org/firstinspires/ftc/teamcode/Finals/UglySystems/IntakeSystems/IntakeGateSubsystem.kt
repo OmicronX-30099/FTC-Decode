@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.Finals.System.IntakeSystems
+package org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems
 
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.positionable.SetPositions
 
@@ -21,8 +20,5 @@ object IntakeGateSubsystem: Subsystem {
     override fun initialize() {
         leftGateServo.position = leftGateClosePosition
         rightGateServo.position = rightGateClosePosition
-        ActiveOpMode.telemetry.addData("IntakeGateSubsystem", "leftGatePosition = " + leftGateServo.position.toString())
-        ActiveOpMode.telemetry.addData("IntakeGateSubsystem", "rightGatePosition = " + rightGateServo.position.toString())
-        ActiveOpMode.telemetry.addData("System","IntakeGateSubsystem initialized")
     }
 }

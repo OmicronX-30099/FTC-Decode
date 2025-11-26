@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Tests.ShooterTuning
+package org.firstinspires.ftc.teamcode.Resources.ShooterTuning
 
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.control.ControlSystem

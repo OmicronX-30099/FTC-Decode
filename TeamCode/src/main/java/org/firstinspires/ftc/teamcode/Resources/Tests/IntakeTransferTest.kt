@@ -1,15 +1,17 @@
+package org.firstinspires.ftc.teamcode.Resources.Tests
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.teamcode.Finals.System.TransferSystems.ShooterGateSubsystem
-import org.firstinspires.ftc.teamcode.Finals.System.IntakeSystem
-import org.firstinspires.ftc.teamcode.Finals.System.IntakeSystems.IntakeGateSubsystem
-import org.firstinspires.ftc.teamcode.Finals.System.IntakeSystems.IntakeSubsystem
-import org.firstinspires.ftc.teamcode.Finals.System.TransferSystems.KickerSubsystem
-import org.firstinspires.ftc.teamcode.Finals.System.TransferSystem
+import org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystem
+import org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems.IntakeGateSubsystem
+import org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems.IntakeSubsystem
+import org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystem
+import org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems.KickerSubsystem
+import org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems.ShooterGateSubsystem
 
 @TeleOp(name="Intake Test")
 class IntakeTransferTest: NextFTCOpMode() {
