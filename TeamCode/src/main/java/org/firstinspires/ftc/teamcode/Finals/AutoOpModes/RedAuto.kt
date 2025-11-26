@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 
 
-@Autonomous(name = "Blue Auto")
-class BlueAuto: NextFTCOpMode() {
+@Autonomous(name = "Red Auto")
+class RedAuto: NextFTCOpMode() {
     init {
         addComponents(
             BindingsComponent,
@@ -36,7 +36,7 @@ class BlueAuto: NextFTCOpMode() {
     override fun onInit() {
         createPaths()
         follower.setStartingPose(Pose(32.4, 134.05, PI))
-        ShooterSystem.setAlliance(Alliance.BLUE)
+        ShooterSystem.setAlliance(Alliance.RED)
         /*
         telemetry.addData("Autoaim: ", ShooterSystem.)
         telemetry.addData("FLywheel Goal", ShooterSystem.FLYWHEEL_GOAL)
@@ -49,20 +49,20 @@ class BlueAuto: NextFTCOpMode() {
         PathArray += follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(32.400, 134.050), Pose(48.000, 96.000))
+                BezierLine(Pose(111.600, 134.050), Pose(96.000, 96.000))
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
 
         PathArray += follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(48.000, 96.000),
-                    Pose(76.600, 77.850),
-                    Pose(-48.500, 85.000),
-                    Pose(71.400, 75.000),
-                    Pose(19.750, 77.000)
+                    Pose(96.000, 96.000),
+                    Pose(67.400, 77.850),
+                    Pose(192.500, 85.000),
+                    Pose(72.600, 75.000),
+                    Pose(124.250, 77.000)
                     /*
                     Pose(96.000, 96.000),
                     Pose(87.650, 77.85),
@@ -72,58 +72,58 @@ class BlueAuto: NextFTCOpMode() {
                     */
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
 
         PathArray += follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(19.750, 77.000), Pose(48.000, 96.000))
+                BezierLine(Pose(124.250, 77.000), Pose(96.000, 96.000))
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        PathArray += follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(48.000, 96.000),
-                    Pose(69.000, 61.350),
-                    Pose(12.000, 57.000)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        PathArray += follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(Pose(12.000, 57.000),
-                    Pose(46.000,60.000),
-                    Pose(48.000, 96.000)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
 
         PathArray += follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(48.000, 96.000),
-                    Pose(44.000, 23.000),
-                    Pose(12.000, 35.500)
+                    Pose(96.000, 96.000),
+                    Pose(75.000, 61.350),
+                    Pose(132.000, 57.000)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
 
         PathArray += follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(12.000, 35.500), Pose(48.000, 96.000))
+                BezierCurve(Pose(132.000, 57.000),
+                    Pose(98.000,60.000),
+                    Pose(96.000, 96.000)
+                )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(135.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
+            .build()
+
+        PathArray += follower
+            .pathBuilder()
+            .addPath(
+                BezierCurve(
+                    Pose(96.000, 96.000),
+                    Pose(80.000, 23.000),
+                    Pose(132.000, 35.500)
+                )
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
+            .build()
+
+        PathArray += follower
+            .pathBuilder()
+            .addPath(
+                BezierLine(Pose(132.000, 35.500), Pose(96.000, 96.000))
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
     }
     /*
