@@ -46,6 +46,8 @@ object PassiveSystem:
         )
     val tripleShootSequence: Command
         get() = SequentialGroup(
+            InstantCommand { this.intake(1.0) },
+            Delay(0.5),
             pushBallCommand,
             Delay(0.15),
             pushBallCommand,
