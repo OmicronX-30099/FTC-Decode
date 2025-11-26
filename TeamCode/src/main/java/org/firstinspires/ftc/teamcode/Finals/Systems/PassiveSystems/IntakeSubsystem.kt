@@ -1,10 +1,7 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems.StaminaSystems
+package org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems
 
-import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
-import dev.nextftc.hardware.powerable.SetPower
 
 object IntakeSubsystem: Subsystem {
     val intakeMotor: MotorEx = MotorEx("intake")

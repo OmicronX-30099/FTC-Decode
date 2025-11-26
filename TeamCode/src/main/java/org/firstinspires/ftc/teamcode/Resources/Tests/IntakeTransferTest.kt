@@ -6,12 +6,12 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystem
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems.IntakeGateSubsystem
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.IntakeSystems.IntakeSubsystem
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystem
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems.KickerSubsystem
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.TransferSystems.ShooterGateSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Core.IntakeSystem
+import org.firstinspires.ftc.teamcode.Finals.Core.IntakeSystems.IntakeGateSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Core.IntakeSystems.IntakeSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Core.TransferSystem
+import org.firstinspires.ftc.teamcode.Finals.Core.TransferSystems.KickerSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Core.TransferSystems.ShooterGateSubsystem
 
 @TeleOp(name="Intake Test")
 class IntakeTransferTest: NextFTCOpMode() {

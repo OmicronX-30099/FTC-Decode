@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems.ShooterSystems
+package org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems
 
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.feedback.PIDCoefficients

@@ -1,32 +1,30 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems
+package org.firstinspires.ftc.teamcode.Finals.Systems
 
 import com.pedropathing.geometry.Pose
 import dev.nextftc.control.KineticState
+import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
-import org.firstinspires.ftc.teamcode.Finals.UglySystems.ShooterSystems.*
+import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.HoodSubsystem
+import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.TurretSubsystem
 import kotlin.math.PI
 import kotlin.math.atan2
 
 object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSubsystem) {
-    val flywheelEquationA: Double = 0.0;
-    val flywheelEquationB: Double = 0.0;
-    val flywheelEquationC: Double = 0.0;
-    val flywheelEquationD: Double = 0.0;
-    val flywheelEquationE: Double = 0.0;
-    val flywheelEquationF: Double = 0.0;
-    val goalPose = Pose(0.0,141.0)
+    val autoAimOnCommand: Command = InstantCommand { this.autoAimOn() }
+    val autoAimOffCommand: Command = InstantCommand { this.autoAimOff() }
+
+    val flywheelEquationA: Double = -24.993970450383305
+    val flywheelEquationB: Double = -0.07154455960209152
+    val flywheelEquationC: Double = 0.00019278705563574583
+    val flywheelEquationD: Double = 116.26277827556967
+    val flywheelEquationE: Double = -0.272675259634784
+    val flywheelEquationF: Double = 122.99485320234648
+    lateinit var goalPose: Pose
 
     var fullAutoAim: Boolean = false
-
-    fun autoAimOn() {
-        fullAutoAim = true
-        FlywheelSubsystem.flywheelAutoAim = true
-    }
-    fun autoAimOff() {
-        fullAutoAim = false
-        FlywheelSubsystem.flywheelAutoAim = false
-    }
 
     fun calibrateFlywheel(currPose: Pose) {
         var distanceFromGoal: Double = currPose.distanceFrom(goalPose)
@@ -50,6 +48,15 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
             in 0.5..<  1.0 -> HoodSubsystem.hoodServo.position = 0.65
             else              -> HoodSubsystem.hoodServo.position = 1.0
         }
+    }
+
+    fun autoAimOn() {
+        fullAutoAim = true
+        FlywheelSubsystem.flywheelAutoAim = true
+    }
+    fun autoAimOff() {
+        fullAutoAim = false
+        FlywheelSubsystem.flywheelAutoAim = false
     }
 
     override fun periodic() {

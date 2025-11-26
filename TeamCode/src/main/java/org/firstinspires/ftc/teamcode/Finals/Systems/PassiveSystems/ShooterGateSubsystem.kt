@@ -1,9 +1,7 @@
-package org.firstinspires.ftc.teamcode.Finals.UglySystems.StaminaSystems
+package org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems
 
-import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.ServoEx
-import dev.nextftc.hardware.positionable.SetPosition
 
 object ShooterGateSubsystem: Subsystem {
     val shooterGateServo: ServoEx = ServoEx("shooterGateServo",-0.1)
