@@ -4,7 +4,7 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.MotorEx
 
 object IntakeSubsystem: Subsystem {
-    val intakeMotor: MotorEx = MotorEx("intake")
+    val intakeMotor: MotorEx = MotorEx("intakeMotor")
 
     fun intake(intakePower: Double) { intakeMotor.power = intakePower } 
 

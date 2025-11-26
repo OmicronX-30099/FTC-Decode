@@ -45,8 +45,8 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     fun calibrateHood(currPose: Pose) {
         var distanceFromGoal: Double = currPose.distanceFrom(goalPose)
         when (distanceFromGoal) {
-            in 0.0..<  0.5 -> HoodSubsystem.hoodServo.position = 0.0
-            in 0.5..<  1.0 -> HoodSubsystem.hoodServo.position = 0.65
+            in 0.0..< 63.0 -> HoodSubsystem.hoodServo.position = 0.0
+            in 63.0..<  105.0 -> HoodSubsystem.hoodServo.position = 0.65
             else              -> HoodSubsystem.hoodServo.position = 1.0
         }
     }

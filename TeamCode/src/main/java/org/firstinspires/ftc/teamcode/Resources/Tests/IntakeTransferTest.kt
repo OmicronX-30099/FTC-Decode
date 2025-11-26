@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Resources.Tests
+/*package org.firstinspires.ftc.teamcode.Resources.Tests
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
@@ -49,4 +49,4 @@ class IntakeTransferTest: NextFTCOpMode() {
             .whenBecomesTrue(ShooterGateSubsystem.gateReleaseCommand)
             .whenBecomesFalse(ShooterGateSubsystem.gateBlockCommand)
     }
-}
+}*/
