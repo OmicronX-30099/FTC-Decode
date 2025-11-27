@@ -26,6 +26,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     const val flywheelEquationD: Double = 116.26277827556967
     const val flywheelEquationE: Double = -0.272675259634784
     const val flywheelEquationF: Double = 122.99485320234648
+    const val turretTicksPerRev: Double = (38450.0/24.0)
     lateinit var goalPose: Pose
 
     var fullAutoAim: Boolean = false
@@ -42,7 +43,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     }
     fun calibrateTurret(currPose: Pose) {
         val angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
-        var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100.0/24.0) * 384.5 * -1
+        var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * turretTicksPerRev * -1
         ticks = normalizeTo360(ticks)
         TurretSubsystem.turretControl.goal = KineticState(round(ticks))
         ActiveOpMode.telemetry.addData("Turret", "rawAngle = $angle")
@@ -51,26 +52,26 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     //[0,360) range
     fun normalizeTo360(ticks: Double): Double {
         if (ticks < 0) {
-            var ticks = ticks + (38450.0/24.0)
+            var ticks = ticks + turretTicksPerRev
         }
-        return ticks % (38450.0/24.0)
+        return ticks % (turretTicksPerRev)
     }
     //(-360,0] range
     fun normalizeToNeg360(ticks: Double): Double {
         if (ticks > 0) {
-            var ticks = ticks - (38450.0/24.0)
+            var ticks = ticks - (turretTicksPerRev)
         }
-        return ticks % (38450.0/24.0)
+        return ticks % (turretTicksPerRev)
     }
     //(-180,180] range
     fun normalizeTo180(ticks: Double): Double {
         var ticks = ticks
         if (ticks < 0) {
-            ticks = ticks + (38450.0/24.0)
+            ticks = ticks + (turretTicksPerRev)
         }
-        ticks %= (38450.0/24.0)
-        if (ticks > (38450.0/48.0)) {
-            ticks -= (38450.0/24.0)
+        ticks %= (turretTicksPerRev)
+        if (ticks > (turretTicksPerRev/2.0)) {
+            ticks -= (turretTicksPerRev)
         }
         return ticks
     }
