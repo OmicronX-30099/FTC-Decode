@@ -32,12 +32,14 @@ class BlueTeleOpV1: NextFTCOpMode() {
             PedroComponent(Constants::createFollower)
         )
     }
-
+    companion object {
+        lateinit var startPose: Pose
+    }
     lateinit var drivetrain: DriverControlledCommand
     lateinit var alliance: Alliance
 
     override fun onInit() {
-        follower.setStartingPose(Pose(27.3125+8.7,141-8.9-1,Math.toRadians(90.0)))
+        follower.setStartingPose(BlueTeleOpV1.startPose)
         this.alliance = Alliance.BLUE
         ShooterSystem.setAlliance(this.alliance)
     }

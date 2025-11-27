@@ -18,6 +18,7 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 
@@ -159,5 +160,8 @@ class Blue12AutoClose: NextFTCOpMode() {
         Paths += pickupThird
         Paths += shootThird
         Paths += leavePath
+    }
+    override fun onStop() {
+        BlueTeleOpV1.startPose = follower.pose
     }
 }
