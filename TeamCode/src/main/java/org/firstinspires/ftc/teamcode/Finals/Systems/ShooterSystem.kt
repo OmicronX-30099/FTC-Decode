@@ -44,24 +44,10 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     fun calibrateTurret(currPose: Pose) {
         val angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
         var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * turretTicksPerRev * -1
-        ticks = normalizeTo360(ticks)
+        ticks = normalizeTo180(ticks)
         TurretSubsystem.turretControl.goal = KineticState(round(ticks))
         ActiveOpMode.telemetry.addData("Turret", "rawAngle = $angle")
         ActiveOpMode.telemetry.addData("Turret", "ticks = $ticks")
-    }
-    //[0,360) range
-    fun normalizeTo360(ticks: Double): Double {
-        if (ticks < 0) {
-            var ticks = ticks + turretTicksPerRev
-        }
-        return ticks % (turretTicksPerRev)
-    }
-    //(-360,0] range
-    fun normalizeToNeg360(ticks: Double): Double {
-        if (ticks > 0) {
-            var ticks = ticks - (turretTicksPerRev)
-        }
-        return ticks % (turretTicksPerRev)
     }
     //(-180,180] range
     fun normalizeTo180(ticks: Double): Double {

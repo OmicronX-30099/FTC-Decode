@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 
 
-@Autonomous(name = "Blue Auto")
+@Autonomous(name = "Dan Blue Auto")
 class BlueAuto: NextFTCOpMode() {
     init {
         addComponents(
