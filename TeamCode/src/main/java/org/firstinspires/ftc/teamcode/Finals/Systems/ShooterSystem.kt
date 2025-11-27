@@ -48,21 +48,21 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         ActiveOpMode.telemetry.addData("Turret", "rawAngle = $angle")
         ActiveOpMode.telemetry.addData("Turret", "ticks = $ticks")
     }
-    //[0,360] range
+    //[0,360) range
     fun normalizeTo360(ticks: Double): Double {
         if (ticks < 0) {
             var ticks = ticks + (38450.0/24.0)
         }
         return ticks % (38450.0/24.0)
     }
-    //[-360,0] range
+    //(-360,0] range
     fun normalizeToNeg360(ticks: Double): Double {
         if (ticks > 0) {
             var ticks = ticks - (38450.0/24.0)
         }
         return ticks % (38450.0/24.0)
     }
-    //[-180,180] range
+    //(-180,180] range
     fun normalizeTo180(ticks: Double): Double {
         var ticks = ticks
         if (ticks < 0) {
