@@ -13,39 +13,41 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.TurretSubsys
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 import kotlin.math.atan2
+import kotlin.math.round
+import kotlin.math.sqrt
 
 object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSubsystem) {
     val autoAimOnCommand: Command = InstantCommand { this.autoAimOn() }
     val autoAimOffCommand: Command = InstantCommand { this.autoAimOff() }
 
-    val flywheelEquationA: Double = -24.993970450383305
-    val flywheelEquationB: Double = -0.07154455960209152
-    val flywheelEquationC: Double = 0.00019278705563574583
-    val flywheelEquationD: Double = 116.26277827556967
-    val flywheelEquationE: Double = -0.272675259634784
-    val flywheelEquationF: Double = 122.99485320234648
+    const val flywheelEquationA: Double = -24.993970450383305
+    const val flywheelEquationB: Double = -0.07154455960209152
+    const val flywheelEquationC: Double = 0.00019278705563574583
+    const val flywheelEquationD: Double = 116.26277827556967
+    const val flywheelEquationE: Double = -0.272675259634784
+    const val flywheelEquationF: Double = 122.99485320234648
     lateinit var goalPose: Pose
 
     var fullAutoAim: Boolean = false
 
     fun calibrateFlywheel(currPose: Pose) {
-        var distanceFromGoal: Double = currPose.distanceFrom(goalPose)
-        var hoodPosition: Double = HoodSubsystem.hoodServo.position
-        var quadCoeffA: Double = flywheelEquationC
-        var quadCoeffB: Double = (flywheelEquationB * hoodPosition) + flywheelEquationE
-        var quadCoeffC: Double = (flywheelEquationA * hoodPosition * hoodPosition) + (flywheelEquationD * hoodPosition) + (flywheelEquationF - distanceFromGoal)
-        var discriminant: Double = (quadCoeffB * quadCoeffB) - (4 * quadCoeffA * quadCoeffC)
-        var velocity = (-1 * quadCoeffB + Math.sqrt(discriminant)) / (2 * quadCoeffA)
+        val distanceFromGoal: Double = currPose.distanceFrom(goalPose)
+        val hoodPosition: Double = HoodSubsystem.hoodServo.position
+        val quadCoeffA: Double = flywheelEquationC
+        val quadCoeffB: Double = (flywheelEquationB * hoodPosition) + flywheelEquationE
+        val quadCoeffC: Double = (flywheelEquationA * hoodPosition * hoodPosition) + (flywheelEquationD * hoodPosition) + (flywheelEquationF - distanceFromGoal)
+        val discriminant: Double = (quadCoeffB * quadCoeffB) - (4 * quadCoeffA * quadCoeffC)
+        val velocity = (-1 * quadCoeffB + sqrt(discriminant)) / (2 * quadCoeffA)
         FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,velocity)
     }
     fun calibrateTurret(currPose: Pose) {
-        var angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
+        val angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
         var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
-        TurretSubsystem.turretControl.goal = KineticState(Math.round(ticks).toDouble())
-        ActiveOpMode.telemetry.addData("Turret", ticks)
+        TurretSubsystem.turretControl.goal = KineticState(round(ticks))
+        ActiveOpMode.telemetry.addData("Turret", "ticks = $ticks")
     }
     fun calibrateHood(currPose: Pose) {
-        var distanceFromGoal: Double = currPose.distanceFrom(goalPose)
+        val distanceFromGoal: Double = currPose.distanceFrom(goalPose)
         when (distanceFromGoal) {
             in 0.0..< 63.0 -> HoodSubsystem.hoodServo.position = 0.0
             in 63.0..<  105.0 -> HoodSubsystem.hoodServo.position = 0.65
