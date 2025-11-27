@@ -44,6 +44,12 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         //if (ticks >= (38450/48)) {
         //    ticks = ticks - (38450/24)
         //}
+        //if (ticks >= (38450/96) {
+        //    ticks = ticks - (38450/24)
+        //}
+        //if (ticks >= ((38450 * 3)/96) {
+        //    ticks = ticks - (38450/24)
+        //}
         TurretSubsystem.turretControl.goal = KineticState(Math.round(ticks).toDouble())
         ActiveOpMode.telemetry.addData("Turret", ticks)
     }
