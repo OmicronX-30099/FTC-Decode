@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.teamcode.Finals.Systems
 
+import com.qualcomm.robotcore.hardware.Gamepad
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.conditionals.IfElseCommand
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.ftc.ActiveOpMode
+import dev.nextftc.ftc.Gamepads
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.IntakeGateSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.KickerSubsystem
@@ -16,6 +19,11 @@ object PassiveSystem:
     // System for Intake, Kicker, and Gate
     SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem, KickerSubsystem, ShooterGateSubsystem)
 {
+    val autoAimRumble = Gamepad.RumbleEffect.Builder()
+        .addStep(1.0,0.5,250)
+        .addStep(0.25,0.75, 250)
+        .build()
+
     val openGateCommand: Command = InstantCommand { IntakeGateSubsystem.openGate() }
     val closeGateCommand: Command = InstantCommand { IntakeGateSubsystem.closeGate() }
     val kickBallCommand: Command = InstantCommand { KickerSubsystem.kickBall() }
@@ -72,6 +80,13 @@ object PassiveSystem:
             Delay(0.3),
             pushBallCommand,
             this.stopIntakeCommand
+        )
+
+    val checkedTripleShootSequence: Command
+        get() = IfElseCommand(
+            { ShooterSystem.fullAutoAim },
+            this.tripleShootSequence,
+            InstantCommand { ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble) }
         )
 
     fun intake(intakePower: Double) {
