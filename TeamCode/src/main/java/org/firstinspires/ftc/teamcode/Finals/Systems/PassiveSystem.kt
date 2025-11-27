@@ -81,12 +81,15 @@ object PassiveSystem:
             pushBallCommand,
             this.stopIntakeCommand
         )
+    fun checker(): Command {
+        if (ShooterSystem.fullAutoAim) {
+            return this.tripleShootSequence
+        } else {
+            return InstantCommand { ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble) }
+        }
+    }
     val checkedTripleShootSequence: Command
-        get() = IfElseCommand(
-            { ShooterSystem.fullAutoAim },
-            this.tripleShootSequence,
-            InstantCommand { ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble) }
-        )
+        get() = checker()
 
     fun intake(intakePower: Double) {
         IntakeSubsystem.intake(intakePower)
