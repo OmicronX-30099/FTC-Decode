@@ -54,7 +54,7 @@ class RedTeleOpV1: NextFTCOpMode() {
         Gamepads.gamepad1.leftBumper
             .whenBecomesTrue { PassiveSystem.checkedTripleShootSequence() }
         Gamepads.gamepad1.triangle
-            .whenBecomesTrue(PassiveSystem.altTripleShootSequence)
+            .whenBecomesTrue { PassiveSystem.checkedAltTripleShootSequence() }
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
             .whenBecomesTrue(PassiveSystem.openGateCommand)
             .whenTrue{ PassiveSystem.intake(Gamepads.gamepad1.rightTrigger.get() - Gamepads.gamepad1.leftTrigger.get()) }
