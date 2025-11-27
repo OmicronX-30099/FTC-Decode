@@ -64,19 +64,21 @@ class BlueTeleOpV1: NextFTCOpMode() {
             .whenBecomesTrue { ShooterSystem.autoAimOn() }
             .whenBecomesFalse { ShooterSystem.autoAimOff() }
         Gamepads.gamepad1.rightStickButton
-            .whenBecomesTrue(
-                switchCommand({ drivetrain.scalar }) {
-                    case(1.0, InstantCommand { drivetrain.scalar = 0.5 })
-                    case(0.5, InstantCommand { drivetrain.scalar = 0.2 })
-                    case(0.2, InstantCommand { drivetrain.scalar = 1.0 })
-                }
-            )
+            .whenBecomesTrue(drivetrainSpeedControl())
         Gamepads.gamepad1.dpadLeft.or(Gamepads.gamepad2.dpadLeft)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose1) }
         Gamepads.gamepad1.dpadDown.or(Gamepads.gamepad2.dpadDown)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose2) }
         Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose3) }
+    }
+    fun drivetrainSpeedControl(): Command {
+        when (drivetrain.scalar) {
+            0.2 -> {return InstantCommand { drivetrain.scalar = 1.0 }}
+            0.5 -> {return InstantCommand { drivetrain.scalar = 0.2 }}
+            1.0 -> {return InstantCommand { drivetrain.scalar = 0.5 }}
+            else -> {return InstantCommand { error("skib, u gay") }}
+        }
     }
 
     override fun onUpdate() {
