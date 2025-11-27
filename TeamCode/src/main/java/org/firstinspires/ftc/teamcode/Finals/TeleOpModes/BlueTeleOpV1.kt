@@ -4,6 +4,7 @@ import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.conditionals.SwitchCommand
+import dev.nextftc.core.commands.conditionals.switchCommand
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -64,14 +65,10 @@ class BlueTeleOpV1: NextFTCOpMode() {
             .whenBecomesFalse { ShooterSystem.autoAimOff() }
         Gamepads.gamepad1.rightStickButton
             .whenBecomesTrue(
-                InstantCommand{
-                    if (drivetrain.scalar == 1.0) {
-                        drivetrain.scalar = 0.5
-                    } else if (drivetrain.scalar == 0.5) {
-                        drivetrain.scalar = 0.2
-                    } else {
-                        drivetrain.scalar == 1.0
-                    }
+                switchCommand({ drivetrain.scalar }) {
+                    case(1.0, InstantCommand { drivetrain.scalar = 0.5 })
+                    case(0.5, InstantCommand { drivetrain.scalar = 0.2 })
+                    case(0.2, InstantCommand { drivetrain.scalar = 1.0 })
                 }
             )
         Gamepads.gamepad1.dpadLeft.or(Gamepads.gamepad2.dpadLeft)
