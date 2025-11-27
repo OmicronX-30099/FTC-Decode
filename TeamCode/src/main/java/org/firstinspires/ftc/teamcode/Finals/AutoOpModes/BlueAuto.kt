@@ -35,7 +35,7 @@ class BlueAuto: NextFTCOpMode() {
 
     override fun onInit() {
         createPaths()
-        follower.setStartingPose(Pose(32.4, 134.05, PI))
+        follower.setStartingPose(Pose(32.9, 131.3, PI))
         ShooterSystem.setAlliance(Alliance.BLUE)
         /*
         telemetry.addData("Autoaim: ", ShooterSystem.)
@@ -49,7 +49,7 @@ class BlueAuto: NextFTCOpMode() {
         PathArray += follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(32.400, 134.050), Pose(48.000, 96.000))
+                BezierLine(Pose(32.900, 131.300), Pose(48.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()

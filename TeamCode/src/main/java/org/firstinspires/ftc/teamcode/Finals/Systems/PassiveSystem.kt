@@ -78,9 +78,7 @@ object PassiveSystem:
         get() = SequentialGroup(
             this.releaseShooterCommand,
             maxIntakeCommand,
-            Delay(0.3),
-            pushBallCommand,
-            Delay(0.3),
+            Delay(0.75),
             pushBallCommand,
             this.stopIntakeCommand
         )

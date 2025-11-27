@@ -11,7 +11,7 @@ import dev.nextftc.hardware.impl.MotorEx
 object TurretSubsystem: Subsystem {
     val turretMotor: MotorEx = MotorEx("turretMotor")
 
-    @JvmField var turretPID = PIDCoefficients(0.02,0.0,0.0)
+    @JvmField var turretPID = PIDCoefficients(0.01,0.0,0.0)
     @JvmField var turretFF = BasicFeedforwardParameters(0.0,0.0,0.0)
     val turretControl: ControlSystem = ControlSystem.builder()
         .posPid(turretPID)
