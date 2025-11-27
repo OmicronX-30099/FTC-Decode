@@ -81,7 +81,6 @@ object PassiveSystem:
             pushBallCommand,
             this.stopIntakeCommand
         )
-
     val checkedTripleShootSequence: Command
         get() = IfElseCommand(
             { ShooterSystem.fullAutoAim },
