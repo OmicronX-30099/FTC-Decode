@@ -44,12 +44,12 @@ object PassiveSystem:
             Delay(0.175),
             InstantCommand { KickerSubsystem.resetKicker() },
             InstantCommand { ShooterGateSubsystem.blockGate() },
-            Delay(0.2)
+            Delay(0.1875)
         )
     val positionBall: Command
         get() = SequentialGroup(
             this.maxIntakeCommand,
-            Delay(0.175),
+            Delay(0.15),
             this.stopIntakeCommand
         )
     val tripleShootSequence: Command
@@ -59,7 +59,7 @@ object PassiveSystem:
             positionBall,
             pushBallCommand,
             maxIntakeCommand,
-            Delay(0.2),
+            Delay(0.15),
             pushBallCommand,
             this.stopIntakeCommand
         )
@@ -67,9 +67,9 @@ object PassiveSystem:
         get() = SequentialGroup(
             this.releaseShooterCommand,
             maxIntakeCommand,
-            Delay(0.4),
+            Delay(0.3),
             pushBallCommand,
-            Delay(0.2),
+            Delay(0.3),
             pushBallCommand,
             this.stopIntakeCommand
         )
