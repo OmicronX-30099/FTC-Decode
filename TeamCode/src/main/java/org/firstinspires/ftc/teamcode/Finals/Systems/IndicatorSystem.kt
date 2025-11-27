@@ -10,10 +10,14 @@ object IndicatorSystem: Subsystem {
     val rgbIndicator: ServoEx = ServoEx("RGBLight1")
 
     override fun periodic() {
-        if (abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0) {
-            rgbIndicator.position = RGB.GREEN.position
+        if (ShooterSystem.fullAutoAim) {
+            if (abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0) {
+                rgbIndicator.position = RGB.GREEN.position
+            } else {
+                rgbIndicator.position = RGB.RED.position
+            }
         } else {
-            rgbIndicator.position = RGB.RED.position
+            rgbIndicator.position = RGB.INDIGO.position
         }
     }
 }
