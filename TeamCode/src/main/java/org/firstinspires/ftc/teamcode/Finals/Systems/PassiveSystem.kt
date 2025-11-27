@@ -82,13 +82,11 @@ object PassiveSystem:
             this.stopIntakeCommand
         )
 
-    fun checkedTripleShootSequence(): Command {
-        ActiveOpMode.telemetry.addData("autoAim", ShooterSystem.fullAutoAim)
+    fun checkedTripleShootSequence() {
         if (ShooterSystem.fullAutoAim) {
-            ActiveOpMode.telemetry.addData("autoAim", "successful")
-            return this.tripleShootSequence
+            this.tripleShootSequence.schedule()
         } else {
-            return InstantCommand { ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble) }
+            ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble)
         }
     }
 
