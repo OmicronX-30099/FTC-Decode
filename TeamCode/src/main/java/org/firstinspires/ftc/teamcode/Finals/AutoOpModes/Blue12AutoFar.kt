@@ -41,6 +41,8 @@ class Blue12AutoFar: NextFTCOpMode() {
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
+            FollowPath(Paths[0], true, 1.0),
+            Delay(1.0),
             FollowPath(Paths[1], true, 1.0),
             Delay(1.0),
             FollowPath(Paths[2], true, 1.0),
@@ -54,8 +56,6 @@ class Blue12AutoFar: NextFTCOpMode() {
             FollowPath(Paths[6], true, 1.0),
             Delay(1.0),
             FollowPath(Paths[7], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[8], true, 1.0),
         )
         main.schedule()
     }
