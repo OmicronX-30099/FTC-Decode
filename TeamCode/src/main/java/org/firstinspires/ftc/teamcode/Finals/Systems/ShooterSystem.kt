@@ -72,5 +72,6 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
             calibrateTurret(follower.pose)
             calibrateFlywheel(follower.pose)
         }
+        ActiveOpMode.telemetry.addData("auto", this.fullAutoAim)
     }
 }
