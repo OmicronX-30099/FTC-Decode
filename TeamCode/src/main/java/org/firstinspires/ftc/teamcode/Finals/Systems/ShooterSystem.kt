@@ -41,17 +41,6 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     fun calibrateTurret(currPose: Pose) {
         var angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
         var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * (100/24) * 384.5 * -1
-
-        //if (ticks >= ((38450/24)*(1/2))) {
-        //    ticks = ticks - (38450/24)
-        //}
-        //if (ticks >= ((38450/24)*(1/4))) {
-        //    ticks = ticks - (38450/24)
-        //}
-        //if (ticks >= ((38450/24)*(3/4))) {
-        //    ticks = ticks - (38450/24)
-        //}
-
         TurretSubsystem.turretControl.goal = KineticState(Math.round(ticks).toDouble())
         ActiveOpMode.telemetry.addData("Turret", ticks)
     }

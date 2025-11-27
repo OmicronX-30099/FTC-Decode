@@ -51,7 +51,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
         Gamepads.gamepad1.rightBumper
             .whenBecomesTrue(PassiveSystem.pushBallCommand)
         Gamepads.gamepad1.leftBumper
-            .whenBecomesTrue(PassiveSystem.checkedTripleShootSequence)
+            .whenBecomesTrue(PassiveSystem.checkedTripleShootSequence())
         Gamepads.gamepad1.triangle
             .whenBecomesTrue(PassiveSystem.altTripleShootSequence)
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
