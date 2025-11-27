@@ -83,7 +83,9 @@ object PassiveSystem:
         )
 
     fun checkedTripleShootSequence(): Command {
+        ActiveOpMode.telemetry.addData("autoAim", ShooterSystem.fullAutoAim)
         if (ShooterSystem.fullAutoAim) {
+            ActiveOpMode.telemetry.addData("autoAim", "successful")
             return this.tripleShootSequence
         } else {
             return InstantCommand { ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble) }
