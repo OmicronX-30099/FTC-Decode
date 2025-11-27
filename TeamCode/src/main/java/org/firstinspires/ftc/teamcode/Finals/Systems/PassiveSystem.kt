@@ -81,6 +81,7 @@ object PassiveSystem:
             pushBallCommand,
             this.stopIntakeCommand
         )
+
     fun checker(): Command {
         if (ShooterSystem.fullAutoAim) {
             return this.tripleShootSequence
