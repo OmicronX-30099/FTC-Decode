@@ -17,7 +17,7 @@ object IndicatorSystem: Subsystem {
                 rgbIndicator.position = RGB.RED.position
             }
         } else {
-            rgbIndicator.position = RGB.INDIGO.position
+            rgbIndicator.position = RGB.PINK.position
         }
     }
 }

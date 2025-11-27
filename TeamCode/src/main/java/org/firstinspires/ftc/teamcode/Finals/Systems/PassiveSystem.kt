@@ -20,8 +20,11 @@ object PassiveSystem:
     SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem, KickerSubsystem, ShooterGateSubsystem)
 {
     val autoAimRumble = Gamepad.RumbleEffect.Builder()
-        .addStep(0.65,0.65,250)
-        .addStep(1.0,1.0, 500)
+        .addStep(0.65,0.65,300)
+        .addStep(1.0,1.0, 600)
+        .build()
+    val autoAimLED = Gamepad.LedEffect.Builder()
+        .addStep(255.0,125.0,255.0,1000)
         .build()
 
     val openGateCommand: Command = InstantCommand { IntakeGateSubsystem.openGate() }
@@ -87,6 +90,15 @@ object PassiveSystem:
             this.tripleShootSequence.schedule()
         } else {
             ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble)
+            ActiveOpMode.gamepad1.runLedEffect(autoAimLED)
+        }
+    }
+    fun checkedAltTripleShootSequence() {
+        if (ShooterSystem.fullAutoAim) {
+            this.altTripleShootSequence.schedule()
+        } else {
+            ActiveOpMode.gamepad1.runRumbleEffect(autoAimRumble)
+            ActiveOpMode.gamepad1.runLedEffect(autoAimLED)
         }
     }
 

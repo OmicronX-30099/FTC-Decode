@@ -5,7 +5,7 @@ enum class RGB {
     ORANGE { override val position: Double = 0.32 },
     YELLOW { override val position: Double = 0.388 },
     GREEN { override val position: Double = 0.475 },
-    AZURE { override val position: Double = 0.59 },
+    PINK { override val position: Double = 0.71 },
     BLUE { override val position: Double = 0.64 },
     INDIGO { override val position: Double = 0.66 },
     OFF { override val position: Double = 0.0 },
