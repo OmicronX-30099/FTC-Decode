@@ -52,7 +52,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
         Gamepads.gamepad1.rightBumper
             .whenBecomesTrue(PassiveSystem.pushBallCommand)
         Gamepads.gamepad1.leftBumper
-            .whenBecomesTrue(PassiveSystem.checkedTripleShootSequence())
+            .whenBecomesTrue(PassiveSystem.tripleShootSequence)
         Gamepads.gamepad1.triangle
             .whenBecomesTrue(PassiveSystem.altTripleShootSequence)
         Gamepads.gamepad1.rightTrigger.greaterThan(0.0).or(Gamepads.gamepad1.leftTrigger.greaterThan(0.0))
@@ -64,21 +64,19 @@ class BlueTeleOpV1: NextFTCOpMode() {
             .whenBecomesTrue { ShooterSystem.autoAimOn() }
             .whenBecomesFalse { ShooterSystem.autoAimOff() }
         Gamepads.gamepad1.rightStickButton
-            .whenBecomesTrue(drivetrainSpeedControl())
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue { drivetrain.scalar = 0.5 }
+            .whenBecomesFalse { drivetrain.scalar = 1.0 }
+        Gamepads.gamepad1.leftStickButton
+            .toggleOnBecomesTrue()
+            .whenBecomesTrue { drivetrain.scalar = 0.2 }
+            .whenBecomesFalse { drivetrain.scalar = 1.0 }
         Gamepads.gamepad1.dpadLeft.or(Gamepads.gamepad2.dpadLeft)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose1) }
         Gamepads.gamepad1.dpadDown.or(Gamepads.gamepad2.dpadDown)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose2) }
         Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose3) }
-    }
-    fun drivetrainSpeedControl(): Command {
-        when (drivetrain.scalar) {
-            0.2 -> {return InstantCommand { drivetrain.scalar = 1.0 }}
-            0.5 -> {return InstantCommand { drivetrain.scalar = 0.2 }}
-            1.0 -> {return InstantCommand { drivetrain.scalar = 0.5 }}
-            else -> {return InstantCommand { error("skib, u gay") }}
-        }
     }
 
     override fun onUpdate() {
