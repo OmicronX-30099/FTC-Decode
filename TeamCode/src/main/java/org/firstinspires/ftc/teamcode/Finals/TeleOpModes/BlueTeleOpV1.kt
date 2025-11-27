@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.Finals.TeleOpModes
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.conditionals.SwitchCommand
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -13,6 +15,7 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.ftc.components.LoopTimeComponent
+import dev.nextftc.hardware.driving.DriverControlledCommand
 import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.*
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
@@ -29,11 +32,13 @@ class BlueTeleOpV1: NextFTCOpMode() {
         )
     }
 
-    lateinit var drivetrain: Command
+    lateinit var drivetrain: DriverControlledCommand
+    lateinit var alliance: Alliance
 
     override fun onInit() {
         follower.setStartingPose(Pose(27.3125+8.7,141-8.9-1,Math.toRadians(90.0)))
-        ShooterSystem.setAlliance(Alliance.BLUE)
+        this.alliance = Alliance.BLUE
+        ShooterSystem.setAlliance(this.alliance)
     }
     override fun onStartButtonPressed() {
         drivetrain = PedroDriverControlled(
@@ -41,6 +46,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
             -Gamepads.gamepad1.leftStickX,
             -Gamepads.gamepad1.rightStickX
         )
+        drivetrain.scalar = 1.0
         drivetrain.schedule()
         Gamepads.gamepad1.rightBumper
             .whenBecomesTrue(PassiveSystem.pushBallCommand)
@@ -56,6 +62,24 @@ class BlueTeleOpV1: NextFTCOpMode() {
             .toggleOnBecomesTrue()
             .whenBecomesTrue { ShooterSystem.autoAimOn() }
             .whenBecomesFalse { ShooterSystem.autoAimOff() }
+        Gamepads.gamepad1.rightStickButton
+            .whenBecomesTrue(
+                InstantCommand{
+                    if (drivetrain.scalar == 1.0) {
+                        drivetrain.scalar = 0.5
+                    } else if (drivetrain.scalar == 0.5) {
+                        drivetrain.scalar = 0.2
+                    } else {
+                        drivetrain.scalar == 1.0
+                    }
+                }
+            )
+        Gamepads.gamepad1.dpadLeft.or(Gamepads.gamepad2.dpadLeft)
+            .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose1) }
+        Gamepads.gamepad1.dpadDown.or(Gamepads.gamepad2.dpadDown)
+            .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose2) }
+        Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
+            .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose3) }
     }
 
     override fun onUpdate() {
