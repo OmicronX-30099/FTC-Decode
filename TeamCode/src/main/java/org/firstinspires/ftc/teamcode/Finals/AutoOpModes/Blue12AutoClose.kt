@@ -43,26 +43,46 @@ class Blue12AutoClose: NextFTCOpMode() {
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
-            FollowPath(Paths[0], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[1], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[2], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[3], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[4], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[5], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[6], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[7], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[8], true, 1.0),
+            ShooterSystem.autoAimOnCommand, //auto adjusts turret and flywheel velocity
+            FollowPath(Paths[0], true, 1.0), //goes to score preload
+            PassiveSystem.altTripleShootSequence, //shoots 3 balls
+            ShooterSystem.autoAimOffCommand, //turns off autoaim command
+            PassiveSystem.maxIntakeCommand, //sets intake motor power to 1.0 and opens intake gate
+            FollowPath(Paths[1], true, 1.0), //goes to pickup first set of balls
+            Delay(0.25),
+            PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
+            Delay(0.25),
+            FollowPath(Paths[2], true, 1.0), //goes to open gate
+            Delay(1.5),
+            ShooterSystem.autoAimOnCommand,
+            FollowPath(Paths[3], true, 1.0), //goes to shoot first set of balls
+            PassiveSystem.altTripleShootSequence,
+            ShooterSystem.autoAimOffCommand,
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[4], true, 1.0), //goes to pickup second set of balls
+            Delay(0.25),
+            PassiveSystem.stopIntakeCommand,
+            Delay(0.25),
+            ShooterSystem.autoAimOnCommand,
+            FollowPath(Paths[5], true, 1.0), //goes to shoot second set of balls
+            PassiveSystem.altTripleShootSequence,
+            ShooterSystem.autoAimOffCommand,
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[6], true, 1.0), //goes to pickup third set of balls
+            Delay(0.25),
+            PassiveSystem.stopIntakeCommand,
+            Delay(0.25),
+            ShooterSystem.autoAimOnCommand,
+            FollowPath(Paths[7], true, 1.0), //goes to shoot third set of balls
+            PassiveSystem.altTripleShootSequence,
+            ShooterSystem.autoAimOffCommand,
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[8], true, 1.0), //goes to front of gate
         )
         main.schedule()
     }
+
+    //the following builds robot movement pathings
     fun buildPaths() {
         val scorePreload = follower.pathBuilder()
             .addPath(
@@ -162,6 +182,6 @@ class Blue12AutoClose: NextFTCOpMode() {
         Paths += leavePath
     }
     override fun onStop() {
-        BlueTeleOpV1.startPose = follower.pose
+        BlueTeleOpV1.startPose = follower.pose //stores robot position for teleop usage
     }
 }
