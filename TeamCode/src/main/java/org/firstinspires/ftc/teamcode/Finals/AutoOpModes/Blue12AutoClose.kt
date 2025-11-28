@@ -38,7 +38,7 @@ class Blue12AutoClose: NextFTCOpMode() {
 
     override fun onInit() {
         ShooterSystem.setAlliance(Alliance.BLUE)
-        follower.setStartingPose(Pose(32.4,132.1, PI))
+        follower.setStartingPose(Pose(32.9, 131.3, PI))
         this.buildPaths()
     }
     override fun onStartButtonPressed() {
@@ -66,14 +66,14 @@ class Blue12AutoClose: NextFTCOpMode() {
     fun buildPaths() {
         val scorePreload = follower.pathBuilder()
             .addPath(
-                BezierLine(Pose(32.400, 132.100), Pose(58.750, 82.250))
+                BezierLine(Pose(32.900, 131.300), Pose(58.750, 84.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
         val pickupFirst = follower.pathBuilder()
             .addPath(
-                BezierLine(Pose(58.750, 82.250), Pose(17.000, 82.250))
+                BezierLine(Pose(58.750, 84.000), Pose(17.000, 84.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
@@ -81,9 +81,9 @@ class Blue12AutoClose: NextFTCOpMode() {
         val openGate = follower.pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(17.000, 82.250),
-                    Pose(38.000, 80.500),
-                    Pose(17.000, 76.000)
+                    Pose(17.000, 84.000),
+                    Pose(38.000, 72.000),
+                    Pose(17.000, 73.000)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
@@ -91,7 +91,7 @@ class Blue12AutoClose: NextFTCOpMode() {
 
         val shootFirst = follower.pathBuilder()
             .addPath(
-                BezierLine(Pose(17.000, 76.000), Pose(58.750, 76.000))
+                BezierLine(Pose(17.000, 73.000), Pose(58.750, 73.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
@@ -99,7 +99,7 @@ class Blue12AutoClose: NextFTCOpMode() {
         val pickupSecond = follower.pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(58.750, 76.000),
+                    Pose(58.750, 73.000),
                     Pose(39.500, 54.393),
                     Pose(10.000, 58.500)
                 )
@@ -112,7 +112,7 @@ class Blue12AutoClose: NextFTCOpMode() {
                 BezierCurve(
                     Pose(10.000, 58.500),
                     Pose(39.500, 54.393),
-                    Pose(58.750, 76.000)
+                    Pose(58.750, 73.000)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
@@ -121,7 +121,7 @@ class Blue12AutoClose: NextFTCOpMode() {
         val pickupThird = follower.pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(58.750, 76.000),
+                    Pose(58.750, 73.000),
                     Pose(63.075, 30.000),
                     Pose(10.000, 35.250)
                 )
@@ -134,7 +134,7 @@ class Blue12AutoClose: NextFTCOpMode() {
                 BezierCurve(
                     Pose(10.000, 35.250),
                     Pose(46.100, 38.300),
-                    Pose(62.000, 26.000)
+                    Pose(58.000, 23.000)
                 )
             )
             .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
@@ -143,12 +143,12 @@ class Blue12AutoClose: NextFTCOpMode() {
         val leavePath = follower.pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(62.000, 26.000),
+                    Pose(58.000, 23.000),
                     Pose(51.100, 58.250),
                     Pose(23.500, 70.500)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
             .build()
 
         Paths += scorePreload
