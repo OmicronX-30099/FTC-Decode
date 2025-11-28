@@ -20,11 +20,11 @@ object PassiveSystem:
     SubsystemGroup(IntakeGateSubsystem, IntakeSubsystem, KickerSubsystem, ShooterGateSubsystem)
 {
     val autoAimRumble = Gamepad.RumbleEffect.Builder()
-        .addStep(0.65,0.65,300)
-        .addStep(1.0,1.0, 600)
+        .addStep(0.25,0.25,500)
+        .addStep(1.0,1.0, 500)
         .build()
     val autoAimLED = Gamepad.LedEffect.Builder()
-        .addStep(255.0,125.0,255.0,1000)
+        .addStep(255.0,75.0,255.0,1000)
         .build()
 
     val openGateCommand: Command = InstantCommand { IntakeGateSubsystem.openGate() }
