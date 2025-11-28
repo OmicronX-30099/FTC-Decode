@@ -32,7 +32,9 @@ class RedTeleOpV1: NextFTCOpMode() {
             PedroComponent(Constants::createFollower)
         )
     }
-
+    companion object {
+        var startPose: Pose? = null
+    }
     lateinit var drivetrain: DriverControlledCommand
     lateinit var alliance: Alliance
 
@@ -84,5 +86,8 @@ class RedTeleOpV1: NextFTCOpMode() {
         ActiveOpMode.telemetry.addData("Follower", "y = "+follower.pose.y.toString())
         ActiveOpMode.telemetry.addData("Follower", "heading = "+follower.pose.heading.toString())
         telemetry.update()
+    }
+    override fun onStop() {
+        BlueTeleOpV1.startPose = null
     }
 }
