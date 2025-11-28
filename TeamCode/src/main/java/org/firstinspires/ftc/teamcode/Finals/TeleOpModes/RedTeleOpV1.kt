@@ -39,7 +39,7 @@ class RedTeleOpV1: NextFTCOpMode() {
     lateinit var alliance: Alliance
 
     override fun onInit() {
-        follower.setStartingPose(Pose(27.3125+8.7,141-8.9-1,Math.toRadians(90.0)))
+        follower.setStartingPose(Pose(72.0,72.0,Math.toRadians(90.0)))
         this.alliance = Alliance.RED
         ShooterSystem.setAlliance(this.alliance)
     }
