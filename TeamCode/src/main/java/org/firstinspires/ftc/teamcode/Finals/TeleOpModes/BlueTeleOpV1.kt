@@ -33,13 +33,17 @@ class BlueTeleOpV1: NextFTCOpMode() {
         )
     }
     companion object {
-        lateinit var startPose: Pose
+        var startPose: Pose? = null
     }
     lateinit var drivetrain: DriverControlledCommand
     lateinit var alliance: Alliance
 
     override fun onInit() {
-        follower.setStartingPose(BlueTeleOpV1.startPose)
+        if (startPose == null) {
+            follower.setStartingPose(BlueTeleOpV1.startPose)
+        } else {
+            follower.setStartingPose(Pose(72.0,72.0,Math.toRadians(90.0)))
+        }
         this.alliance = Alliance.BLUE
         ShooterSystem.setAlliance(this.alliance)
     }
@@ -80,11 +84,13 @@ class BlueTeleOpV1: NextFTCOpMode() {
         Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose3) }
     }
-
     override fun onUpdate() {
         ActiveOpMode.telemetry.addData("Follower", "x = "+follower.pose.x.toString())
         ActiveOpMode.telemetry.addData("Follower", "y = "+follower.pose.y.toString())
         ActiveOpMode.telemetry.addData("Follower", "heading = "+follower.pose.heading.toString())
         telemetry.update()
+    }
+    override fun onStop() {
+        BlueTeleOpV1.startPose = null
     }
 }
