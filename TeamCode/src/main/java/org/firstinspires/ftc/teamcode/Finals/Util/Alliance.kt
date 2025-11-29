@@ -2,7 +2,8 @@ package org.firstinspires.ftc.teamcode.Finals.Util
 
 import com.pedropathing.geometry.Pose
 
-enum class Alliance {
+enum class
+Alliance {
     BLUE {
         override val goalPose: Pose = Pose(6.0,140.0)
         override val resetPose1: Pose = Pose()
