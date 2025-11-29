@@ -35,7 +35,7 @@ class RedAuto: NextFTCOpMode() {
 
     override fun onInit() {
         createPaths()
-        follower.setStartingPose(Pose(111.6,134.05, 0.0))
+        follower.setStartingPose(Pose(108.1,132.3, 0.0))
         ShooterSystem.setAlliance(Alliance.RED)
         telemetry.addData("Autoaim: ", ShooterSystem.goalPose)
 
@@ -45,7 +45,7 @@ class RedAuto: NextFTCOpMode() {
         PathArray += follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(111.600, 134.050), Pose(96.000, 96.000))
+                BezierLine(Pose(108.100, 132.300), Pose(96.000, 96.000))
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()

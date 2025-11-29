@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 
@@ -36,56 +37,68 @@ class Blue12AutoFar: NextFTCOpMode() {
 
     override fun onInit() {
         ShooterSystem.setAlliance(Alliance.BLUE)
-        follower.setStartingPose(Pose(58.75,8.9, PI))
+        follower.setStartingPose(Pose(56.200, 8.900, Math.toRadians(90.0)))
         this.buildPaths()
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
-            FollowPath(Paths[0], true, 1.0),
+            ShooterSystem.autoAimOnCommand,
+            PassiveSystem.altTripleShootSequence,
+            ShooterSystem.autoAimOffCommand,
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[0], true, 1.0), //goes to pickup first set of balls
+            Delay(0.25),
+            PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
+            Delay(0.25),
+            FollowPath(Paths[1], true, 1.0), //goes to open gate
+            Delay(1.5),
+            ShooterSystem.autoAimOnCommand,
+            FollowPath(Paths[2], true, 1.0), //goes to shoot first set of balls
+            PassiveSystem.altTripleShootSequence,
+            ShooterSystem.autoAimOffCommand,
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[3], true, 1.0), //goes to pickup second set of balls
             Delay(1.0),
-            FollowPath(Paths[1], true, 1.0),
+            FollowPath(Paths[4], true, 1.0), //goes to shoot second set of balls
             Delay(1.0),
-            FollowPath(Paths[2], true, 1.0),
+            FollowPath(Paths[5], true, 1.0), //goes to pickup third set of balls
             Delay(1.0),
-            FollowPath(Paths[3], true, 1.0),
+            FollowPath(Paths[6], true, 1.0), //goes to shoot third set of balls
             Delay(1.0),
-            FollowPath(Paths[4], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[5], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[6], true, 1.0),
-            Delay(1.0),
-            FollowPath(Paths[7], true, 1.0),
+            FollowPath(Paths[7], true, 1.0), //goes to front of gate
         )
         main.schedule()
     }
     fun buildPaths() {
-        val pickupFirst = follower.pathBuilder()
+        val pickupFirst = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(58.750, 8.900),
-                    Pose(60.300, 70.700),
-                    Pose(10.000, 58.500)
+                    Pose(56.200, 8.900),
+                    Pose(65.000, 60.000),
+                    Pose(12.000, 57.000)
+                )
+            )
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
+            .build()
+
+        val openGate = follower
+            .pathBuilder()
+            .addPath(
+                BezierCurve(
+                    Pose(12.000, 57.000),
+                    Pose(38.000, 62.000),
+                    Pose(17.000, 67.000)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val openGate = follower.pathBuilder()
+        val shootFirst = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(10.000, 58.500),
-                    Pose(39.000, 60.000),
-                    Pose(17.000, 63.750)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        val shootFirst = follower.pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(17.000, 63.750),
+                    Pose(17.000, 67.000),
                     Pose(41.000, 63.425),
                     Pose(58.750, 76.000)
                 )
@@ -93,7 +106,8 @@ class Blue12AutoFar: NextFTCOpMode() {
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val pickupSecond = follower.pathBuilder()
+        val pickupSecond = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
                     Pose(58.750, 76.000),
@@ -104,7 +118,8 @@ class Blue12AutoFar: NextFTCOpMode() {
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val shootSecond = follower.pathBuilder()
+        val shootSecond = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
                     Pose(17.000, 83.500),
@@ -115,7 +130,8 @@ class Blue12AutoFar: NextFTCOpMode() {
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val pickupThird = follower.pathBuilder()
+        val pickupThird = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
                     Pose(58.750, 76.000),
@@ -126,26 +142,28 @@ class Blue12AutoFar: NextFTCOpMode() {
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val shootThird = follower.pathBuilder()
+        val shootThird = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
                     Pose(10.000, 35.250),
                     Pose(46.100, 38.300),
-                    Pose(62.000, 26.000)
+                    Pose(60.000, 26.000)
                 )
             )
             .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
             .build()
 
-        val leavePath = follower.pathBuilder()
+        val leavePath = follower
+            .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(62.000, 26.000),
+                    Pose(60.000, 26.000),
                     Pose(51.100, 58.250),
                     Pose(23.500, 70.500)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
             .build()
         
         Paths += pickupFirst
@@ -156,5 +174,9 @@ class Blue12AutoFar: NextFTCOpMode() {
         Paths += pickupThird
         Paths += shootThird
         Paths += leavePath
+    }
+
+    override fun onStop() {
+        BlueTeleOpV1.startPose = follower.pose //stores robot position for teleop usage
     }
 }
