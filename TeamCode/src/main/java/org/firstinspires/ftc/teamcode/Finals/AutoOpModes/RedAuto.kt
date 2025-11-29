@@ -35,13 +35,9 @@ class RedAuto: NextFTCOpMode() {
 
     override fun onInit() {
         createPaths()
-        follower.setStartingPose(Pose(32.4, 134.05, PI))
+        follower.setStartingPose(Pose(111.6,134.05, 0.0))
         ShooterSystem.setAlliance(Alliance.RED)
-        /*
-        telemetry.addData("Autoaim: ", ShooterSystem.)
-        telemetry.addData("FLywheel Goal", ShooterSystem.FLYWHEEL_GOAL)
-        telemetry.update()
-        */
+        telemetry.addData("Autoaim: ", ShooterSystem.goalPose)
 
     }
 
@@ -123,7 +119,7 @@ class RedAuto: NextFTCOpMode() {
             .addPath(
                 BezierLine(Pose(132.000, 35.500), Pose(96.000, 96.000))
             )
-            .setConstantHeadingInterpolation(Math.toRadians(0.0))
+            .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(45.0))
             .build()
     }
     /*
@@ -142,31 +138,31 @@ class RedAuto: NextFTCOpMode() {
             PassiveSystem.maxIntakeCommand,
             FollowPath(PathArray[1],true,0.7),
             PassiveSystem.stopIntakeCommand,
-            FollowPath(PathArray[2],true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(1.95),
+            FollowPath(PathArray[2],true,1.0),
+            Delay(1.0),
             // start throwing
-            PassiveSystem.tripleShootSequence,
+            PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             // Section 2 End. Section 3: Grab 2nd set of Artifacts and throw
             PassiveSystem.maxIntakeCommand,
             FollowPath(PathArray[3],true,1.0),
             PassiveSystem.stopIntakeCommand,
-            FollowPath(PathArray[4],true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(1.95),
+            FollowPath(PathArray[4],true,1.0),
+            Delay(1.0),
             // start throwing
-            PassiveSystem.tripleShootSequence,
+            PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             // Section 3 End. Section 4: Grab last set and throw.
             PassiveSystem.maxIntakeCommand,
             FollowPath(PathArray[5],true,1.0),
             PassiveSystem.stopIntakeCommand,
-            FollowPath(PathArray[6],true,1.0),
             ShooterSystem.autoAimOnCommand,
-            Delay(1.95),
+            FollowPath(PathArray[6],true,1.0),
+            Delay(1.0),
             // throw balls
-            PassiveSystem.tripleShootSequence,
+            PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand
             // Section 5 End.
         )

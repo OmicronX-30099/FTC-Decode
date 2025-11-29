@@ -140,7 +140,7 @@ class BlueAuto: NextFTCOpMode() {
             // Section 1 End. Section 2: Grab 1st set of Artifacts and throw
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
-            FollowPath(PathArray[1],true,0.7),
+            FollowPath(PathArray[1],true,0.7), // Grab three balls
             PassiveSystem.stopIntakeCommand,
             FollowPath(PathArray[2],true,1.0),
             ShooterSystem.autoAimOnCommand,
@@ -150,7 +150,7 @@ class BlueAuto: NextFTCOpMode() {
             ShooterSystem.autoAimOffCommand,
             // Section 2 End. Section 3: Grab 2nd set of Artifacts and throw
             PassiveSystem.maxIntakeCommand,
-            FollowPath(PathArray[3],true,1.0),
+            FollowPath(PathArray[3],true,1.0), // Grab three balls
             PassiveSystem.stopIntakeCommand,
             FollowPath(PathArray[4],true,1.0),
             ShooterSystem.autoAimOnCommand,
@@ -160,7 +160,7 @@ class BlueAuto: NextFTCOpMode() {
             ShooterSystem.autoAimOffCommand,
             // Section 3 End. Section 4: Grab last set and throw.
             PassiveSystem.maxIntakeCommand,
-            FollowPath(PathArray[5],true,1.0),
+            FollowPath(PathArray[5],true,1.0), // Grab three balls
             PassiveSystem.stopIntakeCommand,
             FollowPath(PathArray[6],true,1.0),
             ShooterSystem.autoAimOnCommand,
