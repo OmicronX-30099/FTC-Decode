@@ -43,41 +43,65 @@ class Blue12AutoClose: NextFTCOpMode() {
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
-            ShooterSystem.autoAimOnCommand, //auto adjusts turret and flywheel velocity
-            FollowPath(Paths[0], true, 1.0), //goes to score preload
-            PassiveSystem.altTripleShootSequence, //shoots 3 balls
-            ShooterSystem.autoAimOffCommand, //turns off autoaim command
-            PassiveSystem.maxIntakeCommand, //sets intake motor power to 1.0 and opens intake gate
-            FollowPath(Paths[1], true, 1.0), //goes to pickup first set of balls
-            Delay(0.25),
-            PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
-            Delay(0.25),
-            FollowPath(Paths[2], true, 1.0), //goes to open gate
-            Delay(1.5),
+            // Turn on auto aim for preload
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[3], true, 1.0), //goes to shoot first set of balls
+            // Go to preload score position
+            FollowPath(Paths[0], true, 1.0),
+            // Shoot preload, uses alt-tripleshoot because it is closer position
             PassiveSystem.altTripleShootSequence,
+            // Turn off auto aim for power saving
             ShooterSystem.autoAimOffCommand,
+            // Start intake for first row of balls
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[4], true, 1.0), //goes to pickup second set of balls
-            Delay(0.25),
+            // Pickup first row of balls
+            FollowPath(Paths[1], true, 1.0),
+            Delay(0.3),
+            // Stop intake for power save
             PassiveSystem.stopIntakeCommand,
-            Delay(0.25),
+            // Go to open gate
+            FollowPath(Paths[2], true, 1.0),
+            // Wait for gate opening
+            Delay(1.25),
+            // Turn on auto aim to shoot first row of balls
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[5], true, 1.0), //goes to shoot second set of balls
+            // Go to close shoot position for first row of balls
+            FollowPath(Paths[3], true, 1.0),
+            // Shoot first row, use alt-tripleshoot because it is closer position
             PassiveSystem.altTripleShootSequence,
+            // Turn off auto aim for power saving
             ShooterSystem.autoAimOffCommand,
+            // Start intake for second row of balls
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[6], true, 1.0), //goes to pickup third set of balls
-            Delay(0.25),
+            // Pickup second row of balls
+            FollowPath(Paths[4], true, 1.0),
+            Delay(0.3),
+            // Stop intake for power save
             PassiveSystem.stopIntakeCommand,
-            Delay(0.25),
+            // Turn on auto aim to shoot balls
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[7], true, 1.0), //goes to shoot third set of balls
+            // Go to close shoot position for second row of balls
+            FollowPath(Paths[5], true, 1.0),
+            // Shoot second row, use alt-tripleshoot because it is closer position
             PassiveSystem.altTripleShootSequence,
+            // Turn off auto aim for power saving
             ShooterSystem.autoAimOffCommand,
+            // Start intake for third row of balls
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[8], true, 1.0), //goes to front of gate
+            // Pickup third row of balls
+            FollowPath(Paths[6], true, 1.0),
+            Delay(0.3),
+            // Stop intake for power save
+            PassiveSystem.stopIntakeCommand,
+            // Turn on auto aim to shoot balls
+            ShooterSystem.autoAimOnCommand,
+            // Go to far shoot position for third row of balls
+            FollowPath(Paths[7], true, 1.0),
+            // Shoot third row, use tripleshoot because it is far position
+            PassiveSystem.tripleShootSequence,
+            // Turn off auto aaim for power saving
+            ShooterSystem.autoAimOffCommand,
+            // Go closer to gate for teleop ease of access
+            FollowPath(Paths[8], true, 1.0)
         )
         main.schedule()
     }
