@@ -39,7 +39,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
     lateinit var alliance: Alliance
 
     override fun onInit() {
-        if (startPose == null) {
+        if (startPose != null) {
             follower.setStartingPose(BlueTeleOpV1.startPose)
         } else {
             follower.setStartingPose(Pose(72.0,72.0,Math.toRadians(90.0)))

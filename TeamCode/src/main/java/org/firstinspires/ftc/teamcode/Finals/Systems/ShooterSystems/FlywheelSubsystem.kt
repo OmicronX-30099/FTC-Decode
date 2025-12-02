@@ -21,6 +21,7 @@ object FlywheelSubsystem: Subsystem {
 
     var flywheelAutoAim: Boolean = false
 
+
     override fun periodic() {
         if (flywheelAutoAim) { flywheelMotors.power = flywheeControl.calculate(flywheelMotors.state) }
         else { flywheelMotors.power = 0.35 }

@@ -57,4 +57,6 @@ public class Constants {
                 .mecanumDrivetrain(driveConstants)
                 .build();
     }
+    public static double fieldLength = 141.5;
+    public static double fieldWidth = 141.5;
 }

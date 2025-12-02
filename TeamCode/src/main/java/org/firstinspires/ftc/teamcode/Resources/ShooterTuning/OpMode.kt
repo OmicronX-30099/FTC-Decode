@@ -11,7 +11,7 @@ import dev.nextftc.hardware.impl.MotorEx
 @TeleOp
 class OpMode: NextFTCOpMode() {
     val panelsTelemetry = PanelsTelemetry.telemetry
-    val intake = MotorEx("intake")
+    val intake = MotorEx("intakeMotor")
 
     init {
         addComponents(
