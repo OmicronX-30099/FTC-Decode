@@ -78,7 +78,7 @@ class BlueTeleOpV1: NextFTCOpMode() {
             .whenBecomesTrue { drivetrain.scalar = 0.2 }
             .whenBecomesFalse { drivetrain.scalar = 1.0 }
         Gamepads.gamepad1.dpadLeft.or(Gamepads.gamepad2.dpadLeft)
-            .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose1) }
+            .whenBecomesTrue { follower.pose = this.alliance.resetPose1 }
         Gamepads.gamepad1.dpadDown.or(Gamepads.gamepad2.dpadDown)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose2) }
         Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
