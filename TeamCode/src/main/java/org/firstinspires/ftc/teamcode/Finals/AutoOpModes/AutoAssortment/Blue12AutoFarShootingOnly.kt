@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.AutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.Pose
@@ -21,8 +21,8 @@ import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 
-@Autonomous(name="BLUE-FarStart-MixedZones-12ball")
-class Blue12AutoFarStart: NextFTCOpMode() {
+@Autonomous(name="BLUE-far zone only-12ball")
+class Blue12AutoFarShootingOnly: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
@@ -54,6 +54,7 @@ class Blue12AutoFarStart: NextFTCOpMode() {
             ShooterSystem.autoAimOnCommand,
             Delay(1.0),
             FollowPath(Paths[2], true, 1.0), //goes to shoot first set of balls
+            Delay(1.25),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
@@ -63,6 +64,7 @@ class Blue12AutoFarStart: NextFTCOpMode() {
             Delay(0.25),
             ShooterSystem.autoAimOnCommand,
             FollowPath(Paths[4], true, 1.0), //goes to shoot second set of balls
+            Delay(1.25),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
@@ -110,22 +112,22 @@ class Blue12AutoFarStart: NextFTCOpMode() {
                 BezierCurve(
                     Pose(17.000, 67.000),
                     Pose(41.000, 63.425),
-                    Pose(58.750, 70.000)
+                    Pose(60.000, 23.000)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
             .build()
 
         val pickupSecond = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(58.750, 70.000),
-                    Pose(46.615, 85.085),
+                    Pose(60.000, 23.000),
+                    Pose(60.000, 83.500),
                     Pose(17.000, 83.500)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
             .build()
 
         val shootSecond = follower
@@ -134,22 +136,22 @@ class Blue12AutoFarStart: NextFTCOpMode() {
                 BezierCurve(
                     Pose(17.000, 83.500),
                     Pose(46.615, 85.085),
-                    Pose(58.750, 76.000)
+                    Pose(60.000, 23.000)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
             .build()
 
         val pickupThird = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(58.750, 76.000),
-                    Pose(63.008, 30.000),
+                    Pose(60.000, 23.000),
+                    Pose(60.000, 28.500),
                     Pose(10.000, 35.250)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
             .build()
 
         val shootThird = follower
@@ -170,7 +172,7 @@ class Blue12AutoFarStart: NextFTCOpMode() {
                 BezierCurve(
                     Pose(60.000, 23.000),
                     Pose(51.100, 58.250),
-                    Pose(23.500, 53.000)
+                    Pose(23.500, 58.000)
                 )
             )
             .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(160.0))

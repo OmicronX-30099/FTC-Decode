@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.AutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
@@ -18,7 +18,6 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
-import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 

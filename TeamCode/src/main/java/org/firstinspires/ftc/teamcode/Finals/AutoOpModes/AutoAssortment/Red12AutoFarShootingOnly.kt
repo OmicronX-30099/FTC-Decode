@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.AutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.Pose
@@ -17,12 +17,12 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
-import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 
-@Autonomous(name="BLUE-far zone only-12ball")
-class Blue12AutoFarShootingOnly: NextFTCOpMode() {
+@Autonomous(name="RED-far zone only-12ball")
+class Red12AutoFarShootingOnly: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
@@ -35,8 +35,8 @@ class Blue12AutoFarShootingOnly: NextFTCOpMode() {
     var Paths: Array<PathChain> = arrayOf()
 
     override fun onInit() {
-        ShooterSystem.setAlliance(Alliance.BLUE)
-        follower.setStartingPose(Pose(56.200, 8.900, Math.toRadians(90.0)))
+        ShooterSystem.setAlliance(Alliance.RED)
+        follower.setStartingPose(Pose(Constants.fieldWidth-56.200, 8.900, Math.toRadians(90.0)))
         this.buildPaths()
     }
     override fun onStartButtonPressed() {
@@ -86,96 +86,96 @@ class Blue12AutoFarShootingOnly: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(56.200, 8.900),
-                    Pose(65.000, 60.000),
-                    Pose(12.000, 57.000)
+                    Pose(Constants.fieldWidth-56.200, 8.900),
+                    Pose(Constants.fieldWidth-65.000, 60.000),
+                    Pose(Constants.fieldWidth-12.000, 57.000)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
             .build()
 
         val openGate = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(12.000, 57.000),
-                    Pose(38.000, 62.000),
-                    Pose(17.000, 67.000)
+                    Pose(Constants.fieldWidth-12.000, 57.000),
+                    Pose(Constants.fieldWidth-38.000, 62.000),
+                    Pose(Constants.fieldWidth-17.000, 67.000)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
 
         val shootFirst = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(17.000, 67.000),
-                    Pose(41.000, 63.425),
-                    Pose(60.000, 23.000)
+                    Pose(Constants.fieldWidth-17.000, 67.000),
+                    Pose(Constants.fieldWidth-41.000, 63.425),
+                    Pose(Constants.fieldWidth-60.000, 23.000)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
+            .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(90.0))
             .build()
 
         val pickupSecond = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(60.000, 23.000),
-                    Pose(60.000, 83.500),
-                    Pose(17.000, 83.500)
+                    Pose(Constants.fieldWidth-60.000, 23.000),
+                    Pose(Constants.fieldWidth-60.000, 83.500),
+                    Pose(Constants.fieldWidth-17.000, 83.500)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
             .build()
 
         val shootSecond = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(17.000, 83.500),
-                    Pose(46.615, 85.085),
-                    Pose(60.000, 23.000)
+                    Pose(Constants.fieldWidth-17.000, 83.500),
+                    Pose(Constants.fieldWidth-46.615, 85.085),
+                    Pose(Constants.fieldWidth-60.000, 23.000)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
+            .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(90.0))
             .build()
 
         val pickupThird = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(60.000, 23.000),
-                    Pose(60.000, 28.500),
-                    Pose(10.000, 35.250)
+                    Pose(Constants.fieldWidth-60.000, 23.000),
+                    Pose(Constants.fieldWidth-60.000, 28.500),
+                    Pose(Constants.fieldWidth-10.000, 35.250)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
             .build()
 
         val shootThird = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(10.000, 35.250),
-                    Pose(46.100, 38.300),
-                    Pose(60.000, 23.000)
+                    Pose(Constants.fieldWidth-10.000, 35.250),
+                    Pose(Constants.fieldWidth-46.100, 38.300),
+                    Pose(Constants.fieldWidth-60.000, 23.000)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
+            .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(90.0))
             .build()
 
         val leavePath = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(60.000, 23.000),
-                    Pose(51.100, 58.250),
-                    Pose(23.500, 58.000)
+                    Pose(Constants.fieldWidth-60.000, 23.000),
+                    Pose(Constants.fieldWidth-51.100, 58.250),
+                    Pose(Constants.fieldWidth-23.500, 58.000)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(160.0))
+            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(20.0))
             .build()
         
         Paths += pickupFirst
@@ -189,6 +189,6 @@ class Blue12AutoFarShootingOnly: NextFTCOpMode() {
     }
 
     override fun onStop() {
-        BlueTeleOpV1.startPose = follower.pose //stores robot position for teleop usage
+        RedTeleOpV1.startPose = follower.pose //stores robot position for teleop usage
     }
 }

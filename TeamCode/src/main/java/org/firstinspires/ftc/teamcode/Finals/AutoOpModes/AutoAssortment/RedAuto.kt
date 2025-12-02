@@ -18,7 +18,6 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
-import kotlin.math.PI
 
 
 @Autonomous(name = "Dan Red Auto")
