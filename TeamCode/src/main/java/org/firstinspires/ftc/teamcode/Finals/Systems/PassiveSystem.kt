@@ -2,14 +2,12 @@ package org.firstinspires.ftc.teamcode.Finals.Systems
 
 import com.qualcomm.robotcore.hardware.Gamepad
 import dev.nextftc.core.commands.Command
-import dev.nextftc.core.commands.conditionals.IfElseCommand
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.ftc.ActiveOpMode
-import dev.nextftc.ftc.Gamepads
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.IntakeGateSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.IntakeSubsystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystems.KickerSubsystem

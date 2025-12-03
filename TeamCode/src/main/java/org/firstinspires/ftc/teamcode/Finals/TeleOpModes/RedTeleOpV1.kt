@@ -2,10 +2,6 @@ package org.firstinspires.ftc.teamcode.Finals.TeleOpModes
 
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import dev.nextftc.core.commands.Command
-import dev.nextftc.core.commands.conditionals.SwitchCommand
-import dev.nextftc.core.commands.conditionals.switchCommand
-import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -83,6 +79,8 @@ class RedTeleOpV1: NextFTCOpMode() {
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose2) }
         Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
             .whenBecomesTrue { follower.setStartingPose(this.alliance.resetPose3) }
+
+        // Gamepad 2 manuals
     }
 
     override fun onUpdate() {
