@@ -15,6 +15,7 @@ import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.round
 import kotlin.math.sqrt
+import kotlin.properties.Delegates
 
 object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSubsystem) {
     val autoAimOnCommand: Command = InstantCommand { this.autoAimOn() }
@@ -28,6 +29,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     const val flywheelEquationF: Double = 122.99485320234648
     const val turretTicksPerRev: Double = (38450.0/24.0)
     lateinit var goalPose: Pose
+    var turretLimit: Double by Delegates.notNull()
 
     var fullAutoAim: Boolean = false
 
