@@ -36,10 +36,10 @@ class Blue12CloseAuto: NextFTCOpMode() {
 
     override fun onInit() {
         ShooterSystem.setAlliance(Alliance.BLUE)
-        PedroComponent.Companion.follower.setStartingPose(
+        follower.setStartingPose(
             Pose(
-                61.9400,
-                7.9800,
+                32.900,
+                131.300,
                 Math.toRadians(180.0)
             )
         )
@@ -48,7 +48,7 @@ class Blue12CloseAuto: NextFTCOpMode() {
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[0], true, 0.75),
+            FollowPath(Paths[0], true, 1.0),
             Delay(0.5),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
@@ -82,7 +82,9 @@ class Blue12CloseAuto: NextFTCOpMode() {
             Delay(0.2),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
-            FollowPath(Paths[8], true, 1.0), //goes to front of gate
+            FollowPath(Paths[8], true, 0.75), //goes to push bot
+            Delay(0.75),
+            FollowPath(Paths[9], true, 1.0) // goes to front of gate
         )
         main.schedule()
     }
@@ -192,6 +194,15 @@ class Blue12CloseAuto: NextFTCOpMode() {
             .build()
 
         Paths += shootPreload
+        Paths += firstIntake
+        Paths += openGate
+        Paths += firstShoot
+        Paths += secondIntake
+        Paths += secondShoot
+        Paths += thirdIntake
+        Paths += thirdShoot
+        Paths += pushBot
+        Paths += leavePath
     }
 
     override fun onStop() {
