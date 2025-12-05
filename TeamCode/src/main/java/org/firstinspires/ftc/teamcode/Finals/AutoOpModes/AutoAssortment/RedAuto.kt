@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 
-@Autonomous(name = "Dan Red Auto")
+@Autonomous(name = "Dan Red Auto",group="Tests")
 class RedAuto: NextFTCOpMode() {
     init {
         addComponents(

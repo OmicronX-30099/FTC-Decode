@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 
 
-@Autonomous(name="Achintya Blue 12 ball auto close")
+@Autonomous(name="Achintya Blue 12 ball auto close",group="Tests")
 class Blue12AutoClose: NextFTCOpMode() {
     init {
         addComponents(

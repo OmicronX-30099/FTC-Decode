@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 
-@Autonomous(name="BLUE-far zone only-12ball")
+@Autonomous(name="BLUE-far zone only-12ball",group="Tests")
 class Blue12AutoFarShootingOnly: NextFTCOpMode() {
     init {
         addComponents(

@@ -22,7 +22,7 @@ import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 
-@Autonomous(name="RED-Close zone only-12ball")
+@Autonomous(name="RED-Close zone only-12ball",group="Tests")
 class Red12AutoCloseShootingOnly: NextFTCOpMode() {
     init {
         addComponents(
