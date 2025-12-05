@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.AutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
+import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
@@ -36,153 +37,149 @@ class Blue12AutoFarStart: NextFTCOpMode() {
 
     override fun onInit() {
         ShooterSystem.setAlliance(Alliance.BLUE)
-        follower.setStartingPose(Pose(56.200, 8.900, Math.toRadians(90.0)))
+        follower.setStartingPose(Pose(61.9400, 7.9800, Math.toRadians(180.0)))
         this.buildPaths()
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
             ShooterSystem.autoAimOnCommand,
-            Delay(1.25),
+            FollowPath(Paths[0],true,0.75),
+            Delay(0.5),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[0], true, 1.0), //goes to pickup first set of balls
-            Delay(0.25),
+            FollowPath(Paths[1], true, 1.0), //goes to pickup first set of balls
+            Delay(0.3),
             PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
-            Delay(0.25),
-            FollowPath(Paths[1], true, 1.0), //goes to open gate
-            ShooterSystem.autoAimOnCommand,
+            Delay(0.1),
+            FollowPath(Paths[2], true, 0.65), //goes to open gate
             Delay(1.0),
-            FollowPath(Paths[2], true, 1.0), //goes to shoot first set of balls
+            ShooterSystem.autoAimOnCommand,
+            FollowPath(Paths[3], true, 1.0), //goes to shoot first set of balls
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[3], true, 1.0), //goes to pickup second set of balls
-            Delay(0.25),
+            FollowPath(Paths[4], true, 1.0), //goes to pickup second set of balls
+            Delay(0.3),
             PassiveSystem.stopIntakeCommand,
-            Delay(0.25),
+            Delay(0.1),
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[4], true, 1.0), //goes to shoot second set of balls
+            FollowPath(Paths[5], true, 1.0), //goes to shoot second set of balls
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[5], true, 1.0), //goes to pickup third set of balls
-            Delay(0.25),
+            FollowPath(Paths[6], true, 1.0), //goes to pickup third set of balls
+            Delay(0.3),
             PassiveSystem.stopIntakeCommand,
-            Delay(0.25),
+            Delay(0.1),
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[6], true, 1.0), //goes to shoot third set of balls
-            Delay(1.25),
+            FollowPath(Paths[7], true, 1.0), //goes to shoot third set of balls
+            Delay(0.2),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
-            FollowPath(Paths[7], true, 1.0), //goes to front of gate
+            FollowPath(Paths[8], true, 1.0), //goes to front of gate
         )
         main.schedule()
     }
     fun buildPaths() {
-        val pickupFirst = follower
+        val pushBot = follower
+            .pathBuilder()
+            .addPath(BezierLine(Pose(61.940, 7.980), Pose(47.470, 7.980)))
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .build()
+
+        val firstIntake = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(56.200, 8.900),
-                    Pose(65.000, 60.000),
-                    Pose(12.000, 57.000)
+                    Pose(47.470, 7.980),
+                    Pose(48.835, 66.370),
+                    Pose(12.000, 58.810)
                 )
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
         val openGate = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(12.000, 57.000),
-                    Pose(38.000, 62.000),
-                    Pose(17.000, 67.000)
+                    Pose(12.000, 58.810),
+                    Pose(37.3600, 63.650),
+                    Pose(19.125, 64.630)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val shootFirst = follower
+        val firstShoot = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(17.000, 67.000),
-                    Pose(41.000, 63.425),
-                    Pose(58.750, 70.000)
+                    Pose(19.125, 64.630),
+                    Pose(43.400, 66.200),
+                    Pose(57.300, 82.380)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val pickupSecond = follower
+        val secondIntake = follower
+            .pathBuilder()
+            .addPath(
+                BezierLine(Pose(57.300, 82.380), Pose(19.250, 82.380))
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .build()
+
+        val secondShoot = follower
+            .pathBuilder()
+            .addPath(
+                BezierLine(Pose(19.250, 82.380), Pose(57.300, 82.380))
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .build()
+
+        val thirdIntake = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(58.750, 70.000),
-                    Pose(46.615, 85.085),
-                    Pose(17.000, 83.500)
+                    Pose(57.300, 82.380),
+                    Pose(63.250, 31.930),
+                    Pose(11.060, 38.280)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
 
-        val shootSecond = follower
+        val thirdShoot = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(17.000, 83.500),
-                    Pose(46.615, 85.085),
-                    Pose(58.750, 76.000)
+                    Pose(11.060, 38.280),
+                    Pose(34.450, 29.300),
+                    Pose(62.300, 29.750)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        val pickupThird = follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(58.750, 76.000),
-                    Pose(63.008, 30.000),
-                    Pose(10.000, 35.250)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        val shootThird = follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(10.000, 35.250),
-                    Pose(46.100, 38.300),
-                    Pose(60.000, 23.000)
-                )
-            )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
             .build()
 
         val leavePath = follower
             .pathBuilder()
             .addPath(
-                BezierCurve(
-                    Pose(60.000, 23.000),
-                    Pose(51.100, 58.250),
-                    Pose(23.500, 53.000)
-                )
+                BezierLine(Pose(62.300, 29.750), Pose(35.280, 70.560))
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(160.0))
+            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(0.0))
             .build()
         
-        Paths += pickupFirst
+        Paths += pushBot
+        Paths += firstIntake
         Paths += openGate
-        Paths += shootFirst
-        Paths += pickupSecond
-        Paths += shootSecond
-        Paths += pickupThird
-        Paths += shootThird
+        Paths += firstShoot
+        Paths += secondIntake
+        Paths += secondShoot
+        Paths += thirdIntake
+        Paths += thirdShoot
         Paths += leavePath
     }
 
