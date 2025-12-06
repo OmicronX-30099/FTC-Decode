@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.DisabledAutoAssortment
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.Blue
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
-import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
@@ -19,16 +19,18 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
+import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
+import kotlin.math.abs
 
-@Disabled
-@Autonomous(name="BLUE-FarStart-MixedZones-12ball",group="Tests")
-class Blue12AutoFarStart: NextFTCOpMode() {
+
+@Autonomous(name="Blue far auto", group="Blue Final")
+class BlueFarAuto: NextFTCOpMode() {
     init {
         addComponents(
-            BulkReadComponent,
             LoopTimeComponent(),
+            BulkReadComponent,
             PedroComponent(Constants::createFollower),
             SubsystemComponent(ShooterSystem, PassiveSystem, IndicatorSystem)
         )
@@ -38,141 +40,143 @@ class Blue12AutoFarStart: NextFTCOpMode() {
 
     override fun onInit() {
         ShooterSystem.setAlliance(Alliance.BLUE)
-        follower.setStartingPose(Pose(61.9400, 7.9800, Math.toRadians(180.0)))
+        follower.setStartingPose(
+            Pose(
+                61.9400,
+                7.9800,
+                Math.toRadians(180.0)
+            )
+        )
         this.buildPaths()
     }
+
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
+            FollowPath(Paths[0],true,0.7),
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[0],true,0.75),
-            Delay(0.5),
+            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
+            Delay(0.25),
             PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[1], true, 1.0), //goes to pickup first set of balls
-            Delay(0.3),
-            PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
-            Delay(0.1),
-            FollowPath(Paths[2], true, 0.65), //goes to open gate
-            Delay(1.0),
-            ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[3], true, 1.0), //goes to shoot first set of balls
-            PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
-            PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[4], true, 1.0), //goes to pickup second set of balls
-            Delay(0.3),
-            PassiveSystem.stopIntakeCommand,
-            Delay(0.1),
-            ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[5], true, 1.0), //goes to shoot second set of balls
-            PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
-            PassiveSystem.maxIntakeCommand,
-            FollowPath(Paths[6], true, 1.0), //goes to pickup third set of balls
-            Delay(0.3),
-            PassiveSystem.stopIntakeCommand,
-            Delay(0.1),
-            ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[7], true, 1.0), //goes to shoot third set of balls
+            FollowPath(Paths[1],true,1.0),
             Delay(0.2),
+            PassiveSystem.stopIntakeCommand,
+            Delay(0.2),
+            FollowPath(Paths[2],true,0.55),
+            ShooterSystem.autoAimOnCommand,
+            Delay(0.75),
+            FollowPath(Paths[3],true,1.0),
+            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
-            FollowPath(Paths[8], true, 1.0), //goes to front of gate
+            Delay(0.25),
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[4],true,1.0),
+            Delay(0.2),
+            PassiveSystem.stopIntakeCommand,
+            ShooterSystem.autoAimOnCommand,
+            Delay(0.2),
+            FollowPath(Paths[5],true,1.0),
+            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
+            PassiveSystem.altTripleShootSequence,
+            Delay(0.25),
+            PassiveSystem.maxIntakeCommand,
+            FollowPath(Paths[6],true,1.0),
+            Delay(0.2),
+            PassiveSystem.stopIntakeCommand,
+            ShooterSystem.autoAimOnCommand,
+            Delay(0.2),
+            FollowPath(Paths[7],true,1.0),
+            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
+            Delay(0.1),
+            PassiveSystem.altTripleShootSequence,
+            Delay(0.25),
+            FollowPath(Paths[8],true,1.0),
+            ShooterSystem.autoAimOffCommand
         )
         main.schedule()
     }
+
     fun buildPaths() {
-        val pushBot = follower
-            .pathBuilder()
-            .addPath(BezierLine(Pose(61.940, 7.980), Pose(47.470, 7.980)))
+        val pushBot = follower.pathBuilder()
+            .addPath(BezierLine(
+                Pose(61.94,7.98),
+                Pose(45.0,7.98)
+            ))
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val firstIntake = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(47.470, 7.980),
-                    Pose(48.835, 66.370),
-                    Pose(12.000, 58.810)
+                    Pose(45.000, 7.980),
+                    Pose(61.800, 71.600),
+                    Pose(11.000, 58.500)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val openGate = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(12.000, 58.810),
-                    Pose(37.3600, 63.650),
-                    Pose(19.125, 64.630)
+                    Pose(11.000, 58.500),
+                    Pose(46.400, 62.850),
+                    Pose(18.250, 63.80)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val firstShoot = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(19.125, 64.630),
-                    Pose(43.400, 66.200),
-                    Pose(57.300, 82.380)
+                    Pose(18.250, 62.750),
+                    Pose(47.500, 62.850),
+                    Pose(59.250, 82.20)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val secondIntake = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(57.300, 82.380), Pose(19.250, 82.380))
+                BezierLine(Pose(59.250, 82.200), Pose(16.250, 82.200))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val secondShoot = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(19.250, 82.380), Pose(57.300, 82.380))
+                BezierLine(Pose(16.250, 82.200), Pose(59.250, 82.200))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val thirdIntake = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(57.300, 82.380),
-                    Pose(63.250, 31.930),
-                    Pose(11.060, 38.280)
+                    Pose(59.250, 82.200),
+                    Pose(59.150, 29.500),
+                    Pose(11.000, 37.750)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val thirdShoot = follower
             .pathBuilder()
             .addPath(
-                BezierCurve(
-                    Pose(11.060, 38.280),
-                    Pose(34.450, 29.300),
-                    Pose(62.300, 29.750)
-                )
+                BezierLine(Pose(11.000, 37.750), Pose(60.000, 23.375))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val leavePath = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(62.300, 29.750), Pose(35.280, 70.560))
+                BezierLine(Pose(60.000, 23.750), Pose(48.000, 72.000))
             )
             .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(0.0))
             .build()
-        
+
         Paths += pushBot
         Paths += firstIntake
         Paths += openGate
@@ -183,8 +187,7 @@ class Blue12AutoFarStart: NextFTCOpMode() {
         Paths += thirdShoot
         Paths += leavePath
     }
-
     override fun onStop() {
-        BlueTeleOpV1.startPose = follower.pose //stores robot position for teleop usage
+        BlueTeleOpV1.startPose = follower.pose
     }
 }

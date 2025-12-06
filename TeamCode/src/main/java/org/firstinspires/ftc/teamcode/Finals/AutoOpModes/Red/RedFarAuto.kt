@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Blue
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.Red
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
@@ -20,13 +20,13 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
-import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
 
 
-@Autonomous(name="Blue far auto", group="Blue Final")
-class BlueFarAuto: NextFTCOpMode() {
+@Autonomous(name="Red far auto", group="Red Final")
+class RedFarAuto: NextFTCOpMode() {
     init {
         addComponents(
             LoopTimeComponent(),
@@ -39,12 +39,12 @@ class BlueFarAuto: NextFTCOpMode() {
     var Paths: Array<PathChain> = arrayOf()
 
     override fun onInit() {
-        ShooterSystem.setAlliance(Alliance.BLUE)
+        ShooterSystem.setAlliance(Alliance.RED)
         follower.setStartingPose(
             Pose(
-                61.9400,
+                79.56,
                 7.9800,
-                Math.toRadians(180.0)
+                Math.toRadians(0.0)
             )
         )
         this.buildPaths()
@@ -99,82 +99,82 @@ class BlueFarAuto: NextFTCOpMode() {
     fun buildPaths() {
         val pushBot = follower.pathBuilder()
             .addPath(BezierLine(
-                Pose(61.94,7.98),
-                Pose(45.0,7.98)
+                Pose(79.56,7.98),
+                Pose(96.5,7.98)
             ))
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val firstIntake = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(45.000, 7.980),
-                    Pose(61.800, 71.600),
-                    Pose(11.000, 58.500)
+                    Pose(96.500, 7.980),
+                    Pose(79.7, 71.600),
+                    Pose(130.500, 58.500)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val openGate = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(11.000, 58.500),
-                    Pose(46.400, 62.850),
-                    Pose(18.250, 63.80)
+                    Pose(130.500, 58.500),
+                    Pose(95.100, 62.850),
+                    Pose(123.250, 63.80)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val firstShoot = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(18.250, 62.750),
-                    Pose(47.500, 62.850),
-                    Pose(59.250, 82.20)
+                    Pose(123.250, 62.750),
+                    Pose(94.000, 62.850),
+                    Pose(82.250, 82.20)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val secondIntake = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(59.250, 82.200), Pose(16.250, 82.200))
+                BezierLine(Pose(82.250, 82.200), Pose(125.250, 82.200))
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val secondShoot = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(16.250, 82.200), Pose(59.250, 82.200))
+                BezierLine(Pose(125.250, 82.200), Pose(82.250, 82.200))
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val thirdIntake = follower
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(59.250, 82.200),
-                    Pose(59.150, 29.500),
-                    Pose(11.000, 37.750)
+                    Pose(82.250, 82.200),
+                    Pose(82.350, 29.500),
+                    Pose(130.500, 37.750)
                 )
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val thirdShoot = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(11.000, 37.750), Pose(60.000, 23.375))
+                BezierLine(Pose(130.500, 37.750), Pose(81.500, 23.375))
             )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .setConstantHeadingInterpolation(Math.toRadians(0.0))
             .build()
         val leavePath = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(60.000, 23.750), Pose(48.000, 72.000))
+                BezierLine(Pose(81.500, 23.750), Pose(93.500, 72.000))
             )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(0.0))
+            .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(180.0))
             .build()
 
         Paths += pushBot
@@ -188,6 +188,6 @@ class BlueFarAuto: NextFTCOpMode() {
         Paths += leavePath
     }
     override fun onStop() {
-        BlueTeleOpV1.startPose = follower.pose
+        RedTeleOpV1.startPose = follower.pose
     }
 }

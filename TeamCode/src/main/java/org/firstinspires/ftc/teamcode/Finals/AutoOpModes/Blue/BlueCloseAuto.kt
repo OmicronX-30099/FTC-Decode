@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Blue
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.Blue
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
