@@ -20,6 +20,8 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
 
@@ -38,7 +40,7 @@ class RedFarRedo: NextFTCOpMode() {
     var Paths: Array<PathChain> = arrayOf()
 
     override fun onInit() {
-        ShooterSystem.setAlliance(Alliance.BLUE)
+        ShooterSystem.setAlliance(Alliance.RED)
         follower.setStartingPose(
             Pose(
                 79.56,
@@ -185,5 +187,8 @@ class RedFarRedo: NextFTCOpMode() {
         Paths += thirdIntake
         Paths += thirdShoot
         Paths += leavePath
+    }
+    override fun onStop() {
+        RedTeleOpV1.startPose = follower.pose
     }
 }

@@ -20,6 +20,7 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
+import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
 
@@ -185,5 +186,8 @@ class BlueFarAuto: NextFTCOpMode() {
         Paths += thirdIntake
         Paths += thirdShoot
         Paths += leavePath
+    }
+    override fun onStop() {
+        BlueTeleOpV1.startPose = follower.pose
     }
 }
