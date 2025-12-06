@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Blues
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.DisabledAutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
@@ -21,9 +21,10 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
+
 @Disabled
-@Autonomous(name="Blue 12 ball, Far Start",group="Finals")
-class Blue12FarAuto: NextFTCOpMode() {
+@Autonomous(name="BLUE-FarStart-MixedZones-12ball",group="Tests")
+class Blue12AutoFarStart: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
@@ -37,19 +38,13 @@ class Blue12FarAuto: NextFTCOpMode() {
 
     override fun onInit() {
         ShooterSystem.setAlliance(Alliance.BLUE)
-        follower.setStartingPose(
-            Pose(
-                61.9400,
-                7.9800,
-                Math.toRadians(180.0)
-            )
-        )
+        follower.setStartingPose(Pose(61.9400, 7.9800, Math.toRadians(180.0)))
         this.buildPaths()
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
             ShooterSystem.autoAimOnCommand,
-            FollowPath(Paths[0], true, 0.75),
+            FollowPath(Paths[0],true,0.75),
             Delay(0.5),
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
@@ -177,7 +172,7 @@ class Blue12FarAuto: NextFTCOpMode() {
             )
             .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(0.0))
             .build()
-
+        
         Paths += pushBot
         Paths += firstIntake
         Paths += openGate
@@ -190,6 +185,6 @@ class Blue12FarAuto: NextFTCOpMode() {
     }
 
     override fun onStop() {
-        BlueTeleOpV1.Companion.startPose = follower.pose //stores robot position for teleop usage
+        BlueTeleOpV1.startPose = follower.pose //stores robot position for teleop usage
     }
 }

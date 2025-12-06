@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.AutoAssortment
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.DisabledAutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine

@@ -1,12 +1,14 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.AutoAssortment
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.DisabledAutoAssortment
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
+import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -18,12 +20,13 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
+import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
 import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 @Disabled
-@Autonomous(name="BLUE-far zone only-12ball",group="Tests")
-class Blue12AutoFarShootingOnly: NextFTCOpMode() {
+@Autonomous(name="BLUE-far zone only-12ball-v2",group="Tests")
+class Blue12AutoFarShootingOnlyV2: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
@@ -42,42 +45,50 @@ class Blue12AutoFarShootingOnly: NextFTCOpMode() {
     }
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
-            ShooterSystem.autoAimOnCommand,
+            InstantCommand { ShooterSystem.calibrateTurret(follower.pose) },
+            InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
+            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1520.0) },
+            InstantCommand { FlywheelSubsystem.flywheelAutoAim = true},
             Delay(1.25),
             PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
             FollowPath(Paths[0], true, 1.0), //goes to pickup first set of balls
             Delay(0.25),
             PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
             Delay(0.25),
             FollowPath(Paths[1], true, 1.0), //goes to open gate
-            ShooterSystem.autoAimOnCommand,
+            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1480.0) },
             Delay(1.0),
             FollowPath(Paths[2], true, 1.0), //goes to shoot first set of balls
-            Delay(1.25),
+            InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
+            Delay(0.5),
+            InstantCommand { ShooterSystem.calibrateTurret(follower.pose) },
+            Delay(0.75),
             PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
             FollowPath(Paths[3], true, 1.0), //goes to pickup second set of balls
             Delay(0.25),
             PassiveSystem.stopIntakeCommand,
             Delay(0.25),
-            ShooterSystem.autoAimOnCommand,
+            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1480.0) },
             FollowPath(Paths[4], true, 1.0), //goes to shoot second set of balls
-            Delay(1.25),
+            InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
+            Delay(0.5),
+            InstantCommand { ShooterSystem.calibrateTurret(follower.pose) },
+            Delay(0.75),
             PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
             FollowPath(Paths[5], true, 1.0), //goes to pickup third set of balls
             Delay(0.25),
             PassiveSystem.stopIntakeCommand,
             Delay(0.25),
-            ShooterSystem.autoAimOnCommand,
+            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1480.0) },
             FollowPath(Paths[6], true, 1.0), //goes to shoot third set of balls
-            Delay(1.25),
+            InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
+            Delay(0.5),
+            InstantCommand { ShooterSystem.calibrateTurret(follower.pose) },
+            Delay(0.75),
             PassiveSystem.altTripleShootSequence,
-            ShooterSystem.autoAimOffCommand,
             FollowPath(Paths[7], true, 1.0), //goes to front of gate
         )
         main.schedule()
