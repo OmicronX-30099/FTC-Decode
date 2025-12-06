@@ -5,6 +5,7 @@ import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.SequentialGroup
@@ -25,7 +26,7 @@ import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
 
-
+@Disabled()
 @Autonomous(name="Blue close auto", group="Blue Final")
 class BlueCloseAuto: NextFTCOpMode() {
     init {
