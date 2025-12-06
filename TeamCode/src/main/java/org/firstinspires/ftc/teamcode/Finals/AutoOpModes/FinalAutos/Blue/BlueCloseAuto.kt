@@ -145,7 +145,7 @@ class BlueCloseAuto: NextFTCOpMode() {
                 BezierCurve(
                     Pose(59.250, 82.200),
                     Pose(48.350, 52.700),
-                    Pose(11.000, 58.500)
+                    Pose(11.000, 57.500)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
@@ -155,7 +155,7 @@ class BlueCloseAuto: NextFTCOpMode() {
             .pathBuilder()
             .addPath(
                 BezierCurve(
-                    Pose(11.000, 58.500),
+                    Pose(11.000, 57.500),
                     Pose(47.500, 62.850),
                     Pose(59.250, 82.200)
                 )
