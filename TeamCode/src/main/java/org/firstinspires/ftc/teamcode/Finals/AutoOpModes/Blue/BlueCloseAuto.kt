@@ -40,7 +40,7 @@ class BlueCloseAuto: NextFTCOpMode() {
             Pose(
                  32.9,
                 131.3,
-                Math.toRadians(0.0)
+                Math.toRadians(180.0)
             )
         )
         this.buildPaths()
