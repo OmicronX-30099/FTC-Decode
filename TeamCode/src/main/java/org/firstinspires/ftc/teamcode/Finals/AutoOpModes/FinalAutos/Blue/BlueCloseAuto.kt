@@ -120,7 +120,7 @@ class BlueCloseAuto: NextFTCOpMode() {
             .addPath(
                 BezierCurve(
                     Pose(16.250, 82.200),
-                    Pose(36.200, 81.10),
+                    Pose(58.750, 81.100),
                     Pose(18.250, 79.250)
                 )
             )
@@ -168,7 +168,7 @@ class BlueCloseAuto: NextFTCOpMode() {
             .addPath(
                 BezierCurve(
                     Pose(59.250, 82.200),
-                    Pose(59.150, 29.500),
+                    Pose(60.650, 25.300),
                     Pose(11.000, 37.750)
                 )
             )
