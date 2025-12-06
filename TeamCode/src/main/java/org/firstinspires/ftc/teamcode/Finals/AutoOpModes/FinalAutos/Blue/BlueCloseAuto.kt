@@ -63,7 +63,7 @@ class BlueCloseAuto: NextFTCOpMode() {
             Delay(0.2),
             PassiveSystem.stopIntakeCommand,
             Delay(0.2),
-            FollowPath(Paths[2],true,0.55),
+            FollowPath(Paths[2],true,0.375),
             ShooterSystem.autoAimOnCommand,
             Delay(0.75),
             FollowPath(Paths[3],true,1.0),
