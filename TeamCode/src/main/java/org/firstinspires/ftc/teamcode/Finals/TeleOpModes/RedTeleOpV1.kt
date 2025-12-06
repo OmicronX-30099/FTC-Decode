@@ -40,7 +40,7 @@ class RedTeleOpV1: NextFTCOpMode() {
 
     override fun onInit() {
         if (startPose != null) {
-            follower.setStartingPose(BlueTeleOpV1.startPose)
+            follower.setStartingPose(RedTeleOpV1.startPose)
         } else {
             follower.setStartingPose(Pose(72.0,72.0,Math.toRadians(90.0)))
         }
@@ -92,6 +92,6 @@ class RedTeleOpV1: NextFTCOpMode() {
         telemetry.update()
     }
     override fun onStop() {
-        BlueTeleOpV1.startPose = null
+        RedTeleOpV1.startPose = null
     }
 }
