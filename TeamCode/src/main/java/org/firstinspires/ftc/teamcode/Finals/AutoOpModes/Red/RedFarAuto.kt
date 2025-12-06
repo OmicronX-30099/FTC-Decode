@@ -157,7 +157,7 @@ class RedFarAuto: NextFTCOpMode() {
                 BezierCurve(
                     Pose(82.250, 82.200),
                     Pose(82.350, 29.500),
-                    Pose(130.500, 37.750)
+                    Pose(130.500, 35.250)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(0.0))

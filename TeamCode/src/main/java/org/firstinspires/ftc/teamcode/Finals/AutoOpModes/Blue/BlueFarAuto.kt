@@ -157,7 +157,7 @@ class BlueFarAuto: NextFTCOpMode() {
                 BezierCurve(
                     Pose(59.250, 82.200),
                     Pose(59.150, 29.500),
-                    Pose(11.000, 37.750)
+                    Pose(11.000, 35.250)
                 )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
