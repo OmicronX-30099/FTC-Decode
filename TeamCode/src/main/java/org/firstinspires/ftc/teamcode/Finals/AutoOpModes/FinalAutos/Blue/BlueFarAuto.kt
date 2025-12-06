@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Blues
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Blue
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
@@ -24,8 +24,8 @@ import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
 
 
-@Autonomous(name="Blue far auto", group="")
-class BlueFarRedo: NextFTCOpMode() {
+@Autonomous(name="Blue far auto", group="Blue Final")
+class BlueFarAuto: NextFTCOpMode() {
     init {
         addComponents(
             LoopTimeComponent(),

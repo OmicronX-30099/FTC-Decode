@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Blues
+package org.firstinspires.ftc.teamcode.Finals.AutoOpModes.FinalAutos.Red
 
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
@@ -24,8 +24,8 @@ import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
 
 
-@Autonomous(name="Blue close auto", group="")
-class BlueCloseRedo: NextFTCOpMode() {
+@Autonomous(name="Red far auto", group="Red Final")
+class RedFarRedo: NextFTCOpMode() {
     init {
         addComponents(
             LoopTimeComponent(),
@@ -51,7 +51,7 @@ class BlueCloseRedo: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         val main = SequentialGroup(
-            FollowPath(Paths[0],true,1.0),
+            FollowPath(Paths[0],true,0.7),
             ShooterSystem.autoAimOnCommand,
             WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             PassiveSystem.altTripleShootSequence,
@@ -89,78 +89,67 @@ class BlueCloseRedo: NextFTCOpMode() {
             Delay(0.1),
             PassiveSystem.altTripleShootSequence,
             Delay(0.25),
-            FollowPath(Paths[8],true,0.6),
-            ShooterSystem.autoAimOffCommand,
-            FollowPath(Paths[9],true,0.9),
+            FollowPath(Paths[8],true,1.0),
+            ShooterSystem.autoAimOffCommand
         )
         main.schedule()
     }
 
     fun buildPaths() {
-        val shootPreload = follower
+        val pushBot = follower.pathBuilder()
+            .addPath(BezierLine(
+                Pose(61.94,7.98),
+                Pose(45.0,7.98)
+            ))
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .build()
+        val firstIntake = follower
             .pathBuilder()
             .addPath(
-                BezierLine(Pose(32.900, 132.000), Pose(59.250, 82.200))
+                BezierCurve(
+                    Pose(45.000, 7.980),
+                    Pose(61.800, 71.600),
+                    Pose(11.000, 58.500)
+                )
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
-        val firstIntake = follower
+        val openGate = follower
+            .pathBuilder()
+            .addPath(
+                BezierCurve(
+                    Pose(11.000, 58.500),
+                    Pose(46.400, 62.850),
+                    Pose(18.250, 63.80)
+                )
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .build()
+        val firstShoot = follower
+            .pathBuilder()
+            .addPath(
+                BezierCurve(
+                    Pose(18.250, 62.750),
+                    Pose(47.500, 62.850),
+                    Pose(59.250, 82.20)
+                )
+            )
+            .setConstantHeadingInterpolation(Math.toRadians(180.0))
+            .build()
+        val secondIntake = follower
             .pathBuilder()
             .addPath(
                 BezierLine(Pose(59.250, 82.200), Pose(16.250, 82.200))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
-        val openGate = follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(16.250, 82.200),
-                    Pose(46.400, 79.150),
-                    Pose(18.250, 79.250)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        val firstShoot = follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(18.250, 79.250),
-                    Pose(36.900, 83.000),
-                    Pose(59.250, 82.200)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
-        val secondIntake = follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(59.250, 82.200),
-                    Pose(48.350, 52.700),
-                    Pose(11.000, 58.500)
-                )
-            )
-            .setConstantHeadingInterpolation(Math.toRadians(180.0))
-            .build()
-
         val secondShoot = follower
             .pathBuilder()
             .addPath(
-                BezierCurve(
-                    Pose(11.000, 58.500),
-                    Pose(47.500, 62.850),
-                    Pose(59.250, 82.200)
-                )
+                BezierLine(Pose(16.250, 82.200), Pose(59.250, 82.200))
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val thirdIntake = follower
             .pathBuilder()
             .addPath(
@@ -172,7 +161,6 @@ class BlueCloseRedo: NextFTCOpMode() {
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
         val thirdShoot = follower
             .pathBuilder()
             .addPath(
@@ -180,32 +168,15 @@ class BlueCloseRedo: NextFTCOpMode() {
             )
             .setConstantHeadingInterpolation(Math.toRadians(180.0))
             .build()
-
-        val pushBot = follower
-            .pathBuilder()
-            .addPath(
-                BezierCurve(
-                    Pose(60.000, 23.375),
-                    Pose(60.480, 10.750),
-                    Pose(45.000, 7.980)
-                )
-            )
-            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(90.0))
-            .build()
-
         val leavePath = follower
             .pathBuilder()
             .addPath(
-                BezierCurve(
-                    Pose(45.000, 7.980),
-                    Pose(57.700, 40.550),
-                    Pose(48.000, 72.000)
-                )
+                BezierLine(Pose(60.000, 23.750), Pose(48.000, 72.000))
             )
-            .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
+            .setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(0.0))
             .build()
 
-        Paths += shootPreload
+        Paths += pushBot
         Paths += firstIntake
         Paths += openGate
         Paths += firstShoot
@@ -213,7 +184,6 @@ class BlueCloseRedo: NextFTCOpMode() {
         Paths += secondShoot
         Paths += thirdIntake
         Paths += thirdShoot
-        Paths += pushBot
         Paths += leavePath
     }
 }
