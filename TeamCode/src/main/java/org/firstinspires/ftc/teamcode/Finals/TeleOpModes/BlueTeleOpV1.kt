@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.Finals.Constants
 import org.firstinspires.ftc.teamcode.Finals.Systems.*
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
-@TeleOp(name="Blue TeleOp V1")
+@TeleOp(name="Blue TeleOp V1", group="Final")
 class BlueTeleOpV1: NextFTCOpMode() {
     init {
         addComponents(
