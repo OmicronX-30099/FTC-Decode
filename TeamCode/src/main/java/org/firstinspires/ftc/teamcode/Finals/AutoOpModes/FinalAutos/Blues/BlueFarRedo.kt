@@ -90,6 +90,7 @@ class BlueFarRedo: NextFTCOpMode() {
             PassiveSystem.altTripleShootSequence,
             Delay(0.25),
             FollowPath(Paths[8],true,1.0),
+            ShooterSystem.autoAimOffCommand
         )
         main.schedule()
     }
