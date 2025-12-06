@@ -49,9 +49,9 @@ class Blue12AutoCloseShootingOnly: NextFTCOpMode() {
             ShooterSystem.autoAimOffCommand, //turns off autoaim command
             PassiveSystem.maxIntakeCommand, //sets intake motor power to 1.0 and opens intake gate
             FollowPath(Paths[1], true, 1.0), //goes to pickup first set of balls
-            Delay(0.25),
+            Delay(0.3),
             PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
-            Delay(0.25),
+            Delay(0.1),
             FollowPath(Paths[2], true, 1.0), //goes to open gate
             Delay(1.5),
             ShooterSystem.autoAimOnCommand,
@@ -60,18 +60,18 @@ class Blue12AutoCloseShootingOnly: NextFTCOpMode() {
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
             FollowPath(Paths[4], true, 1.0), //goes to pickup second set of balls
-            Delay(0.25),
+            Delay(0.3),
             PassiveSystem.stopIntakeCommand,
-            Delay(0.25),
+            Delay(0.1),
             ShooterSystem.autoAimOnCommand,
             FollowPath(Paths[5], true, 1.0), //goes to shoot second set of balls
             PassiveSystem.altTripleShootSequence,
             ShooterSystem.autoAimOffCommand,
             PassiveSystem.maxIntakeCommand,
             FollowPath(Paths[6], true, 1.0), //goes to pickup third set of balls
-            Delay(0.25),
+            Delay(0.3),
             PassiveSystem.stopIntakeCommand,
-            Delay(0.25),
+            Delay(0.1),
             ShooterSystem.autoAimOnCommand,
             FollowPath(Paths[7], true, 1.0), //goes to shoot third set of balls
             PassiveSystem.altTripleShootSequence,
