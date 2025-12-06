@@ -4,6 +4,7 @@ import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
@@ -23,7 +24,7 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubs
 import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
-
+@Disabled
 @Autonomous(name="BLUE-far zone only-12ball-v2",group="Tests")
 class Blue12AutoFarShootingOnlyV2: NextFTCOpMode() {
     init {

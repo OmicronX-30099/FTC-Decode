@@ -5,6 +5,7 @@ import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathChain
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.components.SubsystemComponent
@@ -22,9 +23,9 @@ import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.PI
 
-
+@Disabled
 @Autonomous(name="Achintya Blue 12 ball auto close",group="Tests")
-class Blue12AutoClose: NextFTCOpMode() {
+class Blue12AutoCloseStart: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
