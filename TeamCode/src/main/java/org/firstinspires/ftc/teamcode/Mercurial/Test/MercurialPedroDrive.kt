@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Test
+package org.firstinspires.ftc.teamcode.Mercurial.Test
 
 import com.pedropathing.follower.Follower
 import com.pedropathing.geometry.Pose
@@ -6,10 +6,9 @@ import dev.frozenmilk.dairy.mercurial.continuations.Closure
 import dev.frozenmilk.dairy.mercurial.continuations.Continuations.exec
 import dev.frozenmilk.dairy.mercurial.continuations.Continuations.loop
 import dev.frozenmilk.dairy.mercurial.continuations.Continuations.match
-import dev.frozenmilk.dairy.mercurial.continuations.Continuations.sequence
 import dev.frozenmilk.dairy.mercurial.continuations.Continuations.wait
 import dev.frozenmilk.dairy.mercurial.ftc.Mercurial
-import org.firstinspires.ftc.teamcode.Constants
+import org.firstinspires.ftc.teamcode.Mercurial.Constants
 import java.lang.Math.toRadians
 import kotlin.properties.Delegates
 
