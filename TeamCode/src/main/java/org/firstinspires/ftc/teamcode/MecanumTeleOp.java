@@ -55,6 +55,7 @@ public class MecanumTeleOp extends LinearOpMode {
 
             telemetry.addData("Loop Times", elapsedtime.milliseconds());
             elapsedtime.reset();
+            telemetry.update();
         }
     }
 }

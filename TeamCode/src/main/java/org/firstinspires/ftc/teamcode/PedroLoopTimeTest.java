@@ -42,6 +42,8 @@ public class PedroLoopTimeTest extends OpMode {
         telemetry.addData("position", follower.getPose());
         telemetry.addData("velocity", follower.getVelocity());
         telemetry.addData("Loop Times", elapsedtime.milliseconds());
+        telemetry.update();
+
         elapsedtime.reset();
     }
 }
