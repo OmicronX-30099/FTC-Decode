@@ -32,6 +32,11 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     var turretLimit: Double by Delegates.notNull()
 
     var fullAutoAim: Boolean = false
+    var partialAutoAimClose: Boolean = false
+    var partialAutoAimFar: Boolean = false
+
+    var shortVelocity: Double = 0.0;
+    var farVelocity = 0.0;
 
     fun calibrateFlywheel(currPose: Pose) {
         val distanceFromGoal: Double = currPose.distanceFrom(goalPose)
@@ -90,6 +95,14 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
             calibrateHood(follower.pose)
             calibrateTurret(follower.pose)
             calibrateFlywheel(follower.pose)
+        } else if (partialAutoAimClose) {
+            calibrateHood(follower.pose)
+            calibrateTurret(follower.pose)
+            FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,shortVelocity)
+        } else if (partialAutoAimFar) {
+            calibrateHood(follower.pose)
+            calibrateTurret(follower.pose)
+            FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,farVelocity)
         }
         ActiveOpMode.telemetry.addData("auto", this.fullAutoAim)
     }
