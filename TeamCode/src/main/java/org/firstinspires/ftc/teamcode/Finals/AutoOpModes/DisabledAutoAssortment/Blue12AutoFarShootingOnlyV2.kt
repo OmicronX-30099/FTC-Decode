@@ -47,7 +47,7 @@ class Blue12AutoFarShootingOnlyV2: NextFTCOpMode() {
         val main = SequentialGroup(
             InstantCommand { ShooterSystem.calibrateTurret(follower.pose) },
             InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
-            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1520.0) },
+            InstantCommand { FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,1520.0) },
             InstantCommand { FlywheelSubsystem.flywheelAutoAim = true},
             Delay(1.25),
             PassiveSystem.altTripleShootSequence,
@@ -57,7 +57,7 @@ class Blue12AutoFarShootingOnlyV2: NextFTCOpMode() {
             PassiveSystem.stopIntakeCommand, //sets intake motor power to 0.0 and closes intake gate
             Delay(0.25),
             FollowPath(Paths[1], true, 1.0), //goes to open gate
-            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1480.0) },
+            InstantCommand { FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,1480.0) },
             Delay(1.0),
             FollowPath(Paths[2], true, 1.0), //goes to shoot first set of balls
             InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
@@ -70,7 +70,7 @@ class Blue12AutoFarShootingOnlyV2: NextFTCOpMode() {
             Delay(0.25),
             PassiveSystem.stopIntakeCommand,
             Delay(0.25),
-            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1480.0) },
+            InstantCommand { FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,1480.0) },
             FollowPath(Paths[4], true, 1.0), //goes to shoot second set of balls
             InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
             Delay(0.5),
@@ -82,7 +82,7 @@ class Blue12AutoFarShootingOnlyV2: NextFTCOpMode() {
             Delay(0.25),
             PassiveSystem.stopIntakeCommand,
             Delay(0.25),
-            InstantCommand { FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,1480.0) },
+            InstantCommand { FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,1480.0) },
             FollowPath(Paths[6], true, 1.0), //goes to shoot third set of balls
             InstantCommand { ShooterSystem.calibrateHood(follower.pose)},
             Delay(0.5),

@@ -20,7 +20,6 @@ import org.firstinspires.ftc.teamcode.Finals.Systems.IndicatorSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.PassiveSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystem
 import org.firstinspires.ftc.teamcode.Finals.Systems.ShooterSystems.FlywheelSubsystem
-import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.RedTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 import kotlin.math.abs
@@ -55,7 +54,7 @@ class RedFarRedo: NextFTCOpMode() {
         val main = SequentialGroup(
             FollowPath(Paths[0],true,0.7),
             ShooterSystem.autoAimOnCommand,
-            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
+            WaitUntil{abs(FlywheelSubsystem.flywheelControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             PassiveSystem.altTripleShootSequence,
             Delay(0.25),
             PassiveSystem.maxIntakeCommand,
@@ -67,7 +66,7 @@ class RedFarRedo: NextFTCOpMode() {
             ShooterSystem.autoAimOnCommand,
             Delay(0.75),
             FollowPath(Paths[3],true,1.0),
-            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
+            WaitUntil{abs(FlywheelSubsystem.flywheelControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             PassiveSystem.altTripleShootSequence,
             Delay(0.25),
             PassiveSystem.maxIntakeCommand,
@@ -77,7 +76,7 @@ class RedFarRedo: NextFTCOpMode() {
             ShooterSystem.autoAimOnCommand,
             Delay(0.2),
             FollowPath(Paths[5],true,1.0),
-            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
+            WaitUntil{abs(FlywheelSubsystem.flywheelControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             PassiveSystem.altTripleShootSequence,
             Delay(0.25),
             PassiveSystem.maxIntakeCommand,
@@ -87,7 +86,7 @@ class RedFarRedo: NextFTCOpMode() {
             ShooterSystem.autoAimOnCommand,
             Delay(0.2),
             FollowPath(Paths[7],true,1.0),
-            WaitUntil{abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
+            WaitUntil{abs(FlywheelSubsystem.flywheelControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0},
             Delay(0.1),
             PassiveSystem.altTripleShootSequence,
             Delay(0.25),
