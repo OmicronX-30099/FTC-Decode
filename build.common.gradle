@@ -112,10 +112,6 @@ android {
     ndkVersion '21.3.6528147'
 }
 
-kotlin { 
-        jvmToolchain 8 
-}
-
 repositories {
 }
 
