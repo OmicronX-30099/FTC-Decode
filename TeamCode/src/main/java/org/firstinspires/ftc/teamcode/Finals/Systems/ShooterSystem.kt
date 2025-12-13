@@ -46,7 +46,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         val quadCoeffC: Double = (flywheelEquationA * hoodPosition * hoodPosition) + (flywheelEquationD * hoodPosition) + (flywheelEquationF - distanceFromGoal)
         val discriminant: Double = (quadCoeffB * quadCoeffB) - (4 * quadCoeffA * quadCoeffC)
         val velocity = (-1 * quadCoeffB + sqrt(discriminant)) / (2 * quadCoeffA)
-        FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,velocity)
+        FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,velocity)
     }
     fun calibrateTurret(currPose: Pose) {
         val angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
@@ -98,11 +98,11 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         } else if (partialAutoAimClose) {
             calibrateHood(follower.pose)
             calibrateTurret(follower.pose)
-            FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,shortVelocity)
+            FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,shortVelocity)
         } else if (partialAutoAimFar) {
             calibrateHood(follower.pose)
             calibrateTurret(follower.pose)
-            FlywheelSubsystem.flywheeControl.goal = KineticState(0.0,farVelocity)
+            FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,farVelocity)
         }
         ActiveOpMode.telemetry.addData("auto", this.fullAutoAim)
     }

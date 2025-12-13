@@ -11,7 +11,7 @@ object IndicatorSystem: Subsystem {
 
     override fun periodic() {
         if (ShooterSystem.fullAutoAim) {
-            if (abs(FlywheelSubsystem.flywheeControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0) {
+            if (abs(FlywheelSubsystem.flywheelControl.goal.velocity - FlywheelSubsystem.flywheelMotors.velocity) <= 20.0) {
                 rgbIndicator.position = RGB.GREEN.position
             } else {
                 rgbIndicator.position = RGB.RED.position
