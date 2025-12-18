@@ -14,7 +14,7 @@ object FlywheelSubsystem: Subsystem {
 
     @JvmField var flywheelPID = PIDCoefficients(0.01, 0.0, 0.0)
     @JvmField var flywheelFF = BasicFeedforwardParameters(0.00031,0.0,0.063)
-    val flywheeControl: ControlSystem = ControlSystem.builder()
+    val flywheelControl: ControlSystem = ControlSystem.builder()
         .velPid(flywheelPID)
         .basicFF(flywheelFF)
         .build()
@@ -23,7 +23,7 @@ object FlywheelSubsystem: Subsystem {
 
 
     override fun periodic() {
-        if (flywheelAutoAim) { flywheelMotors.power = flywheeControl.calculate(flywheelMotors.state) }
+        if (flywheelAutoAim) { flywheelMotors.power = flywheelControl.calculate(flywheelMotors.state) }
         else { flywheelMotors.power = 0.35 }
     }
 }
