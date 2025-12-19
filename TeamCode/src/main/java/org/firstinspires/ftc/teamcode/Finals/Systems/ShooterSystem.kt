@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Finals.Systems
 
 import com.pedropathing.geometry.Pose
+import com.pedropathing.math.Vector
 import dev.nextftc.control.KineticState
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
@@ -28,6 +29,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     const val flywheelEquationE: Double = -0.272675259634784
     const val flywheelEquationF: Double = 122.99485320234648
     const val turretTicksPerRev: Double = (38450.0/24.0)
+    var velCorrection: Double = 0.0;
     lateinit var goalPose: Pose
     var turretLimit: Double by Delegates.notNull()
 
@@ -38,7 +40,8 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     var shortVelocity: Double = 0.0;
     var farVelocity = 0.0;
 
-    fun calibrateFlywheel(currPose: Pose) {
+    fun calibrateFlywheel(currentPose: Pose, velVector: Vector) {
+        val currPose = Pose(velVector.xComponent, velVector.yComponent) + currentPose
         val distanceFromGoal: Double = currPose.distanceFrom(goalPose)
         val hoodPosition: Double = HoodSubsystem.hoodServo.position
         val quadCoeffA: Double = flywheelEquationC
@@ -94,7 +97,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         if (fullAutoAim) {
             calibrateHood(follower.pose)
             calibrateTurret(follower.pose)
-            calibrateFlywheel(follower.pose)
+            calibrateFlywheel(follower.pose, follower.velocity.times(velCorrection))
         } else if (partialAutoAimClose) {
             calibrateHood(follower.pose)
             calibrateTurret(follower.pose)
