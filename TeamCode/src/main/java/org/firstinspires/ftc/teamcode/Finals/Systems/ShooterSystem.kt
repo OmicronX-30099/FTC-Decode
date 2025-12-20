@@ -29,7 +29,8 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     const val flywheelEquationE: Double = -0.272675259634784
     const val flywheelEquationF: Double = 122.99485320234648
     const val turretTicksPerRev: Double = (38450.0/24.0)
-    var velCorrection: Double = 0.0;
+    val velCorrection: Double = 0.8;
+    val fwVelCorrection: Double = 0.5
     lateinit var goalPose: Pose
     var turretLimit: Double by Delegates.notNull()
 
@@ -40,8 +41,7 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
     var shortVelocity: Double = 0.0;
     var farVelocity = 0.0;
 
-    fun calibrateFlywheel(currentPose: Pose, velVector: Vector) {
-        val currPose = Pose(velVector.xComponent, velVector.yComponent) + currentPose
+    fun calibrateFlywheel(currPose: Pose) {
         val distanceFromGoal: Double = currPose.distanceFrom(goalPose)
         val hoodPosition: Double = HoodSubsystem.hoodServo.position
         val quadCoeffA: Double = flywheelEquationC
@@ -51,7 +51,8 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
         val velocity = (-1 * quadCoeffB + sqrt(discriminant)) / (2 * quadCoeffA)
         FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,velocity)
     }
-    fun calibrateTurret(currPose: Pose) {
+    fun calibrateTurret(currentPose: Pose, velVector: Vector) {
+        val currPose = currentPose + Pose(velVector.xComponent, velVector.yComponent)
         val angle = atan2(goalPose.x-currPose.x,goalPose.y-currPose.y)
         var ticks = (((currPose.heading-(PI/2))+angle) / (2*PI)) * turretTicksPerRev * -1
         ticks = normalizeTicks(ticks, 180.0)
@@ -95,18 +96,19 @@ object ShooterSystem: SubsystemGroup(FlywheelSubsystem, HoodSubsystem, TurretSub
 
     override fun periodic() {
         if (fullAutoAim) {
+            var velVector = follower.velocity.times(fwVelCorrection)
+            calibrateHood(follower.pose + Pose(velVector.xComponent, velVector.yComponent))
+            calibrateTurret(follower.pose, follower.velocity.times(velCorrection))
+            calibrateFlywheel(follower.pose + Pose(velVector.xComponent, velVector.yComponent))
+        } /*else if (partialAutoAimClose) {
             calibrateHood(follower.pose)
-            calibrateTurret(follower.pose)
-            calibrateFlywheel(follower.pose, follower.velocity.times(velCorrection))
-        } else if (partialAutoAimClose) {
-            calibrateHood(follower.pose)
-            calibrateTurret(follower.pose)
+            //calibrateTurret(follower.pose)
             FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,shortVelocity)
         } else if (partialAutoAimFar) {
             calibrateHood(follower.pose)
             calibrateTurret(follower.pose)
             FlywheelSubsystem.flywheelControl.goal = KineticState(0.0,farVelocity)
-        }
+        }*/
         ActiveOpMode.telemetry.addData("auto", this.fullAutoAim)
     }
 }
