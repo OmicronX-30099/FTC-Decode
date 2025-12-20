@@ -37,8 +37,8 @@ val basicMercurialTeleop = Mercurial.teleop(
                 val powerLimit: Double = max(abs(drivePower) + abs(strafePower) + abs(turnPower), 1.0)
 
                 val frontLeftDrivePower: Double = (drivePower + strafePower + turnPower) / powerLimit
-                val frontRightDrivePower: Double = (drivePower - strafePower + turnPower) / powerLimit
-                val backLeftDrivePower: Double = (drivePower - strafePower - turnPower) / powerLimit
+                val backLeftDrivePower: Double = (drivePower - strafePower + turnPower) / powerLimit
+                val frontRightDrivePower: Double = (drivePower - strafePower - turnPower) / powerLimit
                 val backRightDrivePower: Double = (drivePower + strafePower - turnPower) / powerLimit
 
                 frontLeftMotor.power = frontLeftDrivePower * drivetrainScalar
