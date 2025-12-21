@@ -82,8 +82,8 @@ class BlueTeleOpV1: NextFTCOpMode() {
         Gamepads.gamepad1.dpadDown.or(Gamepads.gamepad2.dpadDown)
             .whenBecomesTrue { follower.pose = this.alliance.resetPose2 }
         Gamepads.gamepad1.dpadRight.or(Gamepads.gamepad2.dpadRight)
-            .whenBecomesTrue { follower.pose = this.alliance.resetPose3 } }
-    
+            .whenBecomesTrue { follower.pose = this.alliance.resetPose3 }
+    }
     override fun onUpdate() {
         ActiveOpMode.telemetry.addData("Follower", "x = "+follower.pose.x.toString())
         ActiveOpMode.telemetry.addData("Follower", "y = "+follower.pose.y.toString())
