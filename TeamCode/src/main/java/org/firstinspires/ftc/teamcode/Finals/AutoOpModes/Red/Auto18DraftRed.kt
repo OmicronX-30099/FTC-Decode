@@ -23,8 +23,8 @@ import org.firstinspires.ftc.teamcode.Finals.TeleOpModes.BlueTeleOpV1
 import org.firstinspires.ftc.teamcode.Finals.Util.Alliance
 
 
-@Autonomous(name = "18 Blue Close Draft")
-class Auto18Draft: NextFTCOpMode() {
+@Autonomous(name = "18 Red Close Draft")
+class Auto18DraftRed: NextFTCOpMode() {
     init {
         addComponents(
             BulkReadComponent,
@@ -36,13 +36,13 @@ class Auto18Draft: NextFTCOpMode() {
     var Paths: MutableMap<String, PathChain> = mutableMapOf<String, PathChain>()
     override fun onInit() {
         // Essentially sets the autoaim to track the blue goal.
-        ShooterSystem.setAlliance(Alliance.BLUE)
+        ShooterSystem.setAlliance(Alliance.RED)
         // Sets where the Bot is positioned according to the code at the start
         PedroComponent.Companion.follower.setStartingPose(
             Pose(
-                32.9,
-                131.3,
-                Math.toRadians(180.0)
+                Constants.fieldWidth - 34,
+                136.000,
+                Math.toRadians(0.0)
             )
         )
         // Intiates the variables for the pathing
@@ -75,7 +75,7 @@ class Auto18Draft: NextFTCOpMode() {
             Delay(0.25),
             FollowPath(Paths.getValue("PositionThirdSet"), true, 0.7),
 
-        )
+            )
     }
 
     // Intialize pathing variable, variable is of like a dictionary type from Python
@@ -87,120 +87,120 @@ class Auto18Draft: NextFTCOpMode() {
 
         Paths.put("ScoreLoad", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(32.900, 131.300),
+                Pose(Constants.fieldWidth-34, 136.000),
 
-                Pose(58.750, 84.000)
+                Pose(Constants.fieldWidth-58.750, 84.000)
             )
-        ).setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
 
         Paths.put("IntakeOutOfOrder", follower.pathBuilder().addPath(
             BezierCurve(
-                Pose(58.750, 84.000),
-                Pose(53.823, 56.980),
-                Pose(8.000, 59.000)
+                Pose(Constants.fieldWidth-58.750, 84.000),
+                Pose(Constants.fieldWidth-53.823, 56.980),
+                Pose(Constants.fieldWidth-8.000, 59.000)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
 
         Paths.put("PositionSecondSet", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(8.000, 59.000),
+                Pose(Constants.fieldWidth - 8.000, 59.000),
 
-                Pose(70.000, 73.000)
+                Pose(Constants.fieldWidth - 70.000, 73.000)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
 
-       Paths.put("OpenGate1", follower.pathBuilder().addPath(
+        Paths.put("OpenGate1", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(70.000, 73.000),
+                Pose(Constants.fieldWidth - 70.000, 73.000),
 
-                Pose(10.000, 58.000)
+                Pose(Constants.fieldWidth - 10.000, 58.000)
             )
-        ).setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(135.0))
+        ).setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(45.0))
 
             .build())
         Paths.put("MoveToFirstSet", follower.pathBuilder().addPath(
             BezierCurve(
-                Pose(10.000, 58.000),
-                Pose(42.226, 58.721),
-                Pose(58.000, 83.000)
+                Pose(Constants.fieldWidth - 10.000, 58.000),
+                Pose(Constants.fieldWidth - 42.226, 58.721),
+                Pose(Constants.fieldWidth - 58.000, 83.000)
             )
-        ).setLinearHeadingInterpolation(Math.toRadians(135.0), Math.toRadians(180.0))
+        ).setLinearHeadingInterpolation(Math.toRadians(45.0), Math.toRadians(0.0))
 
             .build())
 
         Paths.put("PositionFirstSet", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(58.000, 83.000),
+                Pose(Constants.fieldWidth - 58.000, 83.000),
 
-                Pose(14.000, 83.000)
+                Pose(Constants.fieldWidth - 14.000, 83.000)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
 
         Paths.put("PositionGateBalls1", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(14.000, 83.000),
+                Pose(Constants.fieldWidth - 14.000, 83.000),
 
-                Pose(70.000, 73.000)
+                Pose(Constants.fieldWidth - 70.000, 73.000)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
 
         Paths.put("OpenGate2", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(70.000, 73.000),
+                Pose(Constants.fieldWidth - 70.000, 73.000),
 
-                Pose(10.000, 58.000)
+                Pose(Constants.fieldWidth - 10.000, 58.000)
             )
-        ).setLinearHeadingInterpolation(Math.toRadians(180.0), Math.toRadians(135.0))
+        ).setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(45.0))
 
             .build())
 
         Paths.put("PositionGateBalls2", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(10.000, 58.000),
+                Pose(Constants.fieldWidth - 10.000, 58.000),
 
-                Pose(34.000, 59.000)
+                Pose(Constants.fieldWidth - 34.000, 59.000)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(135.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(45.0))
 
             .build())
 
         Paths.put("MoveThirdSet", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(34.000, 59.000),
+                Pose(Constants.fieldWidth - 34.000, 59.000),
 
-                Pose(45.986, 35.224)
+                Pose(Constants.fieldWidth - 45.986, 35.224)
             )
-        ).setLinearHeadingInterpolation(Math.toRadians(135.0), Math.toRadians(180.0))
+        ).setLinearHeadingInterpolation(Math.toRadians(45.0), Math.toRadians(0.0))
 
             .build())
 
         Paths.put("IntakeThirdSet", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(45.986, 35.224),
+                Pose(Constants.fieldWidth - 45.986, 35.224),
 
-                Pose(8.266, 35.449)
+                Pose(Constants.fieldWidth - 8.266, 35.449)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
 
         Paths.put("PositionThirdSet", follower.pathBuilder().addPath(
             BezierLine(
-                Pose(8.266, 35.449),
+                Pose(Constants.fieldWidth - 8.266, 35.449),
 
-                Pose(71.000, 20.000)
+                Pose(Constants.fieldWidth - 71.000, 20.000)
             )
-        ).setConstantHeadingInterpolation(Math.toRadians(180.0))
+        ).setConstantHeadingInterpolation(Math.toRadians(0.0))
 
             .build())
     }
